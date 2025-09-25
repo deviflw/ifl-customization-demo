@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bespoke Edition - Watch Customization Service</title>
+    <!-- Возвращаем ТОЧНО как было в оригинале -->
+    <link rel="stylesheet" href="shared/styles.css?v=11">
+    <!-- product-layout.css УБИРАЕМ - он всё ломает! -->
+    <!-- <link rel="stylesheet" href="shared/product-layout.css?v=1"> ОТКЛЮЧЕНО -->
+    <link rel="stylesheet" href="shared/filters.css?v=3">
+    <link rel="stylesheet" href="shared/stepped.css?v=3">
+    <script src="shared/quantity-price-update.js?v=3" defer></script>
+    
+    <style>
+        /* Gallery для Bespoke Edition - 2x3 grid на десктопе */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .main-image {
+            grid-column: span 1;
+        }
+        
+        .thumbs-container {
+            display: contents; /* На десктопе разворачиваем thumbnails в общий grid */
+        }
+        
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #e5e5e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #999;
+            margin-bottom: 0 !important;
+        }
+        
+        /* Mobile: 1 большая + 5 маленьких в ряд */
+        @media (max-width: 768px) {
+            .product-gallery {
+                display: block !important;
+            }
+            
+            .main-image {
+                width: 100%;
+                margin-bottom: 10px !important;
+            }
+            
+            .thumbs-container {
+                display: grid !important;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 10px;
+            }
+            
+            .thumbs-container .thumb {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+                font-size: 10px;
+            }
+            
+            /* На мобилке отключаем sticky */
+            .product-details {
+                position: static !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main product page - 2 columns on desktop -->
+    <div class="product-page">
+        <!-- Left: Product Images -->
+        <div class="product-images">
+            <!-- Desktop: 2x3 grid (6 картинок), Mobile: 1 main + 5 thumbs -->
+            <div class="product-gallery">
+                <div class="product-image main-image">[Product Image 1]</div>
+                <div class="thumbs-container">
+                    <div class="product-image thumb">[Thumb 2]</div>
+                    <div class="product-image thumb">[Thumb 3]</div>
+                    <div class="product-image thumb">[Thumb 4]</div>
+                    <div class="product-image thumb">[Thumb 5]</div>
+                    <div class="product-image thumb">[Thumb 6]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Product Details -->
+        <div class="product-details">
+            <h1 class="product-title">Galaxy Concept Bespoke Edition</h1>
+            <p class="product-subtitle">Custom Watch Configuration Service</p>
+            <div class="product-price">Service Price: $1,200</div>
+            
+            <!-- Currently Selected Canvas -->
+            <div class="currently-selected">
+                <div class="currently-selected-title">Your Configuration Canvas</div>
+                <div id="currently-selected-display">
+                    <!-- Default watch shown -->
+                    <div class="selected-watch">
+                        <div class="selected-watch-flex" style="display: flex; gap: 20px; align-items: start;">
+                            <div class="watch-thumb" style="width: 100px; height: 100px; background: #f5f5f5; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; flex-shrink: 0;">
+                                [Watch Thumb]
+                            </div>
+                            <div style="flex: 1; min-width: 0;">
+                                <div class="selected-watch-name">Tissot PRX Powermatic 80</div>
+                                <div class="selected-watch-specs">
+                                    Automatic • 40mm • Steel Case • Black Dial<br>
+                                    Watch Price: $850<br>
+                                    <span style="color: #999; font-size: 12px;">Default selection - click Customize to change</span>
+                                </div>
+                                <details style="margin-top: 12px;">
+                                    <summary style="cursor: pointer; color: #666; font-size: 13px; outline: none;">View full specifications</summary>
+                                    <div style="padding: 12px 0; font-size: 13px; color: #666; line-height: 1.8;">
+                                        <strong>Movement & Performance</strong><br>
+                                        • Power Reserve: 80 hours<br>
+                                        • Jewels: 23<br>
+                                        • Frequency: 21,600 vph<br>
+                                        <br>
+                                        <strong>Case & Dimensions</strong><br>
+                                        • Diameter: 40mm<br>
+                                        • Thickness: 10.9mm<br>
+                                        • Lug to Lug: 44mm<br>
+                                        • Lug Width: 12mm<br>
+                                        <br>
+                                        <strong>Materials & Protection</strong><br>
+                                        • Crystal: Sapphire<br>
+                                        • Water Resistance: 100m/10ATM<br>
+                                        <br>
+                                        <strong>Included</strong><br>
+                                        • Custom IFL Box<br>
+                                        • 2 Years IFL Warranty
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Actions -->
+            <div class="product-actions">
+                <!-- Customize button - separate row -->
+                <button class="customize-button" onclick="openCustomizer()">
+                    CUSTOMIZE YOUR WATCH
+                </button>
+                
+                <!-- Price Summary - между кнопками -->
+                <div class="price-summary-box">
+                    <h4 class="price-summary-title">PRICE SUMMARY</h4>
+                    <div class="price-summary-lines">
+                        <div class="price-summary-line">
+                            <span class="price-label">Custom Design Service</span>
+                            <span class="price-value">$1,200.00</span>
+                        </div>
+                        <div class="price-summary-line" id="watch-price-summary">
+                            <span class="price-label">
+                                <span id="selected-watch-name">Tissot PRX Powermatic 80</span>
+                            </span>
+                            <span class="price-value" id="selected-watch-price">$850.00</span>
+                        </div>
+                        <div class="price-summary-line total">
+                            <span class="price-label"><strong>Total Price</strong></span>
+                            <span class="price-value"><strong id="total-price-summary">$2,050.00</strong></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quantity and Add to Cart - same row -->
+                <div class="cart-controls">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                        <input type="number" id="quantity-input" class="quantity-input" value="1" min="1" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+                
+                <!-- Trust Badges для Bespoke Edition -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">🎨</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">Ready Design</div>
+                            <div class="trust-badge-description">Proven artwork</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">⚡</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">3-4 Weeks</div>
+                            <div class="trust-badge-description">Faster delivery</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">🛡️</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">2 Year Warranty</div>
+                            <div class="trust-badge-description">IFL guarantee</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">📦</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">Premium Box</div>
+                            <div class="trust-badge-description">Certificate included</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Description -->
+            <div class="product-description">
+                <h3>Description</h3>
+                <p>
+                    Transform your chosen luxury watch into a unique masterpiece with our Bespoke Edition service. 
+                    Select from our curated collection of premium timepieces and customize them with exclusive 
+                    Galaxy Concept artwork, creating a one-of-a-kind watch that reflects your personal style.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeCustomizer()"></div>
+    
+    <!-- Customizer Panel with Stepped Navigation -->
+    <div class="customizer-panel" id="customizer">
+        <div class="customizer-header">
+            <h2>Customize Your Watch</h2>
+            <button class="close-button" onclick="closeCustomizer()">✕</button>
+        </div>
+        
+        <!-- Enhanced Progress bar -->
+        <div class="progress-bar">
+            <div class="progress-step active" id="progress-step-1">
+                <span class="step-number">1</span>
+                <span class="step-text">Select Watch</span>
+            </div>
+            <div class="progress-step" id="progress-step-2">
+                <span class="step-number">2</span>
+                <span class="step-text">Choose Options</span>
+            </div>
+            <div class="progress-step" id="progress-step-3">
+                <span class="step-number">3</span>
+                <span class="step-text">Review</span>
+            </div>
+        </div>
+        
+        <div class="customizer-content">
+            
+            <!-- STEP 1: Filter & Select Watch -->
+            <div class="step-content" id="step-1" style="display: block;">
+                <div class="step-section">
+                    <h3>Step 1: Find Your Perfect Watch</h3>
+                    
+                    <!-- Active filters display -->
+                    <div class="active-filters" id="active-filters" style="display: none;">
+                        <span class="filters-label">Active filters:</span>
+                        <div class="filter-tags" id="filter-tags"></div>
+                        <button class="clear-all-btn" onclick="clearAllFilters()">Clear All</button>
+                    </div>
+                    
+                    <!-- Collapsible Filters Container -->
+                    <div class="filters-container">
+                        <!-- Toggle Button -->
+                        <div class="filters-toggle" onclick="toggleFiltersPanel()">
+                            <span class="toggle-text">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="4" y1="6" x2="20" y2="6"></line>
+                                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                                    <line x1="4" y1="18" x2="20" y2="18"></line>
+                                </svg>
+                                Filter Watches
+                            </span>
+                            <span class="toggle-arrow" id="filter-arrow">▼</span>
+                        </div>
+                        
+                        <!-- Filters Panel Inside Container -->
+                        <div class="filters-panel" id="filters-panel" style="display: none;">
+                            <!-- Brand Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Brand</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="tissot">Tissot</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="oris">Oris</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="seiko">Seiko</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="citizen">Citizen</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="bulova">Bulova</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="hamilton">Hamilton</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Movement Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Movement Type</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="movement" data-filter-value="automatic">Automatic</button>
+                                    <button class="filter-btn" data-filter-type="movement" data-filter-value="quartz">Quartz</button>
+                                    <button class="filter-btn" data-filter-type="movement" data-filter-value="solar">Solar</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Case Color Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Case Color</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="steel">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #c0c0c0, #e8e8e8);"></span>
+                                        Steel
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="gold">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #ffd700, #ffed4b);"></span>
+                                        Gold
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="rosegold">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #e8b4b8, #f4c2c2);"></span>
+                                        Rose Gold
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="black">
+                                        <span class="color-dot" style="background: #222;"></span>
+                                        Black
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Dial Color Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Dial Color</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="black">
+                                        <span class="color-dot" style="background: #000;"></span>
+                                        Black
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="white">
+                                        <span class="color-dot" style="background: #fff; border: 1px solid #ddd;"></span>
+                                        White
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="blue">
+                                        <span class="color-dot" style="background: #1e3a8a;"></span>
+                                        Blue
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="green">
+                                        <span class="color-dot" style="background: #22c55e;"></span>
+                                        Green
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="silver">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #c0c0c0, #e8e8e8);"></span>
+                                        Silver
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Case Size Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Case Size</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="36">36mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="38">38mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="40">40mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="42">42mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="44">44mm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Results count -->
+                    <div class="filter-results">
+                        <span class="result-count">Showing <strong id="result-count">12</strong> watches</span>
+                    </div>
+                </div>
+                
+                <!-- Watches Grid -->
+                <div class="step-section">
+                    <h4>Available Watches</h4>
+                    <div class="watch-grid" id="filtered-watches">
+                        <!-- Watches will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- STEP 2: Choose Variant -->
+            <div class="step-content" id="step-2" style="display: none;">
+                <div class="step-section">
+                    <h3>Step 2: Choose Your Options</h3>
+                    
+                    <!-- Selected Watch Display -->
+                    <div class="selected-watch-display" id="selected-watch-display">
+                        <div class="selected-badge">Selected Model</div>
+                        <!-- Will be filled dynamically -->
+                    </div>
+                    
+                    <!-- Variant Options - Shopify Style -->
+                    <div class="variant-options">
+                        
+                        <!-- Size Options -->
+                        <div class="option-group">
+                            <label class="option-label">Available Sizes:</label>
+                            <div class="option-buttons" id="size-options">
+                                <button class="option-btn" data-option="size" data-value="40mm">40mm</button>
+                                <button class="option-btn" data-option="size" data-value="35mm">35mm</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Dial Color Options -->
+                        <div class="option-group">
+                            <label class="option-label">Dial color:</label>
+                            <div class="option-buttons" id="dial-options">
+                                <button class="option-btn color-btn" data-option="dial" data-value="blue">
+                                    <span class="color-swatch" style="background: #1e3a8a;"></span>
+                                    Blue
+                                </button>
+                                <button class="option-btn color-btn" data-option="dial" data-value="black">
+                                    <span class="color-swatch" style="background: #000;"></span>
+                                    Black
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Case Color Options -->
+                        <div class="option-group">
+                            <label class="option-label">Case color:</label>
+                            <div class="option-buttons" id="case-options">
+                                <button class="option-btn color-btn" data-option="case" data-value="gold">
+                                    <span class="color-swatch" style="background: linear-gradient(45deg, #ffd700, #ffed4b);"></span>
+                                    Gold
+                                </button>
+                                <button class="option-btn color-btn" data-option="case" data-value="silver">
+                                    <span class="color-swatch" style="background: linear-gradient(45deg, #c0c0c0, #e8e8e8);"></span>
+                                    Silver
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- STEP 3: Review & Confirm -->
+            <div class="step-content" id="step-3" style="display: none;">
+                <div class="step-section">
+                    <h3>Step 3: Review Your Selection</h3>
+                    
+                    <!-- Final Summary -->
+                    <div class="final-summary">
+                        <div class="summary-card">
+                            <h4>Your Configuration</h4>
+                            <div id="final-watch-details">
+                                <!-- Will be filled with complete selection -->
+                            </div>
+                        </div>
+                        
+                        <div class="price-breakdown">
+                            <h4>Price Breakdown</h4>
+                            <div class="price-line">
+                                <span>Service Fee:</span>
+                                <span>$1,200</span>
+                            </div>
+                            <div class="price-line" id="watch-price-line">
+                                <span>Watch:</span>
+                                <span>$0</span>
+                            </div>
+                            <div class="price-line total">
+                                <span><strong>Total:</strong></span>
+                                <span id="total-price"><strong>$1,200</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <div class="customizer-navigation">
+            <button class="nav-btn btn-back" id="btn-back" onclick="previousStep()" style="display: none;">
+                ← Back
+            </button>
+            <div class="nav-spacer"></div>
+            <button class="nav-btn btn-next" id="btn-next" onclick="nextStep()" disabled>
+                Next: Choose Options →
+            </button>
+            <button class="nav-btn btn-apply" id="btn-apply" onclick="applyConfiguration()" style="display: none;">
+                APPLY
+            </button>
+        </div>
+    </div>
+    
+    <script src="shared/script.js"></script>
+    <script src="shared/filters.js"></script>
+    <script src="shared/stepped.js"></script>
+</body>
+</html>

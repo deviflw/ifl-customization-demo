@@ -1,0 +1,833 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* CSS Variables for consistent colors */
+:root {
+    --primary-color: #081820;  /* Наш основной тёмный */
+    --secondary-color: #40bec1; /* Наш тиффани */
+    --secondary-hover: #35a7a9; /* Тиффани при hover */
+    --success-color: #28a745;   /* Зелёный для success */
+    --gray-light: #f5f5f5;
+    --gray-medium: #999;
+    --gray-dark: #666;
+    --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: var(--font-family);
+    background: #f5f5f5;
+    color: #333;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Все кнопки должны использовать Montserrat */
+button, input, select, textarea {
+    font-family: var(--font-family);
+}
+
+/* Desktop: 2 columns layout */
+.product-page {
+    display: grid;
+    grid-template-columns: 62fr 38fr;  /* Используем fr - они автоматически учитывают gap! */
+    gap: 30px;  /* Gap между колонками */
+    padding: 20px;  /* Равномерный padding со всех сторон */
+    max-width: 100%;  /* Full width */
+    margin: 0;
+    box-sizing: border-box;  /* Включаем padding в расчёт ширины */
+    align-items: start;  /* Важно для sticky! */
+    min-height: 100vh;  /* Минимальная высота для sticky эффекта */
+}
+
+/* Product Images Section */
+.product-images {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-right: 0;  /* Убираем лишний margin */
+}
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 18px;
+    color: #999;
+}
+
+/* Product Details Section */
+.product-details {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    margin-left: 0;  /* Убираем лишний margin */
+}
+
+/* Sticky effect для десктопа */
+@media (min-width: 769px) {
+    .product-details {
+        position: sticky;
+        top: 20px;
+        height: fit-content;
+    }
+}
+
+.product-title {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.product-subtitle {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.product-price {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+/* Currently Selected Canvas */
+.currently-selected {
+    background: linear-gradient(135deg, #fafafa 0%, #f7f7f7 100%);
+    border: 2px dashed #ccc;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    min-height: 150px;
+}
+
+.currently-selected-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #999;
+    margin-bottom: 15px;
+    text-align: left; /* По умолчанию слева для десктопа */
+}
+
+.selected-watch {
+    border-radius: 4px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start; /* Изменили с center на flex-start для правильного выравнивания */
+    justify-content: center; /* Центрируем содержимое по горизонтали */
+}
+
+/* Стили для внутреннего flex-контейнера */
+.selected-watch-flex {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 600px; /* Ограничиваем ширину для лучшего вида */
+    margin: 0 auto; /* Центрируем блок */
+}
+
+.watch-thumb {
+    width: 100px;
+    height: 100px;
+    background: #ffffff !important;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.selected-watch-name {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.selected-watch-specs {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.no-selection {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    padding: 40px 20px;
+}
+
+/* Product Actions */
+.product-actions {
+    margin-bottom: 30px;
+}
+
+.customize-button {
+    width: 100%;
+    padding: 18px;
+    background: #000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.3s;
+    position: relative;
+}
+
+/* Remove any pseudo elements/badges */
+.customize-button::before,
+.customize-button::after {
+    display: none !important;
+    content: none !important;
+}
+
+.customize-button:hover {
+    background: #333;
+}
+
+.cart-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.quantity-btn {
+    width: 40px;
+    height: 45px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+    transition: background 0.2s;
+}
+
+.quantity-btn:hover {
+    background: #f5f5f5;
+}
+
+.quantity-input {
+    width: 60px;
+    height: 45px;
+    border: none;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    text-align: center;
+    font-size: 16px;
+    -moz-appearance: textfield;
+    padding: 0;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.add-to-cart {
+    flex: 1;
+    padding: 14px 24px;
+    background: #40bec1;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.3s;
+}
+
+.add-to-cart:hover {
+    background: #35a7a9;
+}
+
+/* Price Summary Box */
+.price-summary-box {
+    background: linear-gradient(135deg, #fafafa 0%, #f7f7f7 100%);
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+}
+
+.price-summary-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.price-summary-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.price-summary-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+}
+
+.price-summary-line.total {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 2px solid #081820;
+    font-size: 18px;
+}
+
+.price-label {
+    flex: 1;
+}
+
+.price-value {
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Product Description */
+.product-description {
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.product-description h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+.product-description p {
+    line-height: 1.8;
+    color: #666;
+}
+
+/* Trust Badges - единый стиль для всех страниц */
+.trust-badges {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.trust-badge:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.trust-badge-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    width: 40px;
+    text-align: center;
+}
+
+.trust-badge-content {
+    flex: 1;
+    text-align: left;
+}
+
+.trust-badge-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 2px;
+    color: #222;
+    line-height: 1.2;
+}
+
+.trust-badge-description {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.3;
+}
+
+/* Mobile для trust badges */
+@media (max-width: 768px) {
+    .trust-badges {
+        gap: 10px;
+        margin-top: 20px;
+    }
+    
+    .trust-badge {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .trust-badge-icon {
+        font-size: 24px;
+        width: 32px;
+    }
+    
+    .trust-badge-title {
+        font-size: 12px;
+    }
+    
+    .trust-badge-description {
+        font-size: 10px;
+    }
+}
+
+/* Customizer Panel */
+.customizer-panel {
+    position: fixed;
+    left: -700px;
+    top: 0;
+    width: 700px;
+    height: 100vh;
+    background: white;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+    transition: left 0.4s ease;
+    z-index: 1000;
+    overflow: hidden; /* Убираем прокрутку у панели */
+    display: flex;
+    flex-direction: column;
+}
+
+.customizer-panel.open {
+    left: 0;
+}
+
+.customizer-header {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 25px 30px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
+
+.customizer-header h2 {
+    font-size: 24px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 24px;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* Progress Bar */
+.progress-bar {
+    display: flex;
+    padding: 20px 30px;
+    background: #f9f9f9;
+    border-bottom: 1px solid #eee;
+}
+
+.progress-step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    color: #999;
+    font-size: 14px;
+}
+
+.progress-step::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #eee;
+    transition: background 0.3s;
+}
+
+.progress-step.active {
+    color: #333;
+    font-weight: 500;
+}
+
+.progress-step.active::after {
+    background: #333;
+}
+
+/* Customizer Content */
+.customizer-content {
+    padding: 30px;
+    padding-bottom: 30px;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.step-section {
+    margin-bottom: 40px;
+}
+
+.step-section h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Watch Grid */
+.watch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.watch-card {
+    border: 2px solid #eee;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: white;
+}
+
+.watch-card:hover {
+    border-color: #999;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.watch-card.selected {
+    border-color: #333;
+    background: #f9f9f9;
+}
+
+.watch-image {
+    width: 100%;
+    height: 180px;
+    background: #f5f5f5;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+}
+
+.watch-info {
+    text-align: center;
+}
+
+.watch-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.watch-specs {
+    color: #666;
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+.watch-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #28a745;
+    margin-top: 10px;
+}
+
+/* Expandable Specs */
+.watch-details {
+    margin-top: 12px;
+    border-top: 1px solid #eee;
+    padding-top: 12px;
+}
+
+.watch-details summary {
+    cursor: pointer;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+}
+
+.watch-details summary:hover {
+    color: #333;
+}
+
+.specs-list {
+    padding: 12px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* Summary Section */
+.summary-section {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.summary-section h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.summary-line:last-child {
+    border-bottom: none;
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* Action Buttons */
+.customizer-actions {
+    display: flex;
+    gap: 15px;
+    padding: 30px;
+    background: #f9f9f9;
+    border-top: 1px solid #eee;
+    position: sticky;
+    bottom: 0;
+}
+
+.btn-apply {
+    flex: 1;
+    padding: 15px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.3s;
+}
+
+.btn-apply:hover {
+    background: #000;
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 15px;
+    background: white;
+    color: #333;
+    border: 2px solid #333;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+}
+
+.btn-cancel:hover {
+    background: #333;
+    color: white;
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.overlay.open {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .product-page {
+        grid-template-columns: 1fr;
+        padding: 0;
+        gap: 0; /* Убираем gap между колонками */
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .product-images,
+    .product-details {
+        padding: 15px;
+        width: 100%;
+        border-radius: 0 !important; /* Убираем border-radius */
+        /* background: #f8f8f8; УБИРАЕМ ФОН */
+    }
+    
+    /* Убираем отступы между секциями для полного edge-to-edge */
+    .product-images {
+        padding-bottom: 0;
+    }
+    
+    .product-details {
+        padding-top: 20px;
+    }
+
+    .product-title {
+        font-size: 24px;
+    }
+    
+    .currently-selected {
+        padding: 15px;
+    }
+    
+    /* Центрируем заголовок только на мобильной версии */
+    .currently-selected-title {
+        text-align: center;
+    }
+    
+    /* Fix for horizontal scroll - ensure all content fits */
+    .selected-watch > div,
+    .selected-watch-flex {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center;
+    }
+    
+    .cart-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .quantity-selector {
+        display: flex;
+        flex: 0 0 auto;
+    }
+    
+    .add-to-cart {
+        flex: 1;
+    }
+
+    .customizer-panel {
+        left: auto;
+        right: auto;
+        bottom: -100%;
+        top: auto;
+        width: 100%;
+        height: 85vh;
+        border-radius: 20px 20px 0 0;
+        transition: bottom 0.4s ease;
+    }
+
+    .customizer-panel.open {
+        left: auto;
+        bottom: 0;
+    }
+
+    .customizer-panel::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 4px;
+        background: #ccc;
+        border-radius: 2px;
+    }
+
+    .watch-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-bar {
+        padding: 15px 20px;
+    }
+
+    .progress-step {
+        font-size: 12px;
+    }
+    
+    /* Fix for selected watch flex on mobile */
+    .selected-watch-flex {
+        flex-direction: column !important;
+        text-align: center;
+    }
+    
+    .watch-thumb {
+        margin: 0 auto;
+    }
+}

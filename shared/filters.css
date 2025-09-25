@@ -1,0 +1,305 @@
+/* Filter Styles - UNIFIED PANEL VERSION */
+
+/* Collapsible Filter Container - единая панель */
+.filters-container {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.filters-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s;
+    /* NO BORDERS HERE - только внутри контейнера */
+}
+
+.filters-toggle:hover {
+    background: #f0f0f0;
+}
+
+.filters-toggle .toggle-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.filters-toggle .toggle-arrow {
+    transition: transform 0.3s;
+    color: #666;
+}
+
+.filters-toggle.active .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+.filters-toggle.active {
+    /* Убрали border-bottom - мелькает при открытии */
+}
+
+/* Filters Panel - внутри контейнера */
+.filters-panel {
+    padding: 20px;
+    animation: slideDown 0.3s ease;
+    /* NO BORDERS - панель внутри контейнера */
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 1000px;
+    }
+}
+
+/* Filter Groups */
+.filter-group {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.filter-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.filter-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-btn:hover {
+    border-color: #999;
+    transform: translateY(-1px);
+}
+
+.filter-btn.active {
+    background: #333;
+    color: white;
+    border-color: #333;
+}
+
+.filter-btn.active .color-dot {
+    box-shadow: 0 0 0 2px white;
+}
+
+.color-dot {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Active Filters Display */
+.active-filters {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filters-label {
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+}
+
+.filter-tag {
+    background: white;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.filter-tag .remove-tag {
+    cursor: pointer;
+    color: #999;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.filter-tag .remove-tag:hover {
+    color: #333;
+}
+
+.clear-all-btn {
+    padding: 5px 12px;
+    background: transparent;
+    border: 1px solid #999;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.clear-all-btn:hover {
+    background: #333;
+    color: white;
+    border-color: #333;
+}
+
+/* Filter Results */
+.filter-results {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f0f0f0;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-count {
+    font-size: 14px;
+    color: #666;
+}
+
+.result-count strong {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Watch Card Updates for Filters */
+.watch-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.watch-card.filtered-out {
+    opacity: 0.3;
+    pointer-events: none;
+    display: none;
+}
+
+.watch-card .watch-attributes {
+    padding: 8px;
+    background: #f9f9f9;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.watch-card .attribute {
+    display: inline-block;
+    padding: 2px 6px;
+    background: white;
+    border-radius: 3px;
+    margin: 2px;
+}
+
+/* No Results Message */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.no-results h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.no-results p {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.no-results .suggestion-btn {
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.no-results .suggestion-btn:hover {
+    background: #000;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .filter-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .filter-btn {
+        font-size: 13px;
+        padding: 10px 12px;
+        justify-content: center;
+    }
+    
+    .active-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-tags {
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Customization - Complete Design Service</title>
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="shared/styles.css?v=2">
+    <link rel="stylesheet" href="shared/filters.css?v=2">
+    <link rel="stylesheet" href="shared/stepped.css?v=2">
+    <!-- Full Customization specific CSS -->
+    <link rel="stylesheet" href="full-custom.css?v=1">
+    <!-- Shared JS -->
+    <script src="shared/quantity-price-update.js" defer></script>
+</head>
+<body>
+    <!-- Main product page - 2 columns on desktop -->
+    <div class="product-page">
+        <!-- Left: Product Images -->
+        <div class="product-images">
+            <div class="product-image">
+                [Main Product Image]
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                <div class="product-image" style="height: 80px; font-size: 12px;">[Thumb 1]</div>
+                <div class="product-image" style="height: 80px; font-size: 12px;">[Thumb 2]</div>
+                <div class="product-image" style="height: 80px; font-size: 12px;">[Thumb 3]</div>
+                <div class="product-image" style="height: 80px; font-size: 12px;">[Thumb 4]</div>
+            </div>
+        </div>
+
+        <!-- Right: Product Details -->
+        <div class="product-details">
+            <h1 class="product-title">Full Customization Service</h1>
+            <p class="product-subtitle">Complete Custom Design - Your Vision, Our Craft</p>
+            <div class="product-price">Service Price: $1,800</div>
+            
+            <!-- НОВОЕ: Inspiration Gallery Preview -->
+            <div class="inspiration-preview" style="margin-bottom: 20px; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+                <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Need Inspiration?</h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                    <div style="height: 60px; background: #e0e0e0; border-radius: 4px; font-size: 10px; display: flex; align-items: center; justify-content: center;">[Example 1]</div>
+                    <div style="height: 60px; background: #e0e0e0; border-radius: 4px; font-size: 10px; display: flex; align-items: center; justify-content: center;">[Example 2]</div>
+                    <div style="height: 60px; background: #e0e0e0; border-radius: 4px; font-size: 10px; display: flex; align-items: center; justify-content: center;">[Example 3]</div>
+                    <div style="height: 60px; background: #e0e0e0; border-radius: 4px; font-size: 10px; display: flex; align-items: center; justify-content: center;">[View All →]</div>
+                </div>
+            </div>
+            
+            <!-- Currently Selected Canvas (shared) -->
+            <div class="currently-selected">
+                <div class="currently-selected-title">Your Configuration Canvas</div>
+                <div id="currently-selected-display">
+                    <!-- Та же структура что и в Bespoke -->
+                    <div class="selected-watch">
+                        <div class="selected-watch-flex" style="display: flex; gap: 20px; align-items: start;">
+                            <div class="watch-thumb" style="width: 100px; height: 100px; background: #f5f5f5; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; flex-shrink: 0;">
+                                [Watch Thumb]
+                            </div>
+                            <div style="flex: 1; min-width: 0;">
+                                <div class="selected-watch-name">Tissot PRX Powermatic 80</div>
+                                <div class="selected-watch-specs">
+                                    Automatic • 40mm • Steel Case • Black Dial<br>
+                                    Watch Price: $850<br>
+                                    <span style="color: #999; font-size: 12px;">Default selection - click Customize to change</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Actions (shared structure) -->
+            <div class="product-actions">
+                <!-- Customize button -->
+                <button class="customize-button" onclick="openCustomizer()">
+                    CUSTOMIZE YOUR DESIGN
+                </button>
+                
+                <!-- Price Summary (цены другие!) -->
+                <div class="price-summary-box">
+                    <h4 class="price-summary-title">PRICE SUMMARY</h4>
+                    <div class="price-summary-lines">
+                        <div class="price-summary-line">
+                            <span class="price-label">Full Custom Design Service</span>
+                            <span class="price-value">$1,800.00</span>
+                        </div>
+                        <div class="price-summary-line" id="watch-price-summary">
+                            <span class="price-label">
+                                <span id="selected-watch-name">Tissot PRX Powermatic 80</span>
+                            </span>
+                            <span class="price-value" id="selected-watch-price">$850.00</span>
+                        </div>
+                        <div class="price-summary-line total">
+                            <span class="price-label"><strong>Total Price</strong></span>
+                            <span class="price-value"><strong id="total-price-summary">$2,650.00</strong></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quantity and Add to Cart (shared) -->
+                <div class="cart-controls">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                        <input type="number" id="quantity-input" class="quantity-input" value="1" min="1" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+            </div>
+            
+            <!-- Product Description (другой текст) -->
+            <div class="product-description">
+                <h3>Description</h3>
+                <p>
+                    Unleash your creativity with our Full Customization service. Start with your chosen luxury watch, 
+                    then work with our artists to create a completely unique design. Upload your own artwork, 
+                    choose from our inspiration gallery, or let us create something entirely new based on your vision.
+                    Perfect for those who want a truly one-of-a-kind timepiece.
+                </p>
+                <ul style="margin-top: 15px; padding-left: 20px; color: #666; font-size: 14px;">
+                    <li>Complete design freedom</li>
+                    <li>Upload your own artwork or ideas</li>
+                    <li>Work directly with our artists</li>
+                    <li>Multiple revision rounds included</li>
+                    <li>Digital mockup before production</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal будет такой же, но с дополнительными шагами -->
+    <!-- Пока используем тот же модал что и в Bespoke -->
+    
+    <!-- Shared JS files -->
+    <script src="shared/script.js"></script>
+    <script src="shared/filters.js"></script>
+    <script src="shared/stepped.js"></script>
+    
+    <!-- Full Customization specific JS -->
+    <script>
+        // Переопределяем servicePrice для Full Custom
+        const FULL_CUSTOM_SERVICE_PRICE = 1800;
+        
+        // Обновляем функцию расчёта цены
+        window.addEventListener('DOMContentLoaded', () => {
+            // Заменяем базовую цену
+            const originalUpdatePrice = window.updatePriceDisplay;
+            if (originalUpdatePrice) {
+                window.updatePriceDisplay = function() {
+                    // Используем цену Full Custom вместо Bespoke
+                    const quantity = parseInt(document.getElementById('quantity-input').value) || 1;
+                    const servicePrice = FULL_CUSTOM_SERVICE_PRICE;
+                    const watchPriceElement = document.getElementById('selected-watch-price');
+                    const watchPriceText = watchPriceElement ? watchPriceElement.textContent : '$850.00';
+                    const watchPrice = parseFloat(watchPriceText.replace(/[^0-9.]/g, ''));
+                    
+                    const totalService = servicePrice * quantity;
+                    const totalWatch = watchPrice * quantity;
+                    const total = totalService + totalWatch;
+                    
+                    // Обновляем отображение
+                    const serviceLine = document.querySelector('.price-summary-line:first-child');
+                    if (serviceLine) {
+                        const label = serviceLine.querySelector('.price-label');
+                        const value = serviceLine.querySelector('.price-value');
+                        if (quantity > 1) {
+                            label.innerHTML = `Full Custom Design Service <span style="color: #666;">× ${quantity}</span>`;
+                        } else {
+                            label.innerHTML = 'Full Custom Design Service';
+                        }
+                        value.textContent = `$${totalService.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                    }
+                    
+                    // Watch price update
+                    const watchLine = document.getElementById('watch-price-summary');
+                    if (watchLine) {
+                        const label = watchLine.querySelector('.price-label');
+                        const value = watchLine.querySelector('.price-value');
+                        const watchName = document.getElementById('selected-watch-name').textContent;
+                        if (quantity > 1) {
+                            label.innerHTML = `<span id="selected-watch-name">${watchName}</span> <span style="color: #666;">× ${quantity}</span>`;
+                        } else {
+                            label.innerHTML = `<span id="selected-watch-name">${watchName}</span>`;
+                        }
+                        value.innerHTML = `<span id="selected-watch-price">$${totalWatch.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>`;
+                    }
+                    
+                    // Total update
+                    const totalElement = document.getElementById('total-price-summary');
+                    if (totalElement) {
+                        totalElement.textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                    }
+                };
+            }
+        });
+    </script>
+</body>
+</html>

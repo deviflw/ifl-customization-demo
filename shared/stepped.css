@@ -1,0 +1,506 @@
+/* Stepped Navigation Styles */
+
+/* Enhanced Progress Bar */
+.progress-bar {
+    display: flex;
+    padding: 25px 30px;
+    background: linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%);
+    border-bottom: 2px solid #e0e0e0;
+    position: relative;
+    flex-shrink: 0; /* Не сжимается */
+}
+
+/* Progress Line - линия между кружочками */
+.progress-step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    opacity: 0.4;
+    transition: all 0.3s;
+}
+
+/* Линия идет от правого края кружка - только для НЕ последних элементов */
+.progress-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: calc(50% + 16px);
+    right: calc(-50% + 16px);
+    height: 2px;
+    background: #ddd;
+    z-index: 0;
+    transition: background 0.3s;
+}
+
+/* Для completed шагов - наш цвет, но НЕ для последнего */
+.progress-step.completed:not(:last-child)::after {
+    background: #40bec1;
+}
+
+/* Убираем линию для активного последнего шага */
+.progress-step:last-child::after {
+    display: none !important;
+}
+
+.progress-step.active {
+    opacity: 1;
+}
+
+.progress-step.completed {
+    opacity: 1;
+}
+
+.step-number {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 50%;
+    background: #ddd;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 1; /* Кружок поверх линии */
+}
+
+.progress-step.active .step-number {
+    background: #081820;
+    transform: scale(1.1);
+}
+
+.progress-step.completed .step-number {
+    background: #40bec1;
+}
+
+.step-text {
+    display: block;
+    font-size: 13px;
+    color: #666;
+    font-weight: 500;
+}
+
+.progress-step.active .step-text {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Step Content */
+.step-content {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Navigation Buttons */
+.customizer-navigation {
+    display: flex;
+    gap: 15px;
+    padding: 25px 30px;
+    background: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    margin-top: auto; /* Прижимаем к низу через flexbox */
+    flex-shrink: 0; /* Не сжимается */
+}
+
+.nav-btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-width: 150px;
+}
+
+.btn-back {
+    background: white;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+.btn-back:hover {
+    border-color: #999;
+    background: #f9f9f9;
+}
+
+.nav-spacer {
+    flex: 1;
+}
+
+.btn-next {
+    background: #333;
+    color: white;
+}
+
+.btn-next:hover:not(:disabled) {
+    background: #000;
+    transform: translateX(2px);
+}
+
+.btn-next:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.btn-apply {
+    background: #40bec1;
+    color: white;
+    min-width: 200px;
+}
+
+.btn-apply:hover {
+    background: #35a7a9;
+}
+
+/* Selected Watch Display */
+.selected-watch-display {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8efff 100%);
+    border: 2px solid #40bec1;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.selected-badge {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #40bec1;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.selected-watch-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.selected-watch-thumb {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #999;
+}
+
+.selected-watch-details h5 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+}
+
+.selected-watch-details p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Variant Grid - старый стиль для совместимости */
+.variant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Новые стили для вариантов в стиле Shopify */
+.variant-options {
+    margin-top: 30px;
+}
+
+.option-group {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.option-group:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.option-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.option-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Regular option buttons - стиль как в фильтрах */
+.option-btn {
+    padding: 8px 16px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: auto;
+}
+
+.option-btn:hover:not(.disabled) {
+    border-color: #999;
+    transform: translateY(-1px);
+}
+
+.option-btn.selected {
+    background: #333;
+    color: white;
+    border-color: #333;
+}
+
+.option-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.option-btn.disabled::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    right: -2px;
+    height: 2px;
+    background: #999;
+    transform: rotate(-45deg);
+}
+
+/* Color swatch buttons - стиль как в фильтрах */
+.option-btn.color-btn {
+    padding: 8px 16px;
+}
+
+.color-swatch {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+.option-btn.color-btn.selected .color-swatch {
+    box-shadow: 0 0 0 2px white;
+}
+
+.variant-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: white;
+    text-align: center;
+}
+
+.variant-card:hover {
+    border-color: #999;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.variant-card.selected {
+    border-color: #4a90e2;
+    background: #f0f4ff;
+}
+
+.variant-image {
+    width: 100%;
+    height: 120px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 12px;
+}
+
+.variant-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.variant-details {
+    font-size: 13px;
+    color: #666;
+}
+
+/* Final Summary */
+.final-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.summary-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.summary-card h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.config-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.config-line:last-child {
+    border-bottom: none;
+}
+
+.config-label {
+    color: #666;
+    font-size: 14px;
+}
+
+.config-value {
+    font-weight: 600;
+    text-align: right;
+}
+
+/* Price Breakdown */
+.price-breakdown {
+    background: linear-gradient(135deg, #f9f9f9 0%, #f5f5f5 100%);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.price-breakdown h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.price-line.total {
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 2px solid #333;
+    font-size: 18px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .progress-bar {
+        padding: 15px;
+    }
+    
+    .step-text {
+        font-size: 11px;
+    }
+    
+    .step-number {
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 14px;
+    }
+    
+    .customizer-navigation {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding: 20px;
+        gap: 10px;
+        min-height: 74px; /* Фиксированная высота чтобы не прыгало */
+    }
+    
+    .nav-btn {
+        flex: 1;
+        min-width: 0;
+        padding: 14px 20px;
+    }
+    
+    /* Невидимая кнопка всё равно занимает место */
+    .nav-btn[style*="visibility: hidden"] {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .nav-spacer {
+        display: none;
+    }
+    
+    .btn-back {
+        order: 0;
+    }
+    
+    .btn-next,
+    .btn-apply {
+        order: 0;
+    }
+    
+    .final-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .variant-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Watch Card Price - цвет изменён с зелёного на наш чёрный */
+.watch-price {
+    font-size: 18px;
+    font-weight: 600;
+    color: #081820;
+    margin-top: 8px;
+}

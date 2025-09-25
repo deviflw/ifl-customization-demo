@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Customization - Complete Design Service | IFL Watches</title>
+    <!-- Возвращаем как было БЕЗ product-layout -->
+    <link rel="stylesheet" href="shared/styles.css?v=11">
+    <!-- <link rel="stylesheet" href="shared/product-layout.css?v=1"> УБРАЛИ -->
+    <link rel="stylesheet" href="shared/filters.css?v=3">
+    <link rel="stylesheet" href="shared/stepped.css?v=3">
+    <script src="shared/quantity-price-update.js?v=3" defer></script>
+    
+    <!-- Full Customization specific styles (только уникальное) -->
+    <style>
+        /* Убрали override - теперь используем общие 70/30 из styles.css */
+        
+        /* Inspiration Gallery - уникально для Full Custom */
+        .inspiration-gallery {
+            margin-bottom: 30px;
+        }
+        
+        .gallery-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-pill {
+            padding: 7px 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        
+        .filter-pill:hover {
+            border-color: #333;
+            background: #f8f8f8;
+        }
+        
+        .filter-pill.active {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-filters {
+                gap: 6px;
+                margin-bottom: 15px;
+                padding: 0 5px;
+            }
+            
+            .filter-pill {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+        }
+        
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            background: #f5f5f5;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-item-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #999;
+            font-size: 11px;
+            text-align: center;
+            padding: 8px;
+            line-height: 1.3;
+        }
+        
+        .gallery-item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            padding: 8px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-item-info {
+            transform: translateY(0);
+        }
+        
+        .gallery-item-title {
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .gallery-item-style {
+            font-size: 9px;
+            opacity: 0.8;
+        }
+        
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .gallery-item {
+                border-radius: 4px;
+            }
+            
+            .gallery-item:hover {
+                transform: none; /* Отключаем hover на мобилке */
+                box-shadow: none;
+            }
+            
+            .gallery-item-placeholder {
+                font-size: 10px;
+                padding: 6px;
+            }
+            
+            /* На мобилке показываем info всегда */
+            .gallery-item-info {
+                transform: translateY(0);
+                padding: 6px;
+                background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
+            }
+            
+            .gallery-item-title {
+                font-size: 10px;
+            }
+            
+            .gallery-item-style {
+                font-size: 8px;
+            }
+        }
+        
+        /* Info Blocks */
+        .info-blocks {
+            margin-top: 60px;
+            padding-top: 60px;
+            border-top: 1px solid #e5e5e5;
+        }
+        
+        .info-block {
+            margin-bottom: 50px;
+        }
+        
+        .info-block h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .process-step {
+            text-align: center;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background: #333;
+            color: white;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .step-description {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        /* FAQ Accordion */
+        .faq-item {
+            border-bottom: 1px solid #e5e5e5;
+            padding: 20px 0;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .faq-arrow {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-arrow {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding-top: 15px;
+        }
+        
+        /* Trust badges - новый дизайн */
+        .trust-badges {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+            margin-bottom: 0;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .trust-badge:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .trust-badge-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+            width: 40px;
+            text-align: center;
+        }
+        
+        .trust-badge-content {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .trust-badge-title {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 2px;
+            color: #222;
+            line-height: 1.2;
+        }
+        
+        .trust-badge-description {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.3;
+        }
+        
+        /* Mobile тоже 2 колонки но меньше текст */
+        @media (max-width: 768px) {
+            .trust-badges {
+                gap: 10px;
+                margin-top: 20px;
+            }
+            
+            .trust-badge {
+                padding: 12px;
+                gap: 10px;
+            }
+            
+            .trust-badge-icon {
+                font-size: 24px;
+                width: 32px;
+            }
+            
+            .trust-badge-title {
+                font-size: 12px;
+            }
+            
+            .trust-badge-description {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main product page - используем mobile-details-first чтобы галерея была внизу на мобилке -->
+    <div class="product-page mobile-details-first">
+        <!-- Left: Inspiration Gallery instead of Product Images -->
+        <div class="product-images">
+            <div class="inspiration-gallery">
+                <h3 style="font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Inspiration Gallery</h3>
+                
+                <!-- Gallery Filters -->
+                <div class="gallery-filters">
+                    <button class="filter-pill active" data-filter="all">All</button>
+                    <button class="filter-pill" data-filter="abstract">Abstract</button>
+                    <button class="filter-pill" data-filter="logo">Logo</button>
+                    <button class="filter-pill" data-filter="fineart">Fine Art</button>
+                    <button class="filter-pill" data-filter="illustration">Illustration</button>
+                    <button class="filter-pill" data-filter="geometric">Geometric</button>
+                    <button class="filter-pill" data-filter="nature">Nature</button>
+                    <button class="filter-pill" data-filter="portrait">Portrait</button>
+                </div>
+                
+                <!-- Gallery Grid -->
+                <div class="gallery-grid" id="inspiration-grid">
+                    <!-- Example items - в реальности будут настоящие изображения -->
+                    <div class="gallery-item" data-style="abstract">
+                        <div class="gallery-item-placeholder">Abstract Galaxy<br>on Tissot PRX</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Abstract Galaxy</div>
+                            <div class="gallery-item-style">Abstract Art</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="logo">
+                        <div class="gallery-item-placeholder">Ferrari Logo<br>on Oris Aquis</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Ferrari Logo</div>
+                            <div class="gallery-item-style">Logo Design</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="fineart">
+                        <div class="gallery-item-placeholder">Ocean Waves<br>on Seiko 5</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Ocean Waves</div>
+                            <div class="gallery-item-style">Fine Art</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="illustration">
+                        <div class="gallery-item-placeholder">Anime Character<br>on Citizen</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Anime Character</div>
+                            <div class="gallery-item-style">Illustration</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="geometric">
+                        <div class="gallery-item-placeholder">Sacred Geometry<br>on Tissot</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Sacred Geometry</div>
+                            <div class="gallery-item-style">Geometric</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="nature">
+                        <div class="gallery-item-placeholder">Mountain Landscape<br>on Bulova</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Mountain Landscape</div>
+                            <div class="gallery-item-style">Nature</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="portrait">
+                        <div class="gallery-item-placeholder">Family Portrait<br>on Oris</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Family Portrait</div>
+                            <div class="gallery-item-style">Portrait</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="abstract">
+                        <div class="gallery-item-placeholder">Color Splash<br>on Hamilton</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Color Splash</div>
+                            <div class="gallery-item-style">Abstract Art</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="logo">
+                        <div class="gallery-item-placeholder">Company Logo<br>on Seiko GMT</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Company Logo</div>
+                            <div class="gallery-item-style">Logo Design</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="fineart">
+                        <div class="gallery-item-placeholder">Van Gogh Style<br>on Tissot</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Van Gogh Style</div>
+                            <div class="gallery-item-style">Fine Art</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="illustration">
+                        <div class="gallery-item-placeholder">Comic Hero<br>on Citizen</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Comic Hero</div>
+                            <div class="gallery-item-style">Illustration</div>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-style="geometric">
+                        <div class="gallery-item-placeholder">Mandala Pattern<br>on Oris</div>
+                        <div class="gallery-item-info">
+                            <div class="gallery-item-title">Mandala Pattern</div>
+                            <div class="gallery-item-style">Geometric</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Product Details -->
+        <div class="product-details">
+            <h1 class="product-title">Full Customization Service</h1>
+            <p class="product-subtitle">Your Vision, Our Craft - Complete Custom Design</p>
+            <div class="product-price">Service Price: $1,490</div>
+                        
+            <!-- Currently Selected Canvas -->
+            <div class="currently-selected">
+                <div class="currently-selected-title">Your Configuration Canvas</div>
+                <div id="currently-selected-display">
+                    <!-- Default watch shown -->
+                    <div class="selected-watch">
+                        <div class="selected-watch-flex" style="display: flex; gap: 20px; align-items: start;">
+                            <div class="watch-thumb" style="width: 100px; height: 100px; background: #f5f5f5; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px; flex-shrink: 0;">
+                                [Watch Thumb]
+                            </div>
+                            <div style="flex: 1; min-width: 0;">
+                                <div class="selected-watch-name">Tissot PRX Powermatic 80</div>
+                                <div class="selected-watch-specs">
+                                    Automatic • 40mm • Steel Case • Black Dial<br>
+                                    Watch Price: $850<br>
+                                    <span style="color: #999; font-size: 12px;">Default selection - click Customize to change</span>
+                                </div>
+                                <details style="margin-top: 12px;">
+                                    <summary style="cursor: pointer; color: #666; font-size: 13px; outline: none;">View full specifications</summary>
+                                    <div style="padding: 12px 0; font-size: 13px; color: #666; line-height: 1.8;">
+                                        <strong>Movement & Performance</strong><br>
+                                        • Power Reserve: 80 hours<br>
+                                        • Jewels: 23<br>
+                                        • Frequency: 21,600 vph<br>
+                                        <br>
+                                        <strong>Case & Dimensions</strong><br>
+                                        • Diameter: 40mm<br>
+                                        • Thickness: 10.9mm<br>
+                                        • Lug to Lug: 44mm<br>
+                                        • Lug Width: 12mm<br>
+                                        <br>
+                                        <strong>Materials & Protection</strong><br>
+                                        • Crystal: Sapphire<br>
+                                        • Water Resistance: 100m/10ATM<br>
+                                        <br>
+                                        <strong>Included</strong><br>
+                                        • Custom IFL Box<br>
+                                        • 2 Years IFL Warranty
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Actions -->
+            <div class="product-actions">
+                <!-- Customize button - separate row -->
+                <button class="customize-button" onclick="openCustomizer()">
+                    CUSTOMIZE YOUR WATCH
+                </button>
+                
+                <!-- Price Summary - между кнопками -->
+                <div class="price-summary-box">
+                    <h4 class="price-summary-title">PRICE SUMMARY</h4>
+                    <div class="price-summary-lines">
+                        <div class="price-summary-line">
+                            <span class="price-label">Full Custom Design Service</span>
+                            <span class="price-value" id="service-price-value">$1,490.00</span>
+                        </div>
+                        <div class="price-summary-line" id="watch-price-summary">
+                            <span class="price-label">
+                                <span id="selected-watch-name">Tissot PRX Powermatic 80</span>
+                            </span>
+                            <span class="price-value" id="selected-watch-price">$850.00</span>
+                        </div>
+                        <div class="price-summary-line total">
+                            <span class="price-label"><strong>Total Price</strong></span>
+                            <span class="price-value"><strong id="total-price-summary">$2,340.00</strong></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quantity and Add to Cart - same row -->
+                <div class="cart-controls">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                        <input type="number" id="quantity-input" class="quantity-input" value="1" min="1" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <button class="add-to-cart">ADD TO CART</button>
+                </div>
+                
+                <!-- Trust Badges - 2x2 grid under Add to Cart -->
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">✅</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">2 Free Revisions</div>
+                            <div class="trust-badge-description">Perfect your design</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">🛡️</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">2 Year Warranty</div>
+                            <div class="trust-badge-description">IFL quality guarantee</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">🎨</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">100% Unique</div>
+                            <div class="trust-badge-description">One-of-a-kind design</div>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <div class="trust-badge-icon">📦</div>
+                        <div class="trust-badge-content">
+                            <div class="trust-badge-title">Premium Packaging</div>
+                            <div class="trust-badge-description">Certificate included</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Description -->
+            <div class="product-description">
+                <h3>Create Your One-of-a-Kind Timepiece</h3>
+                <p>
+                    Transform your chosen luxury watch into a completely unique masterpiece with our Full Customization service. 
+                    Work directly with our master artists to bring your vision to life - whether it's a personal design, 
+                    company logo, meaningful artwork, or any creative concept you imagine.
+                </p>
+                <p style="margin-top: 15px;">
+                    <strong>After your order:</strong> You'll receive our Vision Board form within 24 hours to share your ideas, 
+                    inspiration images, and design preferences. Our artists will then create a digital mockup for your approval 
+                    before the hand-painting process begins.
+                </p>
+                <ul style="margin-top: 20px; padding-left: 20px; color: #666; font-size: 14px; line-height: 1.8;">
+                    <li>Complete design freedom - any concept possible</li>
+                    <li>Upload your own artwork or let us create from scratch</li>
+                    <li>2 free design revisions included</li>
+                    <li>Digital mockup before production</li>
+                    <li>4-6 weeks total turnaround time</li>
+                    <li>Certificate of Authenticity included</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Information Blocks -->
+    <div class="info-blocks">
+        <!-- How It Works -->
+        <div class="info-block">
+            <h3>Your Journey to a Unique Timepiece</h3>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Choose & Order</div>
+                    <div class="step-description">Select your base watch model and complete checkout</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Vision Board</div>
+                    <div class="step-description">Share your ideas via our detailed form (24hrs after order)</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Design Creation</div>
+                    <div class="step-description">Our artists create your digital mockup (3-5 days)</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Your Approval</div>
+                    <div class="step-description">Review and request revisions if needed</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Hand Painting</div>
+                    <div class="step-description">Meticulous dial artwork creation (2-3 weeks)</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-title">Assembly</div>
+                    <div class="step-description">Professional watch assembly and testing</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">7</div>
+                    <div class="step-title">Quality Check</div>
+                    <div class="step-description">Final inspection and photography</div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">8</div>
+                    <div class="step-title">Delivery</div>
+                    <div class="step-description">Secure worldwide shipping with tracking</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Timeline -->
+        <div class="info-block">
+            <h3>From Vision to Reality: 4-6 Weeks</h3>
+            <div style="background: #f9f9f9; padding: 30px; border-radius: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <strong>Week 1:</strong> Order & Vision Board
+                    </div>
+                    <div style="color: #666; font-size: 14px;">Design concept development</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <strong>Week 2:</strong> Digital Mockup & Revisions
+                    </div>
+                    <div style="color: #666; font-size: 14px;">Your approval required</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <strong>Weeks 3-4:</strong> Hand Painting Process
+                    </div>
+                    <div style="color: #666; font-size: 14px;">Artisan craftsmanship</div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>Weeks 5-6:</strong> Assembly & Shipping
+                    </div>
+                    <div style="color: #666; font-size: 14px;">Quality control & delivery</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FAQ -->
+        <div class="info-block">
+            <h3>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I send you my own watch for customization?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Currently, we only work with new watches from our curated collection. This ensures warranty validity, 
+                    quality control, and proper insurance coverage throughout the customization process.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What's included in the 2 free revisions?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    You can request up to 2 rounds of major design changes to the digital mockup. Minor adjustments 
+                    (small color tweaks, tiny position changes) don't count toward your revision limit. Additional 
+                    major revisions beyond 2 are available for $100 each.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can I see examples similar to my idea?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! After you submit your Vision Board, we'll share relevant examples from our portfolio 
+                    to help refine your concept. You can also browse our Inspiration Gallery above for general style references.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    What's your warranty coverage?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Every customized watch comes with a 2-year IFL warranty covering the artwork and customization. 
+                    The base watch retains its original manufacturer warranty. We also provide lifetime support for 
+                    any questions about your unique timepiece.
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    Do you handle corporate orders?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! We love creating custom watches for companies, teams, and special events. For orders of 5+ watches, 
+                    we offer special pricing and dedicated project management. Contact us at corporate@iflwatches.com for details.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeCustomizer()"></div>
+    
+    <!-- Customizer Panel (same as Bespoke) -->
+    <div class="customizer-panel" id="customizer">
+        <div class="customizer-header">
+            <h2>Customize Your Watch</h2>
+            <button class="close-button" onclick="closeCustomizer()">✕</button>
+        </div>
+        
+        <!-- Same stepped navigation as Bespoke Edition -->
+        <div class="progress-bar">
+            <div class="progress-step active" id="progress-step-1">
+                <span class="step-number">1</span>
+                <span class="step-text">Select Watch</span>
+            </div>
+            <div class="progress-step" id="progress-step-2">
+                <span class="step-number">2</span>
+                <span class="step-text">Choose Options</span>
+            </div>
+            <div class="progress-step" id="progress-step-3">
+                <span class="step-number">3</span>
+                <span class="step-text">Review</span>
+            </div>
+        </div>
+                
+        <div class="customizer-content">
+            
+            <!-- STEP 1: Filter & Select Watch (copied from Bespoke) -->
+            <div class="step-content" id="step-1" style="display: block;">
+                <div class="step-section">
+                    <h3>Step 1: Find Your Perfect Watch</h3>
+                    
+                    <!-- Active filters display -->
+                    <div class="active-filters" id="active-filters" style="display: none;">
+                        <span class="filters-label">Active filters:</span>
+                        <div class="filter-tags" id="filter-tags"></div>
+                        <button class="clear-all-btn" onclick="clearAllFilters()">Clear All</button>
+                    </div>
+                    
+                    <!-- Collapsible Filters Container -->
+                    <div class="filters-container">
+                        <!-- Toggle Button -->
+                        <div class="filters-toggle" onclick="toggleFiltersPanel()">
+                            <span class="toggle-text">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="4" y1="6" x2="20" y2="6"></line>
+                                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                                    <line x1="4" y1="18" x2="20" y2="18"></line>
+                                </svg>
+                                Filter Watches
+                            </span>
+                            <span class="toggle-arrow" id="filter-arrow">▼</span>
+                        </div>
+                        
+                        <!-- Filters Panel Inside Container -->
+                        <div class="filters-panel" id="filters-panel" style="display: none;">
+                            <!-- Brand Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Brand</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="tissot">Tissot</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="oris">Oris</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="seiko">Seiko</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="citizen">Citizen</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="bulova">Bulova</button>
+                                    <button class="filter-btn" data-filter-type="brand" data-filter-value="hamilton">Hamilton</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Movement Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Movement Type</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="movement" data-filter-value="automatic">Automatic</button>
+                                    <button class="filter-btn" data-filter-type="movement" data-filter-value="quartz">Quartz</button>
+                                    <button class="filter-btn" data-filter-type="movement" data-filter-value="solar">Solar</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Case Color Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Case Color</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="steel">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #c0c0c0, #e8e8e8);"></span>
+                                        Steel
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="gold">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #ffd700, #ffed4b);"></span>
+                                        Gold
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="rosegold">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #e8b4b8, #f4c2c2);"></span>
+                                        Rose Gold
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="caseColor" data-filter-value="black">
+                                        <span class="color-dot" style="background: #222;"></span>
+                                        Black
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Dial Color Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Dial Color</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="black">
+                                        <span class="color-dot" style="background: #000;"></span>
+                                        Black
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="white">
+                                        <span class="color-dot" style="background: #fff; border: 1px solid #ddd;"></span>
+                                        White
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="blue">
+                                        <span class="color-dot" style="background: #1e3a8a;"></span>
+                                        Blue
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="green">
+                                        <span class="color-dot" style="background: #22c55e;"></span>
+                                        Green
+                                    </button>
+                                    <button class="filter-btn" data-filter-type="dialColor" data-filter-value="silver">
+                                        <span class="color-dot" style="background: linear-gradient(45deg, #c0c0c0, #e8e8e8);"></span>
+                                        Silver
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Case Size Filter -->
+                            <div class="filter-group">
+                                <label class="filter-label">Case Size</label>
+                                <div class="filter-buttons">
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="36">36mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="38">38mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="40">40mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="42">42mm</button>
+                                    <button class="filter-btn" data-filter-type="size" data-filter-value="44">44mm</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Results count -->
+                    <div class="filter-results">
+                        <span class="result-count">Showing <strong id="result-count">12</strong> watches</span>
+                    </div>
+                </div>
+                
+                <!-- Watches Grid -->
+                <div class="step-section">
+                    <h4>Available Watches</h4>
+                    <div class="watch-grid" id="filtered-watches">
+                        <!-- Watches will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- STEP 2: Choose Variant -->
+            <div class="step-content" id="step-2" style="display: none;">
+                <div class="step-section">
+                    <h3>Step 2: Choose Your Options</h3>
+                    
+                    <!-- Selected Watch Display -->
+                    <div class="selected-watch-display" id="selected-watch-display">
+                        <div class="selected-badge">Selected Model</div>
+                        <!-- Will be filled dynamically -->
+                    </div>
+                    
+                    <!-- Variant Options - Shopify Style -->
+                    <div class="variant-options">
+                        
+                        <!-- Size Options -->
+                        <div class="option-group">
+                            <label class="option-label">Available Sizes:</label>
+                            <div class="option-buttons" id="size-options">
+                                <button class="option-btn" data-option="size" data-value="40mm">40mm</button>
+                                <button class="option-btn" data-option="size" data-value="35mm">35mm</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Dial Color Options -->
+                        <div class="option-group">
+                            <label class="option-label">Dial color:</label>
+                            <div class="option-buttons" id="dial-options">
+                                <button class="option-btn color-btn" data-option="dial" data-value="blue">
+                                    <span class="color-swatch" style="background: #1e3a8a;"></span>
+                                    Blue
+                                </button>
+                                <button class="option-btn color-btn" data-option="dial" data-value="black">
+                                    <span class="color-swatch" style="background: #000;"></span>
+                                    Black
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Case Color Options -->
+                        <div class="option-group">
+                            <label class="option-label">Case color:</label>
+                            <div class="option-buttons" id="case-options">
+                                <button class="option-btn color-btn" data-option="case" data-value="gold">
+                                    <span class="color-swatch" style="background: linear-gradient(45deg, #ffd700, #ffed4b);"></span>
+                                    Gold
+                                </button>
+                                <button class="option-btn color-btn" data-option="case" data-value="silver">
+                                    <span class="color-swatch" style="background: linear-gradient(45deg, #c0c0c0, #e8e8e8);"></span>
+                                    Silver
+                                </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <!-- STEP 3: Review & Confirm -->
+            <div class="step-content" id="step-3" style="display: none;">
+                <div class="step-section">
+                    <h3>Step 3: Review Your Selection</h3>
+                    
+                    <!-- Final Summary -->
+                    <div class="final-summary">
+                        <div class="summary-card">
+                            <h4>Your Configuration</h4>
+                            <div id="final-watch-details">
+                                <!-- Will be filled with complete selection -->
+                            </div>
+                        </div>
+                        
+                        <div class="price-breakdown">
+                            <h4>Price Breakdown</h4>
+                            <div class="price-line">
+                                <span>Service Fee:</span>
+                                <span>$1,490</span>
+                            </div>
+                            <div class="price-line" id="watch-price-line">
+                                <span>Watch:</span>
+                                <span>$0</span>
+                            </div>
+                            <div class="price-line total">
+                                <span><strong>Total:</strong></span>
+                                <span id="total-price"><strong>$1,490</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <div class="customizer-navigation">
+            <button class="nav-btn btn-back" id="btn-back" onclick="previousStep()" style="display: none;">
+                ← Back
+            </button>
+            <div class="nav-spacer"></div>
+            <button class="nav-btn btn-next" id="btn-next" onclick="nextStep()" disabled>
+                Next: Choose Options →
+            </button>
+            <button class="nav-btn btn-apply" id="btn-apply" onclick="applyConfiguration()" style="display: none;">
+                APPLY
+            </button>
+        </div>
+    </div>
+    
+    <!-- Load shared scripts -->
+    <script src="shared/script.js?v=3"></script>
+    <script src="shared/filters.js?v=3"></script>
+    <script src="shared/stepped.js?v=3"></script>
+    
+    <!-- Full Customization specific scripts -->
+    <script>
+        // Override service price for Full Customization
+        const FULL_CUSTOM_SERVICE_PRICE = 1490;
+        
+        // Gallery filter functionality
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                // Remove active from all
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                // Add active to clicked
+                this.classList.add('active');
+                
+                // Filter gallery items
+                const filter = this.dataset.filter;
+                const items = document.querySelectorAll('.gallery-item');
+                
+                items.forEach(item => {
+                    if (filter === 'all' || item.dataset.style === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+        
+        // Override price calculation for Full Customization
+        window.addEventListener('DOMContentLoaded', () => {
+            // Update service price display
+            const servicePriceElement = document.getElementById('service-price-value');
+            if (servicePriceElement) {
+                servicePriceElement.textContent = '$1,490.00';
+            }
+            
+            // Update total with new service price
+            const updateTotal = () => {
+                const quantity = parseInt(document.getElementById('quantity-input').value) || 1;
+                const servicePrice = FULL_CUSTOM_SERVICE_PRICE;
+                const watchPriceText = document.getElementById('selected-watch-price').textContent;
+                const watchPrice = parseFloat(watchPriceText.replace(/[^0-9.]/g, ''));
+                
+                const total = (servicePrice + watchPrice) * quantity;
+                
+                // Update quantity labels if > 1
+                if (quantity > 1) {
+                    document.querySelector('.price-summary-line:first-child .price-label').innerHTML = 
+                        `Full Custom Design Service <span style="color: #666;">× ${quantity}</span>`;
+                    document.querySelector('#watch-price-summary .price-label').innerHTML = 
+                        `<span id="selected-watch-name">${document.getElementById('selected-watch-name').textContent}</span> <span style="color: #666;">× ${quantity}</span>`;
+                } else {
+                    document.querySelector('.price-summary-line:first-child .price-label').innerHTML = 'Full Custom Design Service';
+                    document.querySelector('#watch-price-summary .price-label').innerHTML = 
+                        `<span id="selected-watch-name">${document.getElementById('selected-watch-name').textContent}</span>`;
+                }
+                
+                // Update prices
+                document.getElementById('service-price-value').textContent = 
+                    `$${(servicePrice * quantity).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('selected-watch-price').textContent = 
+                    `$${(watchPrice * quantity).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                document.getElementById('total-price-summary').textContent = 
+                    `$${total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            };
+            
+            // Initial update
+            updateTotal();
+            
+            // Override the existing quantity functions
+            window.increaseQuantity = function() {
+                const input = document.getElementById('quantity-input');
+                input.value = parseInt(input.value) + 1;
+                updateTotal();
+            };
+            
+            window.decreaseQuantity = function() {
+                const input = document.getElementById('quantity-input');
+                if (parseInt(input.value) > 1) {
+                    input.value = parseInt(input.value) - 1;
+                    updateTotal();
+                }
+            };
+        });
+    </script>
+</body>
+</html>

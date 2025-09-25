@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Restored Styles - IFL Watches</title>
+    <!-- ТОЛЬКО общий layout со всеми исправлениями -->
+    <link rel="stylesheet" href="shared/product-layout.css?v=2">
+    <style>
+        body {
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .test-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+        }
+        
+        .test-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 10px;
+        }
+        
+        .color-check {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        
+        .primary-bg {
+            background: var(--primary-color, #081820);
+            color: white;
+        }
+        
+        .secondary-bg {
+            background: var(--secondary-color, #40bec1);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 style="text-align: center; margin-bottom: 40px;">🎨 Восстановленные стили IFL Watches</h1>
+        
+        <!-- Проверка цветов -->
+        <div class="test-section">
+            <div class="test-title">Брендовые цвета</div>
+            <div>
+                <span class="color-check primary-bg">Primary #081820</span>
+                <span class="color-check secondary-bg">Tiffany #40bec1</span>
+            </div>
+        </div>
+        
+        <!-- Кнопка Customize -->
+        <div class="test-section">
+            <div class="test-title">1. Кнопка CUSTOMIZE (тёмная)</div>
+            <button class="customize-button">CUSTOMIZE YOUR WATCH</button>
+            <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                ✅ Тёмная кнопка (#081820) с белой обводкой при hover
+            </p>
+        </div>
+        
+        <!-- Кнопка Add to Cart -->
+        <div class="test-section">
+            <div class="test-title">2. Кнопка ADD TO CART (тиффани)</div>
+            <button class="add-to-cart">ADD TO CART</button>
+            <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                ✅ Тиффани кнопка (#40bec1) с более тёмным hover
+            </p>
+        </div>
+        
+        <!-- Количество -->
+        <div class="test-section">
+            <div class="test-title">3. Селектор количества (простой)</div>
+            <div class="quantity-selector">
+                <button class="quantity-btn">−</button>
+                <input type="number" class="quantity-input" value="1" min="1" readonly>
+                <button class="quantity-btn">+</button>
+            </div>
+            <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                ✅ Простые кнопки с серым hover (#f5f5f5)
+            </p>
+        </div>
+        
+        <!-- Комбо: количество + корзина -->
+        <div class="test-section">
+            <div class="test-title">4. Комбинация (как на сайте)</div>
+            <div class="cart-controls">
+                <div class="quantity-selector">
+                    <button class="quantity-btn">−</button>
+                    <input type="number" class="quantity-input" value="1" min="1" readonly>
+                    <button class="quantity-btn">+</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+            <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                ✅ Правильное расположение и стили как в оригинале
+            </p>
+        </div>
+        
+        <!-- Trust Badges -->
+        <div class="test-section">
+            <div class="test-title">5. Trust Badges</div>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">🎨</div>
+                    <div class="trust-badge-content">
+                        <div class="trust-badge-title">Hand-Painted</div>
+                        <div class="trust-badge-description">Each dial unique</div>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✨</div>
+                    <div class="trust-badge-content">
+                        <div class="trust-badge-title">2 Free Revisions</div>
+                        <div class="trust-badge-description">Perfect your design</div>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                ✅ Единый стиль для всех badges
+            </p>
+        </div>
+        
+        <div style="margin-top: 60px; padding-top: 30px; border-top: 2px solid #e5e5e5;">
+            <h3 style="color: #28a745; text-align: center;">✅ Все стили восстановлены!</h3>
+            <p style="text-align: center; color: #666; font-size: 14px; margin-top: 10px;">
+                Теперь можно использовать <code>product-layout.css</code> для всех страниц<br>
+                DRY принцип соблюдён - один файл для всех компонентов 🎉
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Простой тест интерактивности
+        document.querySelectorAll('.quantity-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('.quantity-input');
+                const current = parseInt(input.value) || 1;
+                if (this.textContent === '+') {
+                    input.value = current + 1;
+                } else if (current > 1) {
+                    input.value = current - 1;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

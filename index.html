@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFL Watches Customization Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        header {
+            background: #081820;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Main Container */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        /* Demo Cards */
+        .demo-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .demo-card-image {
+            width: 100%;
+            height: 250px;
+            background: #e5e5e5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #999;
+        }
+        
+        .demo-card-content {
+            padding: 25px;
+        }
+        
+        .demo-card h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #081820;
+        }
+        
+        .demo-card-price {
+            font-size: 16px;
+            color: #40bec1;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .demo-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .demo-card-link {
+            display: inline-block;
+            background: #081820;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+        
+        .demo-card-link:hover {
+            background: #40bec1;
+        }
+        
+        /* Footer */
+        footer {
+            background: #081820;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #40bec1;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IFL WATCHES CUSTOMIZATION DEMO</h1>
+    </header>
+    
+    <main>
+        <div class="demo-grid">
+            <!-- Bespoke Edition Card -->
+            <div class="demo-card">
+                <div class="demo-card-image">
+                    [Bespoke Edition Preview]
+                </div>
+                <div class="demo-card-content">
+                    <h2>Bespoke Edition</h2>
+                    <div class="demo-card-price">$1,200 + Watch Price</div>
+                    <p>
+                        Choose from our exclusive collection of ready designs. 
+                        Select your watch, apply proven artwork, and receive 
+                        your customized timepiece in 3-4 weeks.
+                    </p>
+                    <a href="bespoke-edition.html" class="demo-card-link">
+                        View Demo
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Full Customization Card -->
+            <div class="demo-card">
+                <div class="demo-card-image">
+                    [Full Customization Preview]
+                </div>
+                <div class="demo-card-content">
+                    <h2>Full Customization</h2>
+                    <div class="demo-card-price">$1,490 + Watch Price</div>
+                    <p>
+                        Create your unique design from scratch. Upload inspiration, 
+                        work with our artists, and bring your vision to life 
+                        in 4-6 weeks.
+                    </p>
+                    <a href="full-customization.html" class="demo-card-link">
+                        View Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>© 2025 IFL Watches. Demo created with 💕 by 
+        <a href="https://github.com/deviflw" target="_blank">@deviflw</a></p>
+    </footer>
+</body>
+</html>
