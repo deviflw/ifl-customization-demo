@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /
+
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+# This is a demo site, please do not index
