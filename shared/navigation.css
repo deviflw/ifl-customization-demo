@@ -23,7 +23,7 @@
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 1px;
-    padding: 20px 0 10px 0; /* Тоже уменьшили padding bottom */
+    padding: 20px 0 15px 0; /* Тоже 15px снизу для выравнивания */
     transition: color 0.3s;
 }
 
@@ -45,7 +45,7 @@
 .nav-link {
     color: white;
     text-decoration: none;
-    padding: 20px 15px 10px 15px; /* Уменьшили padding bottom до 10px */
+    padding: 20px 15px 15px 15px; /* Увеличили padding bottom до 15px для отступа от линии */
     display: block;
     font-size: 14px;
     font-weight: 500;
