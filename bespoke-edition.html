@@ -13,6 +13,7 @@
     <!-- <link rel="stylesheet" href="shared/product-layout.css?v=1"> ОТКЛЮЧЕНО -->
     <link rel="stylesheet" href="shared/filters.css?v=3">
     <link rel="stylesheet" href="shared/stepped.css?v=3">
+    <link rel="stylesheet" href="shared/accordion.css?v=1">
     <script src="shared/quantity-price-update.js?v=3" defer></script>
     
     <style>
@@ -246,14 +247,71 @@
                 </div>
             </div>
             
-            <!-- Product Description -->
-            <div class="product-description">
-                <h3>Description</h3>
-                <p>
-                    Transform your chosen luxury watch into a unique masterpiece with our Bespoke Edition service. 
-                    Select from our curated collection of premium timepieces and customize them with exclusive 
-                    Galaxy Concept artwork, creating a one-of-a-kind watch that reflects your personal style.
-                </p>
+            <!-- Shipping Info Section -->
+            <div class="shipping-info">
+                <div class="shipping-item">
+                    <span class="shipping-icon">✈️</span>
+                    <span>Free worldwide shipping</span>
+                </div>
+                <div class="shipping-item">
+                    <span class="shipping-icon">⏱️</span>
+                    <span>3-4 weeks production time</span>
+                </div>
+                <div class="shipping-item">
+                    <span class="shipping-icon">📦</span>
+                    <span>Premium packaging included</span>
+                </div>
+            </div>
+            
+            <!-- Accordion Sections -->
+            <div class="accordion-container">
+                <!-- Description Accordion -->
+                <div class="accordion-item">
+                    <button class="accordion-header active" onclick="toggleAccordion(this)">
+                        <span>Description</span>
+                        <span class="accordion-icon">−</span>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <p>
+                            Transform your chosen luxury watch into a unique masterpiece with our Bespoke Edition service. 
+                            Select from our curated collection of premium timepieces and customize them with exclusive 
+                            Galaxy Concept artwork, creating a one-of-a-kind watch that reflects your personal style.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Shipping Accordion -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Shipping & Returns</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            <strong>Production:</strong> 3-4 weeks from order confirmation<br>
+                            <strong>Shipping:</strong> Free worldwide via DHL Express (3-5 business days)<br>
+                            <strong>Returns:</strong> 14-day return policy for unworn watches<br>
+                            <strong>Warranty:</strong> 2-year IFL warranty + manufacturer warranty
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Process Accordion -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>How It Works</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            1. <strong>Choose Your Watch:</strong> Select from our curated collection<br>
+                            2. <strong>Customize:</strong> Pick dial and case variations<br>
+                            3. <strong>Production:</strong> Our artists hand-paint your design<br>
+                            4. <strong>Quality Check:</strong> Swiss-certified inspection<br>
+                            5. <strong>Delivery:</strong> Secure worldwide shipping
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -545,6 +603,33 @@
                 menu.classList.remove('active');
             }
         });
+        
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            const isActive = header.classList.contains('active');
+            
+            // Close all other accordions
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                    h.nextElementSibling.style.display = 'none';
+                    h.querySelector('.accordion-icon').textContent = '+';
+                }
+            });
+            
+            // Toggle current accordion
+            if (isActive) {
+                header.classList.remove('active');
+                content.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                header.classList.add('active');
+                content.style.display = 'block';
+                icon.textContent = '−';
+            }
+        }
     </script>
 </body>
 </html>

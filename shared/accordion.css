@@ -1,0 +1,104 @@
+/* Accordion Styles */
+.accordion-container {
+    margin-top: 30px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.accordion-header {
+    width: 100%;
+    padding: 20px 0;
+    background: none;
+    border: none;
+    font-family: var(--font-family, 'Montserrat');
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s;
+    text-align: left;
+}
+
+.accordion-header:hover {
+    color: var(--secondary-color, #40bec1);
+}
+
+.accordion-icon {
+    font-size: 20px;
+    transition: transform 0.3s;
+}
+
+.accordion-header.active .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    display: none;
+    padding: 0 0 20px 0;
+    animation: slideDown 0.3s ease;
+}
+
+.accordion-content p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Shipping Info Styles */
+.shipping-info {
+    margin: 25px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.shipping-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    color: #333;
+}
+
+.shipping-item:last-child {
+    margin-bottom: 0;
+}
+
+.shipping-icon {
+    font-size: 18px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .accordion-header {
+        font-size: 15px;
+        padding: 15px 0;
+    }
+    
+    .shipping-info {
+        margin: 20px 0;
+        padding: 15px;
+    }
+    
+    .shipping-item {
+        font-size: 13px;
+    }
+}
