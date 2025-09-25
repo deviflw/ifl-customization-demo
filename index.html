@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFL Watches Customization Demo</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared/navigation.css">
     <style>
         * {
             margin: 0;
@@ -143,8 +144,27 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="demo-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">IFL CUSTOMIZATION</a>
+            <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="bespoke-edition.html" class="nav-link">Bespoke Edition</a>
+                </li>
+                <li class="nav-item">
+                    <a href="full-customization.html" class="nav-link">Full Customization</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
     <header>
-        <h1>IFL WATCHES CUSTOMIZATION DEMO</h1>
+        <h1>CHOOSE YOUR CUSTOMIZATION SERVICE</h1>
     </header>
     
     <main>
@@ -190,8 +210,26 @@
     </main>
     
     <footer>
-        <p>© 2025 IFL Watches. Demo created with 💕 by 
+        <p>© 2025 IFL Watches. Demo created with 💕 by Claude and 
         <a href="https://github.com/deviflw" target="_blank">@deviflw</a></p>
     </footer>
+    
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.demo-nav');
+            const toggle = document.querySelector('.nav-toggle');
+            const menu = document.getElementById('navMenu');
+            
+            if (!nav.contains(event.target) && menu.classList.contains('active')) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>

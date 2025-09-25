@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Full Customization - Complete Design Service | IFL Watches</title>
+    <title>Full Customization - IFL Watches</title>
+    <!-- Navigation -->
+    <link rel="stylesheet" href="shared/navigation.css">
     <!-- Возвращаем как было БЕЗ product-layout -->
     <link rel="stylesheet" href="shared/styles.css?v=11">
     <!-- <link rel="stylesheet" href="shared/product-layout.css?v=1"> УБРАЛИ -->
@@ -349,6 +351,25 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav class="demo-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">IFL CUSTOMIZATION</a>
+            <button class="nav-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="bespoke-edition.html" class="nav-link">Bespoke Edition</a>
+                </li>
+                <li class="nav-item">
+                    <a href="full-customization.html" class="nav-link active">Full Customization</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
     <!-- Main product page - используем mobile-details-first чтобы галерея была внизу на мобилке -->
     <div class="product-page mobile-details-first">
         <!-- Left: Inspiration Gallery instead of Product Images -->
@@ -1106,6 +1127,25 @@
                     updateTotal();
                 }
             };
+        });
+    </script>
+    
+    <!-- Navigation script -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.demo-nav');
+            const toggle = document.querySelector('.nav-toggle');
+            const menu = document.getElementById('navMenu');
+            
+            if (!nav.contains(event.target) && menu.classList.contains('active')) {
+                menu.classList.remove('active');
+            }
         });
     </script>
 </body>
