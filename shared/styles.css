@@ -44,14 +44,15 @@ button, input, select, textarea {
 
 /* Breadcrumbs */
 .breadcrumbs {
-    padding: 15px 20px;
-    background: white;
-    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 20px 5px 20px; /* Уменьшили padding bottom */
+    /* background: white; УБРАЛИ */
+    /* border-bottom: 1px solid #e5e5e5; УБРАЛИ */
 }
 
 .breadcrumbs-container {
-    max-width: 1400px;
-    margin: 0 auto;
+    max-width: 100%; /* Было 1400px, теперь как у product-page */
+    margin: 0;
+    padding: 0 20px; /* Добавили padding как у product-page */
     display: flex;
     align-items: center;
     gap: 8px;
@@ -81,11 +82,12 @@ button, input, select, textarea {
 /* Mobile breadcrumbs */
 @media (max-width: 768px) {
     .breadcrumbs {
-        padding: 12px 15px;
+        padding: 8px 0 3px 0; /* Ещё меньше padding */
     }
     
     .breadcrumbs-container {
         font-size: 13px;
+        padding: 0 15px; /* Padding для мобилки */
     }
 }
 

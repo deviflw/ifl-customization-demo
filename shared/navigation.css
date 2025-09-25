@@ -9,12 +9,12 @@
 }
 
 .nav-container {
-    max-width: 1400px;
+    max-width: 100%; /* Было 1400px, теперь full width */
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 20px; /* Такой же padding как у product-page */
 }
 
 .nav-logo {
@@ -23,7 +23,7 @@
     font-size: 18px;
     font-weight: 600;
     letter-spacing: 1px;
-    padding: 20px 0;
+    padding: 20px 0 10px 0; /* Тоже уменьшили padding bottom */
     transition: color 0.3s;
 }
 
@@ -45,7 +45,7 @@
 .nav-link {
     color: white;
     text-decoration: none;
-    padding: 20px 15px;
+    padding: 20px 15px 10px 15px; /* Уменьшили padding bottom до 10px */
     display: block;
     font-size: 14px;
     font-weight: 500;
