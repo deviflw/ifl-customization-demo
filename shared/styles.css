@@ -44,7 +44,7 @@ button, input, select, textarea {
 
 /* Breadcrumbs */
 .breadcrumbs {
-    padding: 5px 20px 10px 20px; /* padding как у навигации для выравнивания */
+    padding: 10px 20px 10px 20px; /* Увеличили padding-top до 10px */
     /* background: white; УБРАЛИ */
     /* border-bottom: 1px solid #e5e5e5; УБРАЛИ */
 }
@@ -82,7 +82,7 @@ button, input, select, textarea {
 /* Mobile breadcrumbs */
 @media (max-width: 768px) {
     .breadcrumbs {
-        padding: 5px 15px 10px 15px; /* padding-top: 5px, padding-bottom: 10px */
+        padding: 8px 15px 10px 15px; /* Увеличили padding-top до 8px */
     }
     
     .breadcrumbs-container {

@@ -7,6 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared/navigation.css">
     <style>
+        /* Import CSS variables from shared styles */
+        @import url('shared/styles.css');
+        
         * {
             margin: 0;
             padding: 0;
@@ -23,7 +26,7 @@
         
         /* Header */
         header {
-            background: #081820;
+            background: var(--secondary-color, #40bec1); /* Используем CSS переменную тиффани */
             color: white;
             padding: 20px;
             text-align: center;
@@ -83,12 +86,12 @@
         .demo-card h2 {
             font-size: 20px;
             margin-bottom: 10px;
-            color: #081820;
+            color: var(--primary-color, #081820);
         }
         
         .demo-card-price {
             font-size: 16px;
-            color: #40bec1;
+            color: var(--secondary-color, #40bec1);
             font-weight: 600;
             margin-bottom: 15px;
         }
@@ -102,7 +105,7 @@
         
         .demo-card-link {
             display: inline-block;
-            background: #081820;
+            background: var(--primary-color, #081820);
             color: white;
             text-decoration: none;
             padding: 12px 30px;
@@ -114,12 +117,12 @@
         }
         
         .demo-card-link:hover {
-            background: #40bec1;
+            background: var(--secondary-color, #40bec1);
         }
         
         /* Footer */
         footer {
-            background: #081820;
+            background: var(--primary-color, #081820);
             color: white;
             text-align: center;
             padding: 20px;
@@ -127,7 +130,7 @@
         }
         
         footer a {
-            color: #40bec1;
+            color: var(--secondary-color, #40bec1);
             text-decoration: none;
         }
         
