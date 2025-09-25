@@ -21,7 +21,7 @@
 }
 
 html {
-    overflow-x: hidden;
+    /* overflow-x: hidden; УБИРАЕМ - это ломает sticky! */
     box-sizing: border-box;
 }
 
@@ -33,7 +33,7 @@ body {
     font-family: var(--font-family);
     background: #f5f5f5;
     color: #333;
-    overflow-x: hidden;
+    /* overflow-x: hidden; УБИРАЕМ - это ломает sticky! */
     width: 100%;
 }
 
@@ -133,18 +133,25 @@ button, input, select, textarea {
     margin-left: 0;  /* Убираем лишний margin */
 }
 
-/* Sticky effect для десктопа */
+/* Sticky effect для десктопа - ПРАВИЛЬНАЯ ВЕРСИЯ */
 @media (min-width: 769px) {
     .product-details {
+        position: -webkit-sticky; /* Для Safari */
         position: sticky;
-        top: 80px; /* Отступ от верха навигации (60px nav + 20px gap) */
+        top: 60px; /* Высота навигации */
         height: fit-content;
         align-self: start;
+        z-index: 10; /* Чтобы быть выше других элементов */
     }
     
-    /* Делаем левую колонку выше для демонстрации sticky */
+    /* Убедимся что галерея достаточно высокая */
     .product-gallery {
-        min-height: 800px; /* Минимальная высота галереи */
+        min-height: 900px; /* Увеличили для демонстрации */
+    }
+    
+    /* Убедимся что product-images не имеет overflow */
+    .product-images {
+        overflow: visible;
     }
 }
 

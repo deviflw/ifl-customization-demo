@@ -6,6 +6,7 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 60px; /* Фиксированная высота для правильного расчёта */
 }
 
 .nav-container {
