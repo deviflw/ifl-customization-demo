@@ -42,6 +42,53 @@ button, input, select, textarea {
     font-family: var(--font-family);
 }
 
+/* Breadcrumbs */
+.breadcrumbs {
+    padding: 15px 20px;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.breadcrumbs-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.breadcrumb-link {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.breadcrumb-link:hover {
+    color: var(--secondary-color);
+}
+
+.breadcrumb-separator {
+    color: #999;
+    font-size: 12px;
+}
+
+.breadcrumb-current {
+    color: #333;
+    font-weight: 500;
+}
+
+/* Mobile breadcrumbs */
+@media (max-width: 768px) {
+    .breadcrumbs {
+        padding: 12px 15px;
+    }
+    
+    .breadcrumbs-container {
+        font-size: 13px;
+    }
+}
+
 /* Desktop: 2 columns layout */
 .product-page {
     display: grid;
@@ -88,8 +135,14 @@ button, input, select, textarea {
 @media (min-width: 769px) {
     .product-details {
         position: sticky;
-        top: 20px;
+        top: 80px; /* Отступ от верха навигации (60px nav + 20px gap) */
         height: fit-content;
+        align-self: start;
+    }
+    
+    /* Делаем левую колонку выше для демонстрации sticky */
+    .product-gallery {
+        min-height: 800px; /* Минимальная высота галереи */
     }
 }
 
