@@ -385,110 +385,23 @@
     
     <!-- Main product page - используем mobile-details-first чтобы галерея была внизу на мобилке -->
     <div class="product-page mobile-details-first">
-        <!-- Left: Inspiration Gallery instead of Product Images -->
+        <!-- Left: Placeholder instead of Gallery -->
         <div class="product-images">
-            <div class="inspiration-gallery">
-                <h3 style="font-size: 18px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">Inspiration Gallery</h3>
-                
-                <!-- Gallery Filters -->
-                <div class="gallery-filters">
-                    <button class="filter-pill active" data-filter="all">All</button>
-                    <button class="filter-pill" data-filter="abstract">Abstract</button>
-                    <button class="filter-pill" data-filter="logo">Logo</button>
-                    <button class="filter-pill" data-filter="fineart">Fine Art</button>
-                    <button class="filter-pill" data-filter="illustration">Illustration</button>
-                    <button class="filter-pill" data-filter="geometric">Geometric</button>
-                    <button class="filter-pill" data-filter="nature">Nature</button>
-                    <button class="filter-pill" data-filter="portrait">Portrait</button>
-                </div>
-                
-                <!-- Gallery Grid -->
-                <div class="gallery-grid" id="inspiration-grid">
-                    <!-- Example items - в реальности будут настоящие изображения -->
-                    <div class="gallery-item" data-style="abstract">
-                        <div class="gallery-item-placeholder">Abstract Galaxy<br>on Tissot PRX</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Abstract Galaxy</div>
-                            <div class="gallery-item-style">Abstract Art</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="logo">
-                        <div class="gallery-item-placeholder">Ferrari Logo<br>on Oris Aquis</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Ferrari Logo</div>
-                            <div class="gallery-item-style">Logo Design</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="fineart">
-                        <div class="gallery-item-placeholder">Ocean Waves<br>on Seiko 5</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Ocean Waves</div>
-                            <div class="gallery-item-style">Fine Art</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="illustration">
-                        <div class="gallery-item-placeholder">Anime Character<br>on Citizen</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Anime Character</div>
-                            <div class="gallery-item-style">Illustration</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="geometric">
-                        <div class="gallery-item-placeholder">Sacred Geometry<br>on Tissot</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Sacred Geometry</div>
-                            <div class="gallery-item-style">Geometric</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="nature">
-                        <div class="gallery-item-placeholder">Mountain Landscape<br>on Bulova</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Mountain Landscape</div>
-                            <div class="gallery-item-style">Nature</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="portrait">
-                        <div class="gallery-item-placeholder">Family Portrait<br>on Oris</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Family Portrait</div>
-                            <div class="gallery-item-style">Portrait</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="abstract">
-                        <div class="gallery-item-placeholder">Color Splash<br>on Hamilton</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Color Splash</div>
-                            <div class="gallery-item-style">Abstract Art</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="logo">
-                        <div class="gallery-item-placeholder">Company Logo<br>on Seiko GMT</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Company Logo</div>
-                            <div class="gallery-item-style">Logo Design</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="fineart">
-                        <div class="gallery-item-placeholder">Van Gogh Style<br>on Tissot</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Van Gogh Style</div>
-                            <div class="gallery-item-style">Fine Art</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="illustration">
-                        <div class="gallery-item-placeholder">Comic Hero<br>on Citizen</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Comic Hero</div>
-                            <div class="gallery-item-style">Illustration</div>
-                        </div>
-                    </div>
-                    <div class="gallery-item" data-style="geometric">
-                        <div class="gallery-item-placeholder">Mandala Pattern<br>on Oris</div>
-                        <div class="gallery-item-info">
-                            <div class="gallery-item-title">Mandala Pattern</div>
-                            <div class="gallery-item-style">Geometric</div>
-                        </div>
-                    </div>
+            <div class="gallery-placeholder" style="
+                height: 100%;
+                min-height: 600px;
+                background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 40px;
+            ">
+                <div>
+                    <div style="font-size: 48px; margin-bottom: 20px; opacity: 0.3;">✨</div>
+                    <h3 style="color: #666; margin-bottom: 10px;">Your Vision Awaits</h3>
+                    <p style="color: #999; font-size: 14px;">Upload your inspiration after ordering</p>
                 </div>
             </div>
         </div>
@@ -704,12 +617,45 @@
             </div>
         </div>
     </div>
+    <!-- End of product-page -->
     
-    <!-- Information Blocks -->
-    <div class="info-blocks">
-        <!-- How It Works -->
-        <div class="info-block">
-            <h3>Your Journey to a Unique Timepiece</h3>
+    <!-- Inspiration Section with Portfolio -->
+    <section class="inspiration-section" style="background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); padding: 80px 0; margin-top: 60px;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center;">
+            <!-- Luxury Quote Header -->
+            <div class="luxury-header" style="margin-bottom: 60px;">
+                <h2 style="font-size: 42px; font-weight: 300; letter-spacing: 2px; color: #081820; margin-bottom: 20px;">
+                    Where Vision Meets Mastery
+                </h2>
+                <div class="quote-divider" style="width: 80px; height: 1px; background: #40bec1; margin: 0 auto 20px;"></div>
+                <p style="font-size: 18px; color: #666; font-style: italic; max-width: 600px; margin: 0 auto;">
+                    "Every masterpiece begins with a vision. Let our portfolio inspire yours."
+                </p>
+            </div>
+            
+            <!-- Portfolio Section -->
+            <div class="portfolio-section">
+                <h3 style="font-size: 24px; font-weight: 600; margin-bottom: 15px; color: #081820;">
+                    Portfolio of Excellence
+                </h3>
+                <p style="color: #666; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                    Explore our collection of bespoke timepieces, each telling a unique story through 
+                    hand-painted artistry. From abstract expressions to personal portraits, discover the 
+                    endless possibilities of custom watchmaking.
+                </p>
+                
+                <!-- Portfolio will be injected here -->
+                <div id="portfolio-container"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Information Blocks - Full Width Container -->
+    <section class="info-section" style="background: white; padding: 60px 0;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <!-- How It Works -->
+            <div class="info-block">
+                <h3>Your Journey to a Unique Timepiece</h3>
             <div class="process-steps">
                 <div class="process-step">
                     <div class="step-number">1</div>
@@ -842,6 +788,8 @@
             </div>
         </div>
     </div>
+    </section>
+    <!-- End of info-section -->
     
     <!-- Overlay -->
     <div class="overlay" id="overlay" onclick="closeCustomizer()"></div>
@@ -1251,6 +1199,32 @@
                 icon.textContent = '−';
             }
         }
+    </script>
+    
+    <!-- Load Portfolio -->
+    <link rel="stylesheet" href="shared/portfolio-styles.css">
+    <script src="shared/portfolio-data.js"></script>
+    <script src="shared/portfolio-components.js"></script>
+    <script>
+        // Initialize portfolio when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('portfolio-container');
+            if (container) {
+                // Get featured items for the main page
+                const items = portfolioData.getFeaturedItems();
+                
+                // Render portfolio grid
+                container.innerHTML = PortfolioComponents.renderGrid(items, {
+                    columns: 4,
+                    showFilters: true,
+                    filterOptions: ['style', 'brand'],
+                    size: 'normal'
+                });
+                
+                // Initialize portfolio functionality
+                PortfolioComponents.init();
+            }
+        });
     </script>
 </body>
 </html>
