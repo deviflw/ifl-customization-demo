@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="shared/styles.css?v=11">
     <!-- <link rel="stylesheet" href="shared/product-layout.css?v=1"> УБРАЛИ -->
     <link rel="stylesheet" href="shared/filters.css?v=3">
+    <link rel="stylesheet" href="shared/accordion.css?v=1">
     <link rel="stylesheet" href="shared/stepped.css?v=3">
     <script src="shared/quantity-price-update.js?v=3" defer></script>
     
@@ -615,27 +616,91 @@
                 </div>
             </div>
             
-            <!-- Product Description -->
-            <div class="product-description">
-                <h3>Create Your One-of-a-Kind Timepiece</h3>
-                <p>
-                    Transform your chosen luxury watch into a completely unique masterpiece with our Full Customization service. 
-                    Work directly with our master artists to bring your vision to life - whether it's a personal design, 
-                    company logo, meaningful artwork, or any creative concept you imagine.
-                </p>
-                <p style="margin-top: 15px;">
-                    <strong>After your order:</strong> You'll receive our Vision Board form within 24 hours to share your ideas, 
-                    inspiration images, and design preferences. Our artists will then create a digital mockup for your approval 
-                    before the hand-painting process begins.
-                </p>
-                <ul style="margin-top: 20px; padding-left: 20px; color: #666; font-size: 14px; line-height: 1.8;">
-                    <li>Complete design freedom - any concept possible</li>
-                    <li>Upload your own artwork or let us create from scratch</li>
-                    <li>2 free design revisions included</li>
-                    <li>Digital mockup before production</li>
-                    <li>4-6 weeks total turnaround time</li>
-                    <li>Certificate of Authenticity included</li>
-                </ul>
+            <!-- Accordion Sections -->
+            <div class="accordion-container">
+                <!-- Description Accordion -->
+                <div class="accordion-item">
+                    <button class="accordion-header active" onclick="toggleAccordion(this)">
+                        <span>Description</span>
+                        <span class="accordion-icon">−</span>
+                    </button>
+                    <div class="accordion-content" style="display: block;">
+                        <p>
+                            Transform your chosen luxury watch into a completely unique masterpiece with our Full Customization service. 
+                            Work directly with our master artists to bring your vision to life - whether it's a personal design, 
+                            company logo, meaningful artwork, or any creative concept you imagine.
+                        </p>
+                        <p style="margin-top: 15px;">
+                            <strong>After your order:</strong> You'll receive our Vision Board form within 24 hours to share your ideas, 
+                            inspiration images, and design preferences. Our artists will then create a digital mockup for your approval 
+                            before the hand-painting process begins.
+                        </p>
+                        <ul style="margin-top: 15px; padding-left: 20px; color: #666; font-size: 14px; line-height: 1.8;">
+                            <li>Complete design freedom - any concept possible</li>
+                            <li>Upload your own artwork or let us create from scratch</li>
+                            <li>2 free design revisions included</li>
+                            <li>Digital mockup before production</li>
+                            <li>4-6 weeks total turnaround time</li>
+                            <li>Certificate of Authenticity included</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Process Accordion -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>How It Works</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            1. <strong>Place Your Order:</strong> Select your watch and complete purchase<br>
+                            2. <strong>Vision Board:</strong> Share your ideas and inspiration (24h)<br>
+                            3. <strong>Design Creation:</strong> Our artists create your unique concept<br>
+                            4. <strong>Digital Mockup:</strong> Review and approve your design<br>
+                            5. <strong>Hand Painting:</strong> Master artisans paint your watch<br>
+                            6. <strong>Quality Control:</strong> Swiss-certified inspection<br>
+                            7. <strong>Delivery:</strong> Secure worldwide shipping with tracking
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Shipping Accordion -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Shipping & Returns</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            <strong>Production:</strong> 4-5 weeks from design approval<br>
+                            <strong>Shipping:</strong> Free worldwide via DHL Express (3-5 business days)<br>
+                            <strong>Tracking:</strong> Full tracking provided from dispatch<br>
+                            <strong>Insurance:</strong> All shipments fully insured<br>
+                            <strong>Returns:</strong> Due to the custom nature, returns are only accepted for defects<br>
+                            <strong>Warranty:</strong> 2-year IFL warranty on customization + manufacturer warranty
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- What's Included Accordion -->
+                <div class="accordion-item">
+                    <button class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>What's Included</span>
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>
+                            ✓ Full consultation with our design team<br>
+                            ✓ Digital mockup for approval<br>
+                            ✓ Hand-painted customization by master artists<br>
+                            ✓ Premium presentation box<br>
+                            ✓ Certificate of authenticity<br>
+                            ✓ Professional photography of your watch<br>
+                            ✓ Lifetime support and care instructions
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1159,6 +1224,33 @@
                 menu.classList.remove('active');
             }
         });
+        
+        // Accordion functionality
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            const isActive = header.classList.contains('active');
+            
+            // Close all other accordions
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                if (h !== header) {
+                    h.classList.remove('active');
+                    h.nextElementSibling.style.display = 'none';
+                    h.querySelector('.accordion-icon').textContent = '+';
+                }
+            });
+            
+            // Toggle current accordion
+            if (isActive) {
+                header.classList.remove('active');
+                content.style.display = 'none';
+                icon.textContent = '+';
+            } else {
+                header.classList.add('active');
+                content.style.display = 'block';
+                icon.textContent = '−';
+            }
+        }
     </script>
 </body>
 </html>
