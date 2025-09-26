@@ -6,47 +6,113 @@
     padding: 40px 20px;
 }
 
-/* Filters */
+/* Filters - Customizer Style */
 .portfolio-filters {
+    margin-bottom: 40px;
+}
+
+.portfolio-filter-section {
+    margin-bottom: 30px;
+}
+
+.portfolio-filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 15px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.portfolio-filter-header:hover {
+    border-bottom-color: #40bec1;
+}
+
+.portfolio-filter-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.portfolio-filter-arrow {
+    font-size: 12px;
+    color: #666;
+    transition: transform 0.3s;
+}
+
+.portfolio-filter-header.collapsed .portfolio-filter-arrow {
+    transform: rotate(-90deg);
+}
+
+.portfolio-filter-options {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 30px;
-    align-items: center;
-}
-
-.filter-group {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.filter-label {
-    font-weight: 600;
-    color: #666;
-    margin-right: 5px;
-}
-
-.filter-btn {
-    padding: 8px 16px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-family: var(--font-family);
-    font-size: 14px;
-    cursor: pointer;
+    padding: 10px 0;
     transition: all 0.3s;
 }
 
-.filter-btn:hover {
-    border-color: var(--secondary-color);
-    color: var(--secondary-color);
+.portfolio-filter-header.collapsed + .portfolio-filter-options {
+    display: none;
 }
 
-.filter-btn.active {
-    background: var(--secondary-color);
+/* Filter Pills - Match Customizer Style */
+.filter-pill {
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.filter-pill:hover {
+    border-color: #40bec1;
+    color: #40bec1;
+}
+
+.filter-pill.active {
+    background: #40bec1;
     color: white;
-    border-color: var(--secondary-color);
+    border-color: #40bec1;
+}
+
+/* Color filter pills */
+.filter-pill.color-filter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+
+/* Desktop Layout - 2 columns for filters */
+@media (min-width: 992px) {
+    .portfolio-filters-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+    
+    .portfolio-filter-section {
+        margin-bottom: 0;
+    }
 }
 
 /* Grid Layout */

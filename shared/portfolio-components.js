@@ -16,7 +16,7 @@ class PortfolioComponents {
         const link = linkToDetail ? `portfolio-detail.html?id=${item.id}` : '#';
         
         return `
-            <div class="${cardClass}" data-id="${item.id}" data-style="${item.style}" data-brand="${item.watch.brand}">
+            <div class="${cardClass}" data-id="${item.id}" data-style="${item.style}" data-brand="${item.watch.brand}" data-theme="${item.theme}">
                 <div class="portfolio-card__image">
                     <div class="portfolio-card__slider">
                         ${item.images.slice(0, 3).map((img, index) => `
@@ -87,35 +87,75 @@ class PortfolioComponents {
         return html;
     }
     
-    // Render filters
+    // Render filters - Customizer Style
     static renderFilters(items, filterTypes = ['style', 'brand']) {
         let html = '<div class="portfolio-filters">';
         
-        // All button
-        html += '<button class="filter-btn active" data-filter="all">All</button>';
+        // Desktop: 2 columns wrapper
+        html += '<div class="portfolio-filters-wrapper">';
         
-        // Style filters
+        // Style filters section
         if (filterTypes.includes('style')) {
             const styles = [...new Set(items.map(item => item.style))];
-            html += '<div class="filter-group filter-group--style">';
+            html += `
+                <div class="portfolio-filter-section">
+                    <div class="portfolio-filter-header" onclick="PortfolioComponents.toggleFilterSection(this)">
+                        <div class="portfolio-filter-title">
+                            ☰ FILTER BY STYLE
+                        </div>
+                        <span class="portfolio-filter-arrow">▲</span>
+                    </div>
+                    <div class="portfolio-filter-options">
+                        <button class="filter-pill active" data-filter="all">All Styles</button>
+            `;
             styles.forEach(style => {
-                html += `<button class="filter-btn" data-filter-type="style" data-filter="${style}">${style}</button>`;
+                html += `<button class="filter-pill" data-filter-type="style" data-filter="${style}">${style}</button>`;
             });
-            html += '</div>';
+            html += '</div></div>';
         }
         
-        // Brand filters
+        // Brand filters section  
         if (filterTypes.includes('brand')) {
             const brands = [...new Set(items.map(item => item.watch.brand))];
-            html += '<div class="filter-group filter-group--brand">';
-            html += '<span class="filter-label">Brand:</span>';
+            html += `
+                <div class="portfolio-filter-section">
+                    <div class="portfolio-filter-header" onclick="PortfolioComponents.toggleFilterSection(this)">
+                        <div class="portfolio-filter-title">
+                            ☰ FILTER BY BRAND
+                        </div>
+                        <span class="portfolio-filter-arrow">▲</span>
+                    </div>
+                    <div class="portfolio-filter-options">
+                        <button class="filter-pill active" data-filter="all">All Brands</button>
+            `;
             brands.forEach(brand => {
-                html += `<button class="filter-btn" data-filter-type="brand" data-filter="${brand}">${brand}</button>`;
+                html += `<button class="filter-pill" data-filter-type="brand" data-filter="${brand}">${brand}</button>`;
             });
-            html += '</div>';
+            html += '</div></div>';
         }
         
-        html += '</div>';
+        // Theme filters section (additional)
+        if (filterTypes.includes('theme')) {
+            const themes = [...new Set(items.map(item => item.theme))];
+            html += `
+                <div class="portfolio-filter-section">
+                    <div class="portfolio-filter-header" onclick="PortfolioComponents.toggleFilterSection(this)">
+                        <div class="portfolio-filter-title">
+                            ☰ FILTER BY THEME
+                        </div>
+                        <span class="portfolio-filter-arrow">▲</span>
+                    </div>
+                    <div class="portfolio-filter-options">
+                        <button class="filter-pill active" data-filter="all">All Themes</button>
+            `;
+            themes.forEach(theme => {
+                html += `<button class="filter-pill" data-filter-type="theme" data-filter="${theme}">${theme}</button>`;
+            });
+            html += '</div></div>';
+        }
+        
+        html += '</div>'; // Close wrapper
+        html += '</div>'; // Close filters
         return html;
     }
     
@@ -182,7 +222,7 @@ class PortfolioComponents {
     static init() {
         // Handle filter clicks
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('filter-btn')) {
+            if (e.target.classList.contains('filter-pill')) {
                 this.handleFilter(e.target);
             }
         });
@@ -191,15 +231,26 @@ class PortfolioComponents {
         this.initCardSliders();
     }
     
+    // Toggle filter section
+    static toggleFilterSection(header) {
+        header.classList.toggle('collapsed');
+    }
+    
     // Filter functionality
     static handleFilter(button) {
         const filter = button.dataset.filter;
         const filterType = button.dataset.filterType;
+        const section = button.closest('.portfolio-filter-section');
         const grid = document.getElementById('portfolio-grid');
         const cards = grid.querySelectorAll('.portfolio-card');
         
-        // Update active button
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        // Update active button within section
+        if (section) {
+            section.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+        } else {
+            // Handle "All" buttons
+            button.parentElement.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+        }
         button.classList.add('active');
         
         // Filter cards
@@ -209,6 +260,8 @@ class PortfolioComponents {
             } else {
                 const cardValue = filterType === 'brand' ? 
                     card.dataset.brand : 
+                    filterType === 'theme' ?
+                    card.dataset.theme :
                     card.dataset.style;
                 card.style.display = cardValue === filter ? '' : 'none';
             }
