@@ -142,77 +142,20 @@
 
 .portfolio-filter-group-title {
     margin: 0 0 15px 0;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #333;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
-.portfolio-filter-group-options {
+.filter-options {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
-/* Filter Options */
-.portfolio-filter-option {
-    display: flex;
-    align-items: center;
-    padding: 8px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.portfolio-filter-option:hover {
-    background: #f8f9fa;
-}
-
-.portfolio-filter-option input {
-    display: none;
-}
-
-.portfolio-filter-checkbox {
-    width: 18px;
-    height: 18px;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    margin-right: 12px;
-    position: relative;
-    transition: all 0.2s;
-}
-
-.portfolio-filter-option input:checked + .portfolio-filter-checkbox {
-    background: #40bec1;
-    border-color: #40bec1;
-}
-
-.portfolio-filter-option input:checked + .portfolio-filter-checkbox::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 5px;
-    width: 5px;
-    height: 9px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-}
-
-.portfolio-filter-label {
-    flex: 1;
-    font-size: 14px;
-    color: #333;
-}
-
-.portfolio-filter-count {
-    font-size: 12px;
-    color: #999;
-    padding: 2px 6px;
-    background: #f5f5f5;
-    border-radius: 4px;
-}
+/* Use existing filter-pill styles from filter-styles.css */
 
 /* Overlay */
 .portfolio-filter-overlay {

@@ -53,24 +53,24 @@ class PortfolioFilterPanel {
                     
                     <!-- Style Filters -->
                     <div class="portfolio-filter-group">
-                        <h4 class="portfolio-filter-group-title">Style</h4>
-                        <div class="portfolio-filter-group-options">
+                        <h4 class="portfolio-filter-group-title">STYLE</h4>
+                        <div class="filter-options">
                             ${this.renderFilterOptions('style')}
                         </div>
                     </div>
                     
                     <!-- Theme Filters -->
                     <div class="portfolio-filter-group">
-                        <h4 class="portfolio-filter-group-title">Theme</h4>
-                        <div class="portfolio-filter-group-options">
+                        <h4 class="portfolio-filter-group-title">THEME</h4>
+                        <div class="filter-options">
                             ${this.renderFilterOptions('theme')}
                         </div>
                     </div>
                     
                     <!-- Watch Model Filters -->
                     <div class="portfolio-filter-group">
-                        <h4 class="portfolio-filter-group-title">Watch Brand</h4>
-                        <div class="portfolio-filter-group-options">
+                        <h4 class="portfolio-filter-group-title">WATCH BRAND</h4>
+                        <div class="filter-options">
                             ${this.renderFilterOptions('brand')}
                         </div>
                     </div>
@@ -85,7 +85,7 @@ class PortfolioFilterPanel {
         this.container.insertAdjacentHTML('afterbegin', panelHtml);
     }
     
-    // Render filter options for a specific type
+    // Render filter options for a specific type  
     renderFilterOptions(type) {
         let values = [];
         
@@ -97,14 +97,18 @@ class PortfolioFilterPanel {
             values = [...new Set(this.items.map(item => item.watch.brand))];
         }
         
-        return values.map(value => `
-            <label class="portfolio-filter-option">
-                <input type="checkbox" value="${value}" data-filter-type="${type}">
-                <span class="portfolio-filter-checkbox"></span>
-                <span class="portfolio-filter-label">${value}</span>
-                <span class="portfolio-filter-count">${this.getCount(type, value)}</span>
-            </label>
-        `).join('');
+        let html = '';
+        
+        // Add "All" button first
+        html += `<button class="filter-pill active" data-filter="all" data-filter-type="${type}">All</button>`;
+        
+        // Add filter pills (using EXISTING filter-pill class from customizer!)
+        values.forEach(value => {
+            const count = this.getCount(type, value);
+            html += `<button class="filter-pill" data-filter="${value}" data-filter-type="${type}">${value}</button>`;
+        });
+        
+        return html;
     }
     
     // Get count of items for a filter value
@@ -141,16 +145,54 @@ class PortfolioFilterPanel {
             this.clearAll();
         });
         
-        // Filter checkboxes
-        document.querySelectorAll('.portfolio-filter-option input').forEach(checkbox => {
-            checkbox.addEventListener('change', (e) => {
-                this.updateFilters(e.target);
-            });
+        // Filter pills (using delegation)
+        document.getElementById('portfolio-filter-panel').addEventListener('click', (e) => {
+            if (e.target.classList.contains('filter-pill')) {
+                this.handleFilterClick(e.target);
+            }
         });
         
         // Check for mobile and adjust position
         this.checkMobile();
         window.addEventListener('resize', () => this.checkMobile());
+    }
+    
+    // Handle filter pill click
+    handleFilterClick(pill) {
+        const type = pill.dataset.filterType;
+        const value = pill.dataset.filter;
+        
+        if (value === 'all') {
+            // Clear all filters of this type
+            this.activeFilters[type] = [];
+            
+            // Remove active from all pills in this group
+            pill.parentElement.querySelectorAll('.filter-pill').forEach(p => {
+                p.classList.remove('active');
+            });
+            pill.classList.add('active');
+        } else {
+            // Toggle this filter
+            const allButton = pill.parentElement.querySelector('[data-filter="all"]');
+            allButton.classList.remove('active');
+            
+            if (pill.classList.contains('active')) {
+                // Remove from active filters
+                pill.classList.remove('active');
+                this.activeFilters[type] = this.activeFilters[type].filter(v => v !== value);
+            } else {
+                // Add to active filters
+                pill.classList.add('active');
+                this.activeFilters[type].push(value);
+            }
+            
+            // If no filters active, activate "All"
+            if (this.activeFilters[type].length === 0) {
+                allButton.classList.add('active');
+            }
+        }
+        
+        this.applyFilters();
     }
     
     // Check if mobile and adjust panel position
@@ -230,8 +272,13 @@ class PortfolioFilterPanel {
             brand: []
         };
         
-        document.querySelectorAll('.portfolio-filter-option input').forEach(checkbox => {
-            checkbox.checked = false;
+        // Remove active from all pills except "All"
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            if (pill.dataset.filter === 'all') {
+                pill.classList.add('active');
+            } else {
+                pill.classList.remove('active');
+            }
         });
         
         this.applyFilters();
