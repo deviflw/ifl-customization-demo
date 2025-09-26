@@ -88,73 +88,46 @@ class PortfolioComponents {
     }
     
     // Render filters - Customizer Style
-    static renderFilters(items, filterTypes = ['style', 'brand']) {
+    static renderFilters(items, filterTypes = ['style', 'theme']) {
         let html = '<div class="portfolio-filters">';
         
-        // Desktop: 2 columns wrapper
-        html += '<div class="portfolio-filters-wrapper">';
+        // Get unique values
+        const styles = [...new Set(items.map(item => item.style))];
+        const themes = [...new Set(items.map(item => item.theme))];
         
-        // Style filters section
-        if (filterTypes.includes('style')) {
-            const styles = [...new Set(items.map(item => item.style))];
-            html += `
-                <div class="portfolio-filter-section">
-                    <div class="portfolio-filter-header" onclick="PortfolioComponents.toggleFilterSection(this)">
-                        <div class="portfolio-filter-title">
-                            ☰ FILTER BY STYLE
-                        </div>
-                        <span class="portfolio-filter-arrow">▲</span>
+        // Single collapsible filter section
+        html += `
+            <div class="portfolio-filter-section">
+                <div class="portfolio-filter-header" onclick="PortfolioComponents.toggleFilterSection(this)">
+                    <div class="portfolio-filter-title">
+                        ☰ FILTER PORTFOLIO
                     </div>
-                    <div class="portfolio-filter-options">
-                        <button class="filter-pill active" data-filter="all">All Styles</button>
-            `;
-            styles.forEach(style => {
-                html += `<button class="filter-pill" data-filter-type="style" data-filter="${style}">${style}</button>`;
-            });
-            html += '</div></div>';
-        }
+                    <span class="portfolio-filter-arrow">▲</span>
+                </div>
+                <div class="portfolio-filter-options">
+                    <!-- All -->
+                    <button class="filter-pill active" data-filter="all">All</button>
+                    
+                    <!-- Styles -->
+                    <div class="filter-group-label">Style:</div>
+        `;
+        styles.forEach(style => {
+            html += `<button class="filter-pill" data-filter-type="style" data-filter="${style}">${style}</button>`;
+        });
         
-        // Brand filters section  
-        if (filterTypes.includes('brand')) {
-            const brands = [...new Set(items.map(item => item.watch.brand))];
-            html += `
-                <div class="portfolio-filter-section">
-                    <div class="portfolio-filter-header" onclick="PortfolioComponents.toggleFilterSection(this)">
-                        <div class="portfolio-filter-title">
-                            ☰ FILTER BY BRAND
-                        </div>
-                        <span class="portfolio-filter-arrow">▲</span>
-                    </div>
-                    <div class="portfolio-filter-options">
-                        <button class="filter-pill active" data-filter="all">All Brands</button>
-            `;
-            brands.forEach(brand => {
-                html += `<button class="filter-pill" data-filter-type="brand" data-filter="${brand}">${brand}</button>`;
-            });
-            html += '</div></div>';
-        }
+        html += `
+                    <!-- Themes -->
+                    <div class="filter-group-label">Theme:</div>
+        `;
+        themes.forEach(theme => {
+            html += `<button class="filter-pill" data-filter-type="theme" data-filter="${theme}">${theme}</button>`;
+        });
         
-        // Theme filters section (additional)
-        if (filterTypes.includes('theme')) {
-            const themes = [...new Set(items.map(item => item.theme))];
-            html += `
-                <div class="portfolio-filter-section">
-                    <div class="portfolio-filter-header" onclick="PortfolioComponents.toggleFilterSection(this)">
-                        <div class="portfolio-filter-title">
-                            ☰ FILTER BY THEME
-                        </div>
-                        <span class="portfolio-filter-arrow">▲</span>
-                    </div>
-                    <div class="portfolio-filter-options">
-                        <button class="filter-pill active" data-filter="all">All Themes</button>
-            `;
-            themes.forEach(theme => {
-                html += `<button class="filter-pill" data-filter-type="theme" data-filter="${theme}">${theme}</button>`;
-            });
-            html += '</div></div>';
-        }
+        html += `
+                </div>
+            </div>
+        `;
         
-        html += '</div>'; // Close wrapper
         html += '</div>'; // Close filters
         return html;
     }
@@ -240,32 +213,66 @@ class PortfolioComponents {
     static handleFilter(button) {
         const filter = button.dataset.filter;
         const filterType = button.dataset.filterType;
-        const section = button.closest('.portfolio-filter-section');
         const grid = document.getElementById('portfolio-grid');
         const cards = grid.querySelectorAll('.portfolio-card');
         
-        // Update active button within section
-        if (section) {
-            section.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
-        } else {
-            // Handle "All" buttons
-            button.parentElement.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
-        }
-        button.classList.add('active');
-        
-        // Filter cards
-        cards.forEach(card => {
-            if (filter === 'all') {
+        // If clicking All, remove all other active states
+        if (filter === 'all') {
+            document.querySelectorAll('.filter-pill').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+            
+            // Show all cards
+            cards.forEach(card => {
                 card.style.display = '';
-            } else {
-                const cardValue = filterType === 'brand' ? 
-                    card.dataset.brand : 
-                    filterType === 'theme' ?
-                    card.dataset.theme :
-                    card.dataset.style;
-                card.style.display = cardValue === filter ? '' : 'none';
+            });
+            return;
+        }
+        
+        // Otherwise, remove active from All and toggle current
+        document.querySelector('.filter-pill[data-filter="all"]').classList.remove('active');
+        button.classList.toggle('active');
+        
+        // Get all active filters
+        const activeFilters = {
+            style: [],
+            theme: []
+        };
+        
+        document.querySelectorAll('.filter-pill.active').forEach(btn => {
+            const type = btn.dataset.filterType;
+            const value = btn.dataset.filter;
+            if (type && value && value !== 'all') {
+                activeFilters[type] = activeFilters[type] || [];
+                activeFilters[type].push(value);
             }
         });
+        
+        // Filter cards based on all active filters
+        cards.forEach(card => {
+            let show = true;
+            
+            // Check style filters
+            if (activeFilters.style && activeFilters.style.length > 0) {
+                show = show && activeFilters.style.includes(card.dataset.style);
+            }
+            
+            // Check theme filters
+            if (activeFilters.theme && activeFilters.theme.length > 0) {
+                show = show && activeFilters.theme.includes(card.dataset.theme);
+            }
+            
+            card.style.display = show ? '' : 'none';
+        });
+        
+        // If no filters active, activate All
+        if (document.querySelectorAll('.filter-pill.active:not([data-filter="all"])').length === 0) {
+            document.querySelector('.filter-pill[data-filter="all"]').classList.add('active');
+            cards.forEach(card => {
+                card.style.display = '';
+            });
+        }
     }
     
     // Card slider functionality
