@@ -1,0 +1,284 @@
+/* Portfolio Filter Panel - Behance Style */
+
+/* Filter Toggle Button */
+.portfolio-filter-toggle {
+    position: fixed;
+    top: 120px;
+    left: 20px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.portfolio-filter-toggle:hover {
+    background: #f8f9fa;
+    border-color: #40bec1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.portfolio-filter-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Filter Panel */
+.portfolio-filter-panel {
+    position: fixed;
+    background: white;
+    z-index: 999;
+    box-shadow: 2px 0 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+}
+
+/* Left panel (desktop) */
+.portfolio-filter-panel.left {
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    transform: translateX(-100%);
+}
+
+.portfolio-filter-panel.left.active {
+    transform: translateX(0);
+}
+
+/* Top panel (mobile) */
+.portfolio-filter-panel.top {
+    top: 0;
+    left: 0;
+    right: 0;
+    max-height: 70vh;
+    transform: translateY(-100%);
+}
+
+.portfolio-filter-panel.top.active {
+    transform: translateY(0);
+}
+
+/* Panel Header */
+.portfolio-filter-panel-header {
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+.portfolio-filter-panel-header h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.portfolio-filter-close {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.portfolio-filter-close:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* Panel Body */
+.portfolio-filter-panel-body {
+    padding: 20px;
+}
+
+/* Clear Button */
+.portfolio-filter-clear {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.filter-clear-btn {
+    width: 100%;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-clear-btn:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+/* Filter Groups */
+.portfolio-filter-group {
+    margin-bottom: 30px;
+}
+
+.portfolio-filter-group-title {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.portfolio-filter-group-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Filter Options */
+.portfolio-filter-option {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.portfolio-filter-option:hover {
+    background: #f8f9fa;
+}
+
+.portfolio-filter-option input {
+    display: none;
+}
+
+.portfolio-filter-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-right: 12px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.portfolio-filter-option input:checked + .portfolio-filter-checkbox {
+    background: #40bec1;
+    border-color: #40bec1;
+}
+
+.portfolio-filter-option input:checked + .portfolio-filter-checkbox::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 5px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.portfolio-filter-label {
+    flex: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.portfolio-filter-count {
+    font-size: 12px;
+    color: #999;
+    padding: 2px 6px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+/* Overlay */
+.portfolio-filter-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.portfolio-filter-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Content Push Effect */
+.portfolio-grid-wrapper {
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-grid-wrapper.panel-open {
+    margin-left: 280px;
+}
+
+/* Results Counter */
+.portfolio-results-count {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+    .portfolio-filter-toggle {
+        top: 80px;
+        left: 15px;
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .portfolio-filter-panel.top {
+        border-radius: 0 0 12px 12px;
+    }
+    
+    .portfolio-grid-wrapper.panel-open {
+        margin-left: 0;
+        transform: none;
+    }
+    
+    .portfolio-filter-overlay.active {
+        display: block;
+    }
+}
+
+/* Smooth Transitions */
+@media (prefers-reduced-motion: reduce) {
+    .portfolio-filter-panel,
+    .portfolio-grid-wrapper,
+    .portfolio-filter-overlay {
+        transition: none;
+    }
+}

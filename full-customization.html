@@ -1207,23 +1207,24 @@
     </script>
     
     <!-- Load Portfolio -->
-    <link rel="stylesheet" href="shared/filter-styles.css">
+    <link rel="stylesheet" href="shared/portfolio-panel-styles.css">
     <link rel="stylesheet" href="shared/portfolio-styles.css">
     <script src="shared/portfolio-data.js"></script>
+    <script src="shared/portfolio-filter-panel.js"></script>
     <script src="shared/portfolio-components.js"></script>
     <script>
         // Initialize portfolio when page loads
         document.addEventListener('DOMContentLoaded', function() {
             const container = document.getElementById('portfolio-container');
             if (container) {
-                // Get featured items for the main page
-                const items = portfolioData.getFeaturedItems();
+                // Get all active items
+                const items = portfolioData.getActiveItems();
                 
-                // Render portfolio grid
+                // Render portfolio grid with Behance-style panel
                 container.innerHTML = PortfolioComponents.renderGrid(items, {
                     columns: 4,
                     showFilters: true,
-                    filterOptions: ['style', 'brand'],
+                    filterStyle: 'panel', // Use Behance-style panel
                     size: 'normal'
                 });
                 

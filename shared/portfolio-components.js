@@ -57,32 +57,39 @@ class PortfolioComponents {
         `;
     }
     
-    // Render portfolio grid
+    // Render portfolio grid with Behance-style panel
     static renderGrid(items, options = {}) {
         const {
-            columns = 3,
+            columns = 4,
             showFilters = true,
-            filterOptions = ['style', 'brand'],
-            size = 'normal'
+            filterStyle = 'panel', // 'panel' (Behance) or 'inline' (old style)
+            size = 'normal',
+            containerClass = 'portfolio-grid-wrapper'
         } = options;
         
         const gridClass = `portfolio-grid portfolio-grid--${columns}col`;
         
-        let html = '<div class="portfolio-container">';
+        let html = `<div class="${containerClass}">`;
         
-        // Add filters if enabled
-        if (showFilters) {
-            html += this.renderFilters(items, filterOptions);
-        }
+        // Add results counter
+        html += `<div class="portfolio-results-count" id="portfolio-results-count">${items.length} Results</div>`;
         
         // Add grid
         html += `<div class="${gridClass}" id="portfolio-grid">`;
         items.forEach(item => {
-            html += this.renderCard(item, { size });
+            html += this.renderCard(item, { size, showPrice: true, showBrand: true });
         });
         html += '</div>';
         
         html += '</div>';
+        
+        // Initialize filter panel if using panel style
+        if (showFilters && filterStyle === 'panel') {
+            setTimeout(() => {
+                const filterPanel = new PortfolioFilterPanel('portfolio-container');
+                filterPanel.init(items);
+            }, 100);
+        }
         
         return html;
     }

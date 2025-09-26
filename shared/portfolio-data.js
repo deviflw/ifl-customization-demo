@@ -204,6 +204,103 @@ const portfolioData = {
             completion_date: '2024-11-30',
             is_active: true,
             description: 'Enchanting forest landscapes with detailed flora and fauna artwork.'
+        },
+        {
+            id: 'minimalist-nomos',
+            title: 'Minimal Lines',
+            subtitle: 'Less is more',
+            handle: 'minimal-lines-nomos',
+            style: 'Minimalist',
+            theme: 'Abstract',
+            watch: {
+                model: 'Nomos Tangente',
+                brand: 'Nomos',
+                size: '38mm',
+                price: 2800
+            },
+            service_price: 1200,
+            portfolio_type: 'product',
+            images: [
+                'https://via.placeholder.com/800x800/ecf0f1/333?text=Minimal+1',
+                'https://via.placeholder.com/800x800/bdc3c7/333?text=Minimal+2'
+            ],
+            main_image: 'https://via.placeholder.com/800x800/ecf0f1/333?text=Minimal+Main',
+            featured: true,
+            is_active: true,
+            description: 'Minimalist approach with clean lines and subtle geometric patterns.'
+        },
+        {
+            id: 'anime-seiko',
+            title: 'Anime Dreams',
+            subtitle: 'Japanese culture',
+            handle: 'anime-dreams-seiko',
+            style: 'Illustration',
+            theme: 'Anime',
+            watch: {
+                model: 'Seiko 5 Sports',
+                brand: 'Seiko',
+                size: '42.5mm',
+                price: 350
+            },
+            service_price: 1200,
+            portfolio_type: 'product',
+            images: [
+                'https://via.placeholder.com/800x800/ff6b6b/fff?text=Anime+1',
+                'https://via.placeholder.com/800x800/ff4757/fff?text=Anime+2'
+            ],
+            main_image: 'https://via.placeholder.com/800x800/ff6b6b/fff?text=Anime+Main',
+            featured: true,
+            is_active: true,
+            description: 'Vibrant anime-inspired artwork celebrating Japanese pop culture.'
+        },
+        {
+            id: 'sports-tag',
+            title: 'Racing Heritage',
+            subtitle: 'Motorsport legacy',
+            handle: 'racing-heritage-tag',
+            style: 'Illustration',
+            theme: 'Cars & Motors',
+            watch: {
+                model: 'TAG Heuer Carrera',
+                brand: 'TAG Heuer',
+                size: '39mm',
+                price: 5500
+            },
+            service_price: 1490,
+            portfolio_type: 'custom_order',
+            images: [
+                'https://via.placeholder.com/800x800/2c3e50/fff?text=Racing+1',
+                'https://via.placeholder.com/800x800/34495e/fff?text=Racing+2'
+            ],
+            main_image: 'https://via.placeholder.com/800x800/2c3e50/fff?text=Racing+Main',
+            client_location: 'Monaco',
+            completion_date: '2024-10-10',
+            is_active: true,
+            description: 'Celebrating motorsport heritage with checkered flags and racing elements.'
+        },
+        {
+            id: 'cosmic-zenith',
+            title: 'Nebula Explorer',
+            subtitle: 'Deep space journey',
+            handle: 'nebula-explorer-zenith',
+            style: 'Abstract',
+            theme: 'Space',
+            watch: {
+                model: 'Zenith Defy',
+                brand: 'Zenith',
+                size: '44mm',
+                price: 7900
+            },
+            service_price: 1490,
+            portfolio_type: 'product',
+            images: [
+                'https://via.placeholder.com/800x800/6c5ce7/fff?text=Nebula+1',
+                'https://via.placeholder.com/800x800/5f3dc4/fff?text=Nebula+2'
+            ],
+            main_image: 'https://via.placeholder.com/800x800/6c5ce7/fff?text=Nebula+Main',
+            featured: true,
+            is_active: true,
+            description: 'Cosmic nebulas and stellar formations in vivid purples and blues.'
         }
     ],
     
