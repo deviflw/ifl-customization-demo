@@ -6,15 +6,14 @@ let sliderImages = [];
 function updatePreviewSlider() {
     // Get concept for current page (Bespoke or Full)
     const isBespoke = window.location.pathname.includes('bespoke');
-    const conceptId = isBespoke ? 'galaxy-concept' : null; // For demo, using galaxy concept
     
-    // Get gallery images for selected watch
-    if (selectedWatch && conceptId) {
-        sliderImages = getConceptGallery(conceptId, selectedWatch.id) || [];
-    } else if (!isBespoke) {
-        // For Full Customization, show portfolio examples
-        sliderImages = fullCustomizationExamples['abstract'] || [];
+    // Only show slider for Bespoke Edition (has pre-designed concepts)
+    // Full Customization won't have preview as it's customer's own design
+    if (isBespoke && selectedWatch) {
+        // Bespoke: Show Galaxy concept for selected watch
+        sliderImages = getConceptGallery('galaxy-concept', selectedWatch.id) || [];
     } else {
+        // Full Custom or no watch selected - no preview
         sliderImages = [];
     }
     

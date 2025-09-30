@@ -279,7 +279,9 @@ function getConceptGallery(conceptId, watchId) {
     return concept.watchGalleries.default || [];
 }
 
-// For Full Customization - portfolio examples
+// For Full Customization - NO PREVIEW EXAMPLES!
+// Full Custom is completely custom design by customer request
+// These are only kept for potential future use (portfolio page, etc)
 const fullCustomizationExamples = {
     'abstract': [
         '[Abstract Example 1]',
