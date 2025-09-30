@@ -195,6 +195,11 @@ function updateNavigationButtons(step) {
         backBtn.style.display = 'block';
         nextBtn.style.display = 'none';
         applyBtn.style.display = 'block';
+        
+        // Update preview slider when entering step 3
+        if (typeof updatePreviewSlider === 'function') {
+            updatePreviewSlider();
+        }
     }
 }
 

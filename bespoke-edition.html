@@ -14,7 +14,10 @@
     <link rel="stylesheet" href="shared/filters.css?v=3">
     <link rel="stylesheet" href="shared/stepped.css?v=3">
     <link rel="stylesheet" href="shared/accordion.css?v=1">
+    <link rel="stylesheet" href="shared/slider.css?v=1">
     <script src="shared/quantity-price-update.js?v=3" defer></script>
+    <script src="shared/concept-galleries.js" defer></script>
+    <script src="shared/slider.js" defer></script>
     
     <style>
         /* Gallery для Bespoke Edition - 2x3 grid на десктопе */
@@ -520,6 +523,11 @@
             <div class="step-content" id="step-3" style="display: none;">
                 <div class="step-section">
                     <h3>Step 3: Review Your Selection</h3>
+                    
+                    <!-- Preview Slider (will be shown if images exist) -->
+                    <div class="preview-slider" id="preview-slider">
+                        <!-- Dynamically populated by slider.js -->
+                    </div>
                     
                     <!-- Final Summary -->
                     <div class="final-summary">

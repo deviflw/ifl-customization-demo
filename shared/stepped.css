@@ -504,3 +504,43 @@
     color: #081820;
     margin-top: 8px;
 }
+
+/* Step 3 Layout Improvements */
+.step-content#step-3 .final-summary {
+    margin-top: 0;
+}
+
+/* When slider exists, adjust grid */
+.preview-slider.has-images ~ .final-summary {
+    margin-top: 30px;
+}
+
+/* Desktop: Configuration and Price side by side when no slider */
+.preview-slider:not(.has-images) ~ .final-summary,
+.preview-slider:empty ~ .final-summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+/* Desktop: When slider exists, price goes full width below */
+.preview-slider.has-images ~ .final-summary {
+    display: block;
+}
+
+.preview-slider.has-images ~ .final-summary .summary-card {
+    margin-bottom: 25px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .preview-slider.has-images ~ .final-summary,
+    .preview-slider:not(.has-images) ~ .final-summary,
+    .preview-slider:empty ~ .final-summary {
+        display: block;
+    }
+    
+    .final-summary .summary-card {
+        margin-bottom: 20px;
+    }
+}
