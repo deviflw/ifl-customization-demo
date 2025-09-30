@@ -20,6 +20,85 @@
     <script src="shared/slider.js" defer></script>
     
     <style>
+        /* Help Block Styles */
+        .help-block {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px 20px;
+            margin: 20px 0;
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .help-block:hover {
+            background: #f0f1f3;
+            border-color: #d0d0d0;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .help-block-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        
+        .help-block-content {
+            flex: 1;
+        }
+        
+        .help-block-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 2px;
+        }
+        
+        .help-block-text {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .help-block-arrow {
+            font-size: 20px;
+            color: #999;
+            transition: transform 0.3s ease;
+        }
+        
+        .help-block:hover .help-block-arrow {
+            transform: translateX(3px);
+        }
+        
+        @media (max-width: 768px) {
+            .help-block {
+                padding: 14px 16px;
+                margin: 15px 0;
+            }
+            
+            .help-block-icon {
+                width: 36px;
+                height: 36px;
+            }
+            
+            .help-block-title {
+                font-size: 13px;
+            }
+            
+            .help-block-text {
+                font-size: 11px;
+            }
+        }
+        
         /* Gallery для Bespoke Edition - 2x3 grid на десктопе */
         .product-gallery {
             display: grid;
@@ -177,6 +256,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            
+            <!-- How It Works Helper Block -->
+            <div class="help-block" onclick="scrollToHowItWorks()">
+                <div class="help-block-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.5 9.5c0-1.5 1.5-2.5 3-2.5s3 1 3 2.5c0 1.2-.8 2.2-2 2.5v1"></path>
+                        <circle cx="12" cy="16.5" r="0.5" fill="currentColor"></circle>
+                    </svg>
+                </div>
+                <div class="help-block-content">
+                    <div class="help-block-title">First time ordering?</div>
+                    <div class="help-block-text">Learn how our customization process works</div>
+                </div>
+                <div class="help-block-arrow">→</div>
             </div>
             
             <!-- Product Actions -->
@@ -620,6 +715,46 @@
                 header.classList.add('active');
                 content.style.display = 'block';
                 icon.textContent = '−';
+            }
+        }
+        
+        // Scroll to How It Works and open accordion
+        function scrollToHowItWorks() {
+            // Find the How It Works accordion
+            const accordions = document.querySelectorAll('.accordion-header');
+            let howItWorksAccordion = null;
+            
+            accordions.forEach(acc => {
+                if (acc.textContent.includes('How It Works')) {
+                    howItWorksAccordion = acc;
+                }
+            });
+            
+            if (howItWorksAccordion) {
+                // Close all accordions first
+                document.querySelectorAll('.accordion-header').forEach(h => {
+                    h.classList.remove('active');
+                    h.nextElementSibling.style.display = 'none';
+                    h.querySelector('.accordion-icon').textContent = '+';
+                });
+                
+                // Open How It Works
+                howItWorksAccordion.classList.add('active');
+                howItWorksAccordion.nextElementSibling.style.display = 'block';
+                howItWorksAccordion.querySelector('.accordion-icon').textContent = '−';
+                
+                // Smooth scroll to it
+                howItWorksAccordion.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+                
+                // Add a highlight effect
+                howItWorksAccordion.style.transition = 'background 0.5s ease';
+                howItWorksAccordion.style.background = '#f0f7ff';
+                setTimeout(() => {
+                    howItWorksAccordion.style.background = '';
+                }, 1500);
             }
         }
     </script>
