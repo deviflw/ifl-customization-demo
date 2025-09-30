@@ -178,7 +178,7 @@ button, input, select, textarea {
     border: 2px dashed #ccc;
     padding: 25px;
     border-radius: 8px;
-    margin-bottom: 25px;
+    margin-bottom: 15px; /* Уменьшили с 25px до 15px для выравнивания */
     min-height: 150px;
 }
 
