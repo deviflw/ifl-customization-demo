@@ -87,6 +87,27 @@ const variantDatabase = {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
+    // Override openCustomizer to reset state after Apply
+    const originalOpenCustomizer = window.openCustomizer;
+    window.openCustomizer = function() {
+        // Check if we should reset (after successful Apply)
+        const shouldReset = !localStorage.getItem('customizerState');
+        
+        if (shouldReset) {
+            // Reset everything to clean state
+            resetCustomizer();
+        }
+        
+        // Call original function if it exists
+        if (typeof originalOpenCustomizer === 'function') {
+            originalOpenCustomizer();
+        } else {
+            // Fallback: manually open customizer
+            document.getElementById('customizer').classList.add('open');
+            document.getElementById('overlay').classList.add('open');
+        }
+    };
+    
     // Override selectWatch from filters.js
     window.selectWatch = function(watchId) {
         const watch = watchDatabase.find(w => w.id === watchId);
@@ -441,19 +462,37 @@ function resetCustomizer() {
     selectedWatch = null;
     selectedVariant = null;
     
-    // Очищаем все активные состояния в UI
-    document.querySelectorAll('.watch-card.active').forEach(card => {
-        card.classList.remove('active');
+    // Очищаем все активные и выбранные состояния в UI
+    document.querySelectorAll('.watch-card.active, .watch-card.selected').forEach(card => {
+        card.classList.remove('active', 'selected');
     });
     
-    document.querySelectorAll('.variant-card.active').forEach(card => {
-        card.classList.remove('active');
+    document.querySelectorAll('.variant-card.active, .variant-card.selected').forEach(card => {
+        card.classList.remove('active', 'selected');
     });
+    
+    // Очищаем выбранные опции
+    document.querySelectorAll('.option-btn.active, .option-btn.selected').forEach(btn => {
+        btn.classList.remove('active', 'selected');
+    });
+    
+    // Сбрасываем кнопку Next
+    const nextBtn = document.getElementById('btn-next');
+    if (nextBtn) {
+        nextBtn.disabled = true;
+        nextBtn.innerHTML = `Next: Choose Watch →`;
+    }
     
     // Очищаем отображение выбранных вариантов
     const variantGrid = document.querySelector('.variant-grid');
     if (variantGrid) {
         variantGrid.innerHTML = '<div style="text-align: center; color: #999; padding: 40px;">Please select a watch model first</div>';
+    }
+    
+    // Очищаем отображение выбранной модели
+    const selectedDisplay = document.getElementById('selected-watch-display');
+    if (selectedDisplay) {
+        selectedDisplay.innerHTML = '';
     }
     
     // Возвращаемся на первый шаг
