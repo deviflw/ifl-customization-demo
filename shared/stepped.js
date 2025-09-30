@@ -416,11 +416,20 @@ function applyConfiguration() {
         updatePriceSummary(selectedWatch);
     }
     
-    // Close customizer
-    closeCustomizer();
+    // Close customizer without saving state
+    if (typeof closeCustomizer === 'function') {
+        closeCustomizer(true);
+    } else {
+        // Fallback if closeCustomizer is not available
+        document.getElementById('customizer').classList.remove('open');
+        document.getElementById('overlay').classList.remove('open');
+    }
     
     // Show success
     showNotification('Configuration applied successfully!', 'success');
+    
+    // Clear saved state after successful apply
+    localStorage.removeItem('customizerState');
     
     // Reset for next use
     resetCustomizer();
@@ -431,6 +440,23 @@ function resetCustomizer() {
     currentStep = 1;
     selectedWatch = null;
     selectedVariant = null;
+    
+    // Очищаем все активные состояния в UI
+    document.querySelectorAll('.watch-card.active').forEach(card => {
+        card.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.variant-card.active').forEach(card => {
+        card.classList.remove('active');
+    });
+    
+    // Очищаем отображение выбранных вариантов
+    const variantGrid = document.querySelector('.variant-grid');
+    if (variantGrid) {
+        variantGrid.innerHTML = '<div style="text-align: center; color: #999; padding: 40px;">Please select a watch model first</div>';
+    }
+    
+    // Возвращаемся на первый шаг
     showStep(1);
 }
 

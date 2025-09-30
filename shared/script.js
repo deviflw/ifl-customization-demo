@@ -48,13 +48,15 @@ function openCustomizer() {
 }
 
 // Close customizer
-function closeCustomizer() {
+function closeCustomizer(skipSave = false) {
     document.getElementById('customizer').classList.remove('open');
     document.getElementById('overlay').classList.remove('open');
     customizerState.isOpen = false;
     
-    // Save state when closing without applying
-    saveState();
+    // Save state when closing without applying (unless skipSave is true)
+    if (!skipSave) {
+        saveState();
+    }
 }
 
 // Select a card
@@ -150,8 +152,15 @@ function applySelection() {
     // Clear sessionStorage after successful apply
     sessionStorage.removeItem('customizer_state');
     
-    // Close customizer
-    closeCustomizer();
+    // Clear localStorage to prevent restoring on next open
+    localStorage.removeItem('customizerState');
+    
+    // Reset customizer state
+    customizerState.currentStep = 1;
+    customizerState.selected = {};
+    
+    // Close customizer without saving state
+    closeCustomizer(true);
     
     // Show success notification
     showNotification('Configuration applied successfully!', 'success');
