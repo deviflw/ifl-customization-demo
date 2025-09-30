@@ -152,10 +152,10 @@ function applySelection() {
     // Clear sessionStorage after successful apply
     sessionStorage.removeItem('customizer_state');
     
-    // Clear localStorage to prevent restoring on next open
-    localStorage.removeItem('customizerState');
+    // Note: Don't clear localStorage - let normal save/load work
+    // Stepped.js will handle reset with wasApplied flag
     
-    // Reset customizer state
+    // Reset customizer state for this session
     customizerState.currentStep = 1;
     customizerState.selected = {};
     

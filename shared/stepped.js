@@ -2,6 +2,7 @@
 let currentStep = 1;
 let selectedWatch = null;
 let selectedVariant = null;
+let wasApplied = false; // Флаг для отслеживания Apply
 
 // Mock variant database
 const variantDatabase = {
@@ -87,15 +88,14 @@ const variantDatabase = {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', function() {
-    // Override openCustomizer to reset state after Apply
+    // Override openCustomizer to reset state ONLY after Apply
     const originalOpenCustomizer = window.openCustomizer;
     window.openCustomizer = function() {
-        // Check if we should reset (after successful Apply)
-        const shouldReset = !localStorage.getItem('customizerState');
-        
-        if (shouldReset) {
+        // Check if we should reset (only after successful Apply)
+        if (wasApplied) {
             // Reset everything to clean state
             resetCustomizer();
+            wasApplied = false; // Reset flag
         }
         
         // Call original function if it exists
@@ -401,7 +401,7 @@ function applyConfiguration() {
                     <div class="selected-watch-name">${selectedWatch.brand} ${selectedWatch.model}</div>
                     <div class="selected-watch-specs">
                         ${capitalizeFirst(selectedWatch.movement)} • ${selectedVariant.size} • ${capitalizeFirst(selectedVariant.case)} Case • ${capitalizeFirst(selectedVariant.dial)} Dial<br>
-                        Watch Price: $${selectedWatch.price.toLocaleString()}<br>
+                        <strong>Watch Price: $${selectedWatch.price.toLocaleString()}</strong><br>
                         <span style="color: #28a745; font-size: 12px;">✓ Custom configuration saved</span>
                     </div>
                     <details style="margin-top: 12px;">
@@ -437,6 +437,9 @@ function applyConfiguration() {
         updatePriceSummary(selectedWatch);
     }
     
+    // Set flag that Apply was clicked
+    wasApplied = true;
+    
     // Close customizer without saving state
     if (typeof closeCustomizer === 'function') {
         closeCustomizer(true);
@@ -449,8 +452,8 @@ function applyConfiguration() {
     // Show success
     showNotification('Configuration applied successfully!', 'success');
     
-    // Clear saved state after successful apply
-    localStorage.removeItem('customizerState');
+    // Note: Don't clear localStorage here - let it save normally
+    // The wasApplied flag will trigger reset on next open
     
     // Reset for next use
     resetCustomizer();
