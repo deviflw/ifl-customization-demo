@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="shared/styles.css">
     <link rel="stylesheet" href="shared/navigation.css">
     <link rel="stylesheet" href="shared/portfolio-styles-v2.css">
-    <link rel="stylesheet" href="shared/portfolio-filters.css">
+    <link rel="stylesheet" href="shared/portfolio-filters-v2.css">
     <link rel="stylesheet" href="shared/modal-styles.css">
     
     <!-- Navigation script -->
@@ -22,78 +22,81 @@
     <!-- Navigation будет вставлена автоматически через navigation.js -->
 
     <!-- Portfolio Content -->
-    <main class="portfolio-wrapper">
-        <!-- Filter Sidebar -->
-        <aside class="filter-sidebar" id="filterSidebar">
-            <div class="filter-header">
-                <h3>Filters</h3>
-                <button class="close-filters-mobile" id="closeFiltersMobile">×</button>
-            </div>
-            
-            <button class="clear-filters" id="clearFilters">Clear All</button>
-            
-            <!-- Style Filter -->
-            <div class="filter-section">
-                <h4 class="filter-section-title">Style</h4>
-                <div class="filter-pills" id="styleFilters">
-                    <!-- Will be populated dynamically -->
-                </div>
-            </div>
-            
-            <!-- Theme Filter -->
-            <div class="filter-section">
-                <h4 class="filter-section-title">Theme</h4>
-                <div class="filter-pills" id="themeFilters">
-                    <!-- Will be populated dynamically -->
-                </div>
-            </div>
-            
-            <!-- Watch Model Filter -->
-            <div class="filter-section">
-                <h4 class="filter-section-title">Watch Model</h4>
-                <div class="filter-pills" id="modelFilters">
-                    <!-- Will be populated dynamically -->
-                </div>
-            </div>
-            
-            <div class="filter-results" id="filterResults">
-                <strong>0</strong> projects found
-            </div>
-        </aside>
+    <main class="portfolio-container">
+        <!-- Header -->
+        <div class="portfolio-header">
+            <h1>PORTFOLIO</h1>
+            <p>Explore our collection of hand-painted masterpieces</p>
+        </div>
         
-        <!-- Main Content -->
-        <div class="portfolio-container" id="portfolioContainer">
-            <!-- Header -->
-            <div class="portfolio-header">
-                <h1>PORTFOLIO</h1>
-                <p>Explore our collection of hand-painted masterpieces</p>
-            </div>
+        <!-- Controls Bar - НЕ ДВИГАЕТСЯ -->
+        <div class="portfolio-controls">
+            <button class="filter-trigger" id="filterTrigger">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="6" x2="20" y2="6"/>
+                    <line x1="7" y1="12" x2="20" y2="12"/>
+                    <line x1="10" y1="18" x2="20" y2="18"/>
+                </svg>
+                <span>Filter</span>
+            </button>
             
-            <!-- Controls Bar -->
-            <div class="portfolio-controls">
-                <button class="filter-trigger" id="filterTrigger">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="4" y1="6" x2="20" y2="6"/>
-                        <line x1="7" y1="12" x2="20" y2="12"/>
-                        <line x1="10" y1="18" x2="20" y2="18"/>
-                    </svg>
-                    <span>Filter</span>
-                </button>
+            <div class="results-counter" id="resultsCounter">
+                Showing <strong>0</strong> projects
+            </div>
+        </div>
+        
+        <!-- Content Wrapper - фильтры и сетка вместе -->
+        <div class="portfolio-content-wrapper">
+            <!-- Filter Sidebar - как колонка -->
+            <aside class="filter-sidebar" id="filterSidebar">
+                <div class="filter-header">
+                    <h3>Filters</h3>
+                    <button class="close-filters-mobile" id="closeFiltersMobile">×</button>
+                </div>
                 
-                <div class="results-counter" id="resultsCounter">
-                    Showing <strong>0</strong> projects
+                <button class="clear-filters" id="clearFilters">Clear All</button>
+                
+                <!-- Style Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-section-title">Style</h4>
+                    <div class="filter-pills" id="styleFilters">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Theme Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-section-title">Theme</h4>
+                    <div class="filter-pills" id="themeFilters">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+                
+                <!-- Watch Model Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-section-title">Watch Model</h4>
+                    <div class="filter-pills" id="modelFilters">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+                
+                <div class="filter-results" id="filterResults">
+                    <strong>0</strong> projects found
+                </div>
+            </aside>
+            
+            <!-- Grid Container -->
+            <div class="portfolio-grid-container">
+                <!-- Portfolio Grid -->
+                <div class="portfolio-grid" id="portfolioGrid">
+                    <div class="portfolio-loading">Loading portfolio...</div>
                 </div>
             </div>
-            
-            <!-- Portfolio Grid -->
-            <div class="portfolio-grid" id="portfolioGrid">
-                <div class="portfolio-loading">Loading portfolio...</div>
-            </div>
-            
-            <!-- Pagination -->
-            <div class="pagination" id="pagination">
-                <!-- Will be populated dynamically -->
-            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <!-- Will be populated dynamically -->
         </div>
     </main>
 
@@ -204,12 +207,10 @@
                 // Filter trigger button
                 const filterTrigger = document.getElementById('filterTrigger');
                 const filterSidebar = document.getElementById('filterSidebar');
-                const portfolioContainer = document.getElementById('portfolioContainer');
                 
                 filterTrigger.addEventListener('click', () => {
                     filterTrigger.classList.toggle('active');
                     filterSidebar.classList.toggle('active');
-                    portfolioContainer.classList.toggle('filters-active');
                 });
                 
                 // Close filters on mobile
@@ -218,7 +219,6 @@
                     closeFiltersMobile.addEventListener('click', () => {
                         filterTrigger.classList.remove('active');
                         filterSidebar.classList.remove('active');
-                        portfolioContainer.classList.remove('filters-active');
                     });
                 }
                 
