@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="shared/styles.css">
     <link rel="stylesheet" href="shared/navigation.css">
     <link rel="stylesheet" href="shared/portfolio-styles-v2.css">
+    <link rel="stylesheet" href="shared/modal-styles.css">
     
     <!-- Navigation script -->
     <script src="shared/navigation.js"></script>
@@ -69,6 +70,10 @@
                     style: '',
                     theme: '',
                     type: ''
+                };
+                this.typeLabels = {
+                    'bespoke_concept': 'Bespoke',
+                    'custom_order': 'Commission'
                 };
                 this.init();
             }
@@ -162,15 +167,13 @@
                             ` : ''}
                             
                             <div class="portfolio-overlay">
-                                <div class="portfolio-quick-info">
-                                    <h3>${item.title}</h3>
-                                    <p class="overlay-meta">${item.style.name} • ${item.theme.name}</p>
-                                    ${item.watch_product ? `
-                                        <p class="watch-model">
-                                            ${item.watch_product.vendor} ${item.watch_product.title}
-                                        </p>
-                                    ` : ''}
-                                </div>
+                                <button class="btn-quick-view" onclick="event.stopPropagation(); portfolioGrid.openQuickView('${item.id}')">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                    <span>Quick View</span>
+                                </button>
                             </div>
                         </div>
                         
@@ -184,7 +187,7 @@
                                 <span class="portfolio-type">${typeLabels[item.portfolio_type]}</span>
                             </div>
                             ${item.watch_product ? 
-                                `<p class="portfolio-watch">${item.watch_product.vendor} ${item.watch_product.title}</p>` 
+                                `<p class="portfolio-watch">${item.watch_product.title}</p>` 
                                 : ''}
                         </div>
                     </div>
@@ -218,8 +221,87 @@
             }
             
             openQuickView(itemId) {
-                // Временно такой же как viewDetails, потом сделаем модальное окно
-                this.viewDetails(itemId);
+                const item = portfolioHelpers.getActiveItems().find(p => p.id === itemId);
+                if (!item) return;
+                
+                // Показываем модал
+                const modal = document.getElementById('quickViewModal');
+                const modalBody = modal.querySelector('.modal-body');
+                
+                // Генерируем контент для модала
+                modalBody.innerHTML = `
+                    <div class="quick-view-container">
+                        <div class="quick-view-gallery">
+                            <div class="main-image">
+                                <img src="${item.main_image}" alt="${item.title}">
+                            </div>
+                            ${item.images && item.images.length > 0 ? `
+                                <div class="thumbnail-list">
+                                    <div class="thumbnail active">
+                                        <img src="${item.main_image}" alt="${item.title}">
+                                    </div>
+                                    ${item.images.map(img => `
+                                        <div class="thumbnail">
+                                            <img src="${img}" alt="${item.title}">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="quick-view-details">
+                            <h2>${item.title}</h2>
+                            
+                            <div class="quick-view-tags">
+                                <span class="tag tag-style">${item.style.name}</span>
+                                <span class="tag tag-theme">${item.theme.name}</span>
+                                <span class="portfolio-type">${this.typeLabels[item.portfolio_type]}</span>
+                            </div>
+                            
+                            <p class="quick-view-description">${item.description || 'A unique custom timepiece design.'}</p>
+                            
+                            ${item.watch_product ? `
+                                <div class="watch-details">
+                                    <h3>Watch Details</h3>
+                                    <p><strong>Model:</strong> ${item.watch_product.title}</p>
+                                    <p><strong>Brand:</strong> ${item.watch_product.vendor}</p>
+                                    <p><strong>Size:</strong> ${item.watch_product.size}</p>
+                                    <p><strong>Price from:</strong> $${item.watch_product.price}</p>
+                                </div>
+                            ` : ''}
+                            
+                            <div class="quick-view-actions">
+                                ${item.portfolio_type === 'bespoke_concept' ? 
+                                    `<a href="${item.product_reference || '#'}" class="btn btn-primary">Order This Design</a>` :
+                                    `<button class="btn btn-primary" onclick="window.location.href='/pages/bespoke'">Order Similar</button>`
+                                }
+                                <a href="/portfolio/${item.handle}" class="btn btn-secondary">View Full Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Добавляем обработчики для галереи
+                const thumbnails = modalBody.querySelectorAll('.thumbnail');
+                const mainImage = modalBody.querySelector('.main-image img');
+                
+                thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', () => {
+                        thumbnails.forEach(t => t.classList.remove('active'));
+                        thumb.classList.add('active');
+                        mainImage.src = thumb.querySelector('img').src;
+                    });
+                });
+                
+                // Показываем модал
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            closeQuickView() {
+                const modal = document.getElementById('quickViewModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
             }
             
             resetFilters() {
@@ -234,5 +316,22 @@
         // Initialize portfolio grid
         const portfolioGrid = new PortfolioGrid();
     </script>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" class="modal">
+        <div class="modal-overlay" onclick="portfolioGrid.closeQuickView()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="portfolioGrid.closeQuickView()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="modal-body">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
