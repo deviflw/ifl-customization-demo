@@ -139,9 +139,9 @@
             
             createCard(item) {
                 const badges = [];
-                if (item.video_url) badges.push('<span class="badge badge-video">🎥</span>');
-                if (item.instagram_url) badges.push('<span class="badge badge-instagram">📷</span>');
-                if (item.timelapse_url) badges.push('<span class="badge badge-timelapse">⏱</span>');
+                if (item.video_url) badges.push('<span class="badge badge-video">🎥 Video</span>');
+                if (item.instagram_url) badges.push('<span class="badge badge-instagram">📷 Instagram</span>');
+                if (item.timelapse_url) badges.push('<span class="badge badge-timelapse">⏱ Timelapse</span>');
                 
                 // Красивые названия для типов
                 const typeLabels = {
@@ -151,7 +151,7 @@
                 };
                 
                 return `
-                    <div class="portfolio-card" data-id="${item.id}">
+                    <div class="portfolio-card" data-id="${item.id}" onclick="portfolioGrid.openQuickView('${item.id}')">
                         <div class="portfolio-image-wrapper">
                             <img src="${item.main_image}" alt="${item.title}" loading="lazy">
                             
@@ -173,11 +173,6 @@
                                         </p>
                                     ` : ''}
                                 </div>
-                                <a href="#" class="btn-view-details" onclick="portfolioGrid.viewDetails('${item.id}'); return false;">
-                                    ${item.portfolio_type === 'bespoke_concept' ? 'Order This Design' : 
-                                      item.portfolio_type === 'custom_order' ? 'Order Similar' : 
-                                      'View Details'}
-                                </a>
                             </div>
                         </div>
                         
@@ -222,6 +217,11 @@
                     console.log('View details for:', item);
                     alert(`Opening: ${item.title}\n\nThis would navigate to:\n/portfolio/${item.handle}`);
                 }
+            }
+            
+            openQuickView(itemId) {
+                // Временно такой же как viewDetails, потом сделаем модальное окно
+                this.viewDetails(itemId);
             }
             
             resetFilters() {
