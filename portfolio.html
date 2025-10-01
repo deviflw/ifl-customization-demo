@@ -48,9 +48,8 @@
                 <label for="typeFilter">Type:</label>
                 <select id="typeFilter">
                     <option value="">All Types</option>
-                    <option value="custom_order">Bespoke Order</option>
-                    <option value="product">Ready Design</option>
-                    <option value="concept">Concept Art</option>
+                    <option value="bespoke_concept">Bespoke Designs</option>
+                    <option value="custom_order">Client Commissions</option>
                 </select>
             </div>
         </div>
@@ -146,9 +145,9 @@
                 
                 // Красивые названия для типов
                 const typeLabels = {
-                    'custom_order': 'Bespoke',
-                    'product': 'Ready',
-                    'concept': 'Concept'
+                    'custom_order': 'Commission',
+                    'bespoke_concept': 'Bespoke',
+                    'product': 'Ready' // оставим для совместимости
                 };
                 
                 return `
