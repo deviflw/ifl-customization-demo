@@ -19,9 +19,10 @@
 }
 
 .nav-container {
-    max-width: 1400px;
+    /* Убираем max-width для full width! */
+    /* max-width: 1400px; */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 40px; /* Увеличиваем padding для красоты */
     display: flex;
     justify-content: space-between;
     align-items: center;
