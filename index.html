@@ -7,6 +7,12 @@
     <title>IFL Watches Customization Demo</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared/navigation.css">
+    <link rel="stylesheet" href="shared/styles.css">
+    <link rel="stylesheet" href="shared/navigation.css">
+    
+    <!-- Navigation script -->
+    <script src="shared/navigation.js"></script>
+    
     <style>
         /* Import CSS variables from shared styles */
         @import url('shared/styles.css');
@@ -148,27 +154,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="demo-nav">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">IFL CUSTOMIZATION</a>
-            <button class="nav-toggle" onclick="toggleMenu()">☰</button>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="bespoke-edition.html" class="nav-link">Bespoke Edition</a>
-                </li>
-                <li class="nav-item">
-                    <a href="full-customization.html" class="nav-link">Full Customization</a>
-                </li>
-                <li class="nav-item">
-                    <a href="portfolio.html" class="nav-link">Portfolio</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <!-- Navigation будет вставлена автоматически через navigation.js -->
     
     <header>
         <h1>CHOOSE YOUR CUSTOMIZATION SERVICE</h1>
@@ -239,23 +225,5 @@
         <p>© 2025 IFL Watches. Demo created with 💕 by Claude and 
         <a href="https://github.com/deviflw" target="_blank">@deviflw</a></p>
     </footer>
-    
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
-        }
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const nav = document.querySelector('.demo-nav');
-            const toggle = document.querySelector('.nav-toggle');
-            const menu = document.getElementById('navMenu');
-            
-            if (!nav.contains(event.target) && menu.classList.contains('active')) {
-                menu.classList.remove('active');
-            }
-        });
-    </script>
 </body>
 </html>
