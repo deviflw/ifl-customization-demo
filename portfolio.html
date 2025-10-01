@@ -174,7 +174,9 @@
                                     ` : ''}
                                 </div>
                                 <a href="#" class="btn-view-details" onclick="portfolioGrid.viewDetails('${item.id}'); return false;">
-                                    View Details
+                                    ${item.portfolio_type === 'bespoke_concept' ? 'Order This Design' : 
+                                      item.portfolio_type === 'custom_order' ? 'Order Similar' : 
+                                      'View Details'}
                                 </a>
                             </div>
                         </div>

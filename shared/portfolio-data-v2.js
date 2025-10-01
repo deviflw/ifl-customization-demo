@@ -74,7 +74,7 @@ const portfolioMetaobjects = {
         size: "43.5mm",
         image: "https://picsum.photos/400/400?random=101"
       },
-      portfolio_type: "product",
+      portfolio_type: "bespoke_concept", // Наш дизайн, продается
       product_reference: "/products/ocean-explorer-oris",
       completion_date: "2024-11-20",
       featured: true,
@@ -101,7 +101,7 @@ const portfolioMetaobjects = {
         size: "40mm",
         image: "https://picsum.photos/400/400?random=102"
       },
-      portfolio_type: "concept",
+      portfolio_type: "custom_order", // Просто концепт, не продается
       completion_date: "2024-10-10",
       featured: false,
       is_active: true
@@ -126,7 +126,7 @@ const portfolioMetaobjects = {
         size: "45mm",
         image: "https://picsum.photos/400/400?random=103"
       },
-      portfolio_type: "product",
+      portfolio_type: "bespoke_concept", // Концепт стал продуктом
       product_reference: "/products/urban-pulse-casioak",
       client_location: "New York, USA",
       completion_date: "2024-09-05",
@@ -208,7 +208,7 @@ const portfolioMetaobjects = {
         size: "38mm",
         image: "https://picsum.photos/400/400?random=106"
       },
-      portfolio_type: "concept",
+      portfolio_type: "custom_order", // Просто концепт, не продается
       completion_date: "2024-06-10",
       featured: false,
       instagram_url: "https://instagram.com/p/retrogaming",
@@ -233,7 +233,7 @@ const portfolioMetaobjects = {
         size: "40.5mm",
         image: "https://picsum.photos/400/400?random=107"
       },
-      portfolio_type: "product",
+      portfolio_type: "bespoke_concept", // Наш дизайн в магазине
       product_reference: "/products/botanical-garden-orient",
       client_location: "Tokyo, Japan",
       completion_date: "2024-05-22",
