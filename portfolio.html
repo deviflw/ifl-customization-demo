@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Portfolio - IFL Watches</title>
+    
+    <!-- Shared styles (DRY!) -->
+    <link rel="stylesheet" href="shared/styles.css">
+    <link rel="stylesheet" href="shared/navigation.css">
+    <link rel="stylesheet" href="shared/portfolio-styles-v2.css">
+    
+    <!-- Portfolio data -->
+    <script src="shared/portfolio-data-v2.js"></script>
+</head>
+<body>
+    <!-- Navigation (reused from other pages) -->
+    <nav class="demo-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">IFL Customization Demo</a>
+            <div class="nav-links">
+                <a href="bespoke-edition.html">Bespoke Edition</a>
+                <a href="full-customization.html">Full Customization</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Content -->
+    <main class="portfolio-container">
+        <!-- Header -->
+        <div class="portfolio-header">
+            <h1>PORTFOLIO</h1>
+            <p>Explore our collection of hand-painted masterpieces, each telling a unique story</p>
+        </div>
+        
+        <!-- Filters -->
+        <div class="portfolio-filters">
+            <div class="filter-group">
+                <label for="styleFilter">Style:</label>
+                <select id="styleFilter">
+                    <option value="">All Styles</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="themeFilter">Theme:</label>
+                <select id="themeFilter">
+                    <option value="">All Themes</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="typeFilter">Type:</label>
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="custom_order">Custom Orders</option>
+                    <option value="product">Products</option>
+                    <option value="concept">Concepts</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid" id="portfolioGrid">
+            <div class="portfolio-loading">Loading portfolio...</div>
+        </div>
+    </main>
+
+    <script>
+        // Portfolio renderer
+        class PortfolioGrid {
+            constructor() {
+                this.grid = document.getElementById('portfolioGrid');
+                this.filters = {
+                    style: '',
+                    theme: '',
+                    type: ''
+                };
+                this.init();
+            }
+            
+            init() {
+                this.populateFilters();
+                this.attachEventListeners();
+                this.render();
+            }
+            
+            populateFilters() {
+                // Populate style filter
+                const styleSelect = document.getElementById('styleFilter');
+                portfolioMetaobjects.styles.forEach(style => {
+                    const option = document.createElement('option');
+                    option.value = style.id;
+                    option.textContent = style.name;
+                    styleSelect.appendChild(option);
+                });
+                
+                // Populate theme filter
+                const themeSelect = document.getElementById('themeFilter');
+                portfolioMetaobjects.themes.forEach(theme => {
+                    const option = document.createElement('option');
+                    option.value = theme.id;
+                    option.textContent = theme.name;
+                    themeSelect.appendChild(option);
+                });
+            }
+            
+            attachEventListeners() {
+                document.getElementById('styleFilter').addEventListener('change', (e) => {
+                    this.filters.style = e.target.value;
+                    this.render();
+                });
+                
+                document.getElementById('themeFilter').addEventListener('change', (e) => {
+                    this.filters.theme = e.target.value;
+                    this.render();
+                });
+                
+                document.getElementById('typeFilter').addEventListener('change', (e) => {
+                    this.filters.type = e.target.value;
+                    this.render();
+                });
+            }
+            
+            render() {
+                const items = portfolioHelpers.filterItems(this.filters);
+                
+                if (items.length === 0) {
+                    this.grid.innerHTML = `
+                        <div class="portfolio-empty">
+                            <p>No items found matching your filters.</p>
+                            <button class="btn-reset-filters" onclick="portfolioGrid.resetFilters()">
+                                Reset Filters
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                this.grid.innerHTML = items.map(item => this.createCard(item)).join('');
+                
+                // Add click handlers for mobile
+                this.addMobileHandlers();
+            }
+            
+            createCard(item) {
+                const badges = [];
+                if (item.video_url) badges.push('<span class="badge badge-video">🎥 Video</span>');
+                if (item.instagram_url) badges.push('<span class="badge badge-instagram">📷 Instagram</span>');
+                if (item.timelapse_url) badges.push('<span class="badge badge-timelapse">⏱ Timelapse</span>');
+                
+                return `
+                    <div class="portfolio-card" data-id="${item.id}">
+                        <div class="portfolio-image-wrapper">
+                            <img src="${item.main_image}" alt="${item.title}" loading="lazy">
+                            
+                            ${item.featured ? '<div class="featured-badge">Featured</div>' : ''}
+                            
+                            ${badges.length > 0 ? `
+                                <div class="portfolio-badges">
+                                    ${badges.join('')}
+                                </div>
+                            ` : ''}
+                            
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-quick-info">
+                                    <h3>${item.title}</h3>
+                                    <p>${item.style.name} • ${item.theme.name}</p>
+                                    ${item.watch_product ? `
+                                        <p class="watch-model">
+                                            ${item.watch_product.vendor} ${item.watch_product.title}
+                                        </p>
+                                    ` : ''}
+                                </div>
+                                <a href="#" class="btn-view-details" onclick="portfolioGrid.viewDetails('${item.id}'); return false;">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-info">
+                            <h4>${item.title}</h4>
+                            <div class="portfolio-meta">
+                                <span class="portfolio-type">${item.portfolio_type.replace('_', ' ')}</span>
+                                ${item.client_location ? 
+                                    `<span class="portfolio-location">${item.client_location}</span>` 
+                                    : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            addMobileHandlers() {
+                // На мобильных делаем overlay видимым по клику
+                if (window.innerWidth <= 768) {
+                    document.querySelectorAll('.portfolio-card').forEach(card => {
+                        card.addEventListener('click', function(e) {
+                            if (!e.target.closest('.btn-view-details')) {
+                                // Toggle active class
+                                document.querySelectorAll('.portfolio-card').forEach(c => {
+                                    if (c !== this) c.classList.remove('active');
+                                });
+                                this.classList.toggle('active');
+                            }
+                        });
+                    });
+                }
+            }
+            
+            viewDetails(itemId) {
+                const item = portfolioHelpers.getActiveItems().find(p => p.id === itemId);
+                if (item) {
+                    // В реальном приложении это бы перенаправляло на страницу детали
+                    console.log('View details for:', item);
+                    alert(`Opening: ${item.title}\n\nThis would navigate to:\n/portfolio/${item.handle}`);
+                }
+            }
+            
+            resetFilters() {
+                this.filters = { style: '', theme: '', type: '' };
+                document.getElementById('styleFilter').value = '';
+                document.getElementById('themeFilter').value = '';
+                document.getElementById('typeFilter').value = '';
+                this.render();
+            }
+        }
+        
+        // Initialize portfolio grid
+        const portfolioGrid = new PortfolioGrid();
+    </script>
+</body>
+</html>

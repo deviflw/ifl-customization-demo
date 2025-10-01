@@ -1,0 +1,186 @@
+{
+  "styles": [
+    { "id": "style-1", "handle": "illustration", "name": "Illustration" },
+    { "id": "style-2", "handle": "fine-art", "name": "Fine Art" },
+    { "id": "style-3", "handle": "logo-design", "name": "Logo Design" },
+    { "id": "style-4", "handle": "abstract", "name": "Abstract" },
+    { "id": "style-5", "handle": "pointillism", "name": "Pointillism" },
+    { "id": "style-6", "handle": "graffiti", "name": "Graffiti" }
+  ],
+  
+  "themes": [
+    { "id": "theme-1", "handle": "cars-motors", "name": "Cars & Motors" },
+    { "id": "theme-2", "handle": "ocean-marine", "name": "Ocean & Marine" },
+    { "id": "theme-3", "handle": "space-galaxy", "name": "Space & Galaxy" },
+    { "id": "theme-4", "handle": "nature-wildlife", "name": "Nature & Wildlife" },
+    { "id": "theme-5", "handle": "urban-street", "name": "Urban & Street Art" },
+    { "id": "theme-6", "handle": "sports-teams", "name": "Sports & Teams" },
+    { "id": "theme-7", "handle": "aviation", "name": "Aviation" },
+    { "id": "theme-8", "handle": "music-culture", "name": "Music & Culture" }
+  ],
+  
+  "portfolio_items": [
+    {
+      "id": "port-1",
+      "handle": "racing-dreams-ferrari",
+      "title": "Racing Dreams",
+      "description": "Custom Ferrari F40 artwork celebrating the golden era of supercars",
+      "main_image": "https://picsum.photos/600/600?random=1",
+      "images": [
+        "https://picsum.photos/800/800?random=2",
+        "https://picsum.photos/800/800?random=3"
+      ],
+      "style": { "id": "style-1", "name": "Illustration" },
+      "theme": { "id": "theme-1", "name": "Cars & Motors" },
+      "watch_product": {
+        "id": "watch-1",
+        "title": "Tissot PRX Powermatic 80",
+        "vendor": "Tissot",
+        "price": "$650",
+        "size": "40mm",
+        "image": "https://picsum.photos/400/400?random=100"
+      },
+      "portfolio_type": "custom_order",
+      "client_location": "Dubai, UAE",
+      "completion_date": "2024-12-15",
+      "featured": true,
+      "video_url": "https://www.youtube.com/watch?v=example",
+      "instagram_url": "https://instagram.com/p/example",
+      "is_active": true
+    },
+    {
+      "id": "port-2",
+      "handle": "ocean-explorer",
+      "title": "Ocean Explorer",
+      "description": "Deep sea diving scene with octopus and coral reef",
+      "main_image": "https://picsum.photos/600/600?random=4",
+      "images": [
+        "https://picsum.photos/800/800?random=5",
+        "https://picsum.photos/800/800?random=6"
+      ],
+      "style": { "id": "style-2", "name": "Fine Art" },
+      "theme": { "id": "theme-2", "name": "Ocean & Marine" },
+      "watch_product": {
+        "id": "watch-2",
+        "title": "Oris Aquis Date",
+        "vendor": "Oris",
+        "price": "$2,100",
+        "size": "43.5mm",
+        "image": "https://picsum.photos/400/400?random=101"
+      },
+      "portfolio_type": "product",
+      "product_reference": "/products/ocean-explorer-oris",
+      "completion_date": "2024-11-20",
+      "featured": true,
+      "timelapse_url": "https://www.youtube.com/watch?v=timelapse",
+      "is_active": true
+    },
+    {
+      "id": "port-3",
+      "handle": "galaxy-wanderer",
+      "title": "Galaxy Wanderer",
+      "description": "Abstract space theme with nebula and stars",
+      "main_image": "https://picsum.photos/600/600?random=7",
+      "images": [
+        "https://picsum.photos/800/800?random=8",
+        "https://picsum.photos/800/800?random=9"
+      ],
+      "style": { "id": "style-5", "name": "Pointillism" },
+      "theme": { "id": "theme-3", "name": "Space & Galaxy" },
+      "watch_product": {
+        "id": "watch-3",
+        "title": "Citizen Tsuyosa",
+        "vendor": "Citizen",
+        "price": "$450",
+        "size": "40mm",
+        "image": "https://picsum.photos/400/400?random=102"
+      },
+      "portfolio_type": "concept",
+      "completion_date": "2024-10-10",
+      "featured": false,
+      "is_active": true
+    },
+    {
+      "id": "port-4",
+      "handle": "urban-pulse",
+      "title": "Urban Pulse",
+      "description": "NYC street art inspired design with graffiti elements",
+      "main_image": "https://picsum.photos/600/600?random=10",
+      "images": [
+        "https://picsum.photos/800/800?random=11",
+        "https://picsum.photos/800/800?random=12"
+      ],
+      "style": { "id": "style-6", "name": "Graffiti" },
+      "theme": { "id": "theme-5", "name": "Urban & Street Art" },
+      "watch_product": {
+        "id": "watch-4",
+        "title": "G-Shock CasiOak",
+        "vendor": "Casio",
+        "price": "$150",
+        "size": "45mm",
+        "image": "https://picsum.photos/400/400?random=103"
+      },
+      "portfolio_type": "product",
+      "product_reference": "/products/urban-pulse-casioak",
+      "client_location": "New York, USA",
+      "completion_date": "2024-09-05",
+      "featured": true,
+      "instagram_url": "https://instagram.com/p/urbanpulse",
+      "is_active": true
+    },
+    {
+      "id": "port-5",
+      "handle": "wildlife-spirit",
+      "title": "Wildlife Spirit",
+      "description": "Majestic lion portrait in watercolor style",
+      "main_image": "https://picsum.photos/600/600?random=13",
+      "images": [
+        "https://picsum.photos/800/800?random=14"
+      ],
+      "style": { "id": "style-2", "name": "Fine Art" },
+      "theme": { "id": "theme-4", "name": "Nature & Wildlife" },
+      "watch_product": {
+        "id": "watch-5",
+        "title": "Seiko 5 Sports",
+        "vendor": "Seiko",
+        "price": "$325",
+        "size": "42.5mm",
+        "image": "https://picsum.photos/400/400?random=104"
+      },
+      "portfolio_type": "custom_order",
+      "client_location": "London, UK",
+      "completion_date": "2024-08-15",
+      "featured": false,
+      "video_url": "https://www.youtube.com/watch?v=wildlife",
+      "is_active": true
+    },
+    {
+      "id": "port-6",
+      "handle": "aviation-legend",
+      "title": "Aviation Legend",
+      "description": "P-51 Mustang fighter plane detailed illustration",
+      "main_image": "https://picsum.photos/600/600?random=15",
+      "images": [
+        "https://picsum.photos/800/800?random=16",
+        "https://picsum.photos/800/800?random=17",
+        "https://picsum.photos/800/800?random=18"
+      ],
+      "style": { "id": "style-1", "name": "Illustration" },
+      "theme": { "id": "theme-7", "name": "Aviation" },
+      "watch_product": {
+        "id": "watch-6",
+        "title": "Hamilton Khaki Aviation",
+        "vendor": "Hamilton",
+        "price": "$895",
+        "size": "42mm",
+        "image": "https://picsum.photos/400/400?random=105"
+      },
+      "portfolio_type": "custom_order",
+      "client_location": "Dallas, USA",
+      "completion_date": "2024-07-20",
+      "featured": true,
+      "timelapse_url": "https://www.youtube.com/watch?v=aviation",
+      "is_active": true
+    }
+  ]
+}
