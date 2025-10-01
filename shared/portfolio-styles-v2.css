@@ -188,22 +188,30 @@
 }
 
 .portfolio-quick-info h3 {
-    font-size: 18px;
-    margin-bottom: 6px;
-    font-weight: 500;
+    font-size: 20px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .portfolio-quick-info p {
     font-size: 12px;
-    opacity: 0.85;
+    opacity: 0.9;
     margin-bottom: 4px;
 }
 
-.watch-model {
-    font-size: 11px;
-    color: var(--color-accent);
-    margin-top: 6px;
+.overlay-meta {
+    font-size: 13px !important;
+    opacity: 1 !important;
     font-weight: 500;
+}
+
+.watch-model {
+    font-size: 12px;
+    color: #A0E7E8; /* Светлый тиффани для overlay */
+    margin-top: 8px;
+    font-weight: 500;
+    opacity: 1;
 }
 
 .btn-view-details {
@@ -235,7 +243,7 @@
 .portfolio-info h4 {
     font-size: 16px;
     color: var(--color-dark);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     font-weight: 500;
 }
 
@@ -243,14 +251,51 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 8px;
+}
+
+/* Tags for style and theme */
+.portfolio-tags {
+    display: flex;
+    gap: 6px;
+}
+
+.tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    font-weight: 500;
+}
+
+.tag-style {
+    background: #f0f8f8;
+    color: var(--color-accent);
+}
+
+.tag-theme {
+    background: #f5f5f5;
+    color: #666;
 }
 
 .portfolio-type {
     font-size: 11px;
-    color: var(--color-accent);
+    color: var(--color-dark);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
+    background: #FFD700;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+/* Watch model in card */
+.portfolio-watch {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+    margin-bottom: 0;
 }
 
 .portfolio-location {

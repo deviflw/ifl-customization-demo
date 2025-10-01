@@ -48,9 +48,9 @@
                 <label for="typeFilter">Type:</label>
                 <select id="typeFilter">
                     <option value="">All Types</option>
-                    <option value="custom_order">Custom Orders</option>
-                    <option value="product">Products</option>
-                    <option value="concept">Concepts</option>
+                    <option value="custom_order">Bespoke Order</option>
+                    <option value="product">Ready Design</option>
+                    <option value="concept">Concept Art</option>
                 </select>
             </div>
         </div>
@@ -140,9 +140,16 @@
             
             createCard(item) {
                 const badges = [];
-                if (item.video_url) badges.push('<span class="badge badge-video">🎥 Video</span>');
-                if (item.instagram_url) badges.push('<span class="badge badge-instagram">📷 Instagram</span>');
-                if (item.timelapse_url) badges.push('<span class="badge badge-timelapse">⏱ Timelapse</span>');
+                if (item.video_url) badges.push('<span class="badge badge-video">🎥</span>');
+                if (item.instagram_url) badges.push('<span class="badge badge-instagram">📷</span>');
+                if (item.timelapse_url) badges.push('<span class="badge badge-timelapse">⏱</span>');
+                
+                // Красивые названия для типов
+                const typeLabels = {
+                    'custom_order': 'Bespoke',
+                    'product': 'Ready',
+                    'concept': 'Concept'
+                };
                 
                 return `
                     <div class="portfolio-card" data-id="${item.id}">
@@ -160,7 +167,7 @@
                             <div class="portfolio-overlay">
                                 <div class="portfolio-quick-info">
                                     <h3>${item.title}</h3>
-                                    <p>${item.style.name} • ${item.theme.name}</p>
+                                    <p class="overlay-meta">${item.style.name} • ${item.theme.name}</p>
                                     ${item.watch_product ? `
                                         <p class="watch-model">
                                             ${item.watch_product.vendor} ${item.watch_product.title}
@@ -176,11 +183,15 @@
                         <div class="portfolio-info">
                             <h4>${item.title}</h4>
                             <div class="portfolio-meta">
-                                <span class="portfolio-type">${item.portfolio_type.replace('_', ' ')}</span>
-                                ${item.client_location ? 
-                                    `<span class="portfolio-location">${item.client_location}</span>` 
-                                    : ''}
+                                <div class="portfolio-tags">
+                                    <span class="tag tag-style">${item.style.name}</span>
+                                    <span class="tag tag-theme">${item.theme.name}</span>
+                                </div>
+                                <span class="portfolio-type">${typeLabels[item.portfolio_type]}</span>
                             </div>
+                            ${item.watch_product ? 
+                                `<p class="portfolio-watch">${item.watch_product.vendor} ${item.watch_product.title}</p>` 
+                                : ''}
                         </div>
                     </div>
                 `;
