@@ -156,8 +156,8 @@
                 };
                 
                 return `
-                    <div class="portfolio-card" data-id="${item.id}" onclick="portfolioGrid.openQuickView('${item.id}')">
-                        <div class="portfolio-image-wrapper">
+                    <div class="portfolio-card" data-id="${item.id}">
+                        <div class="portfolio-image-wrapper" onclick="window.location.href='/portfolio-single.html?id=${item.handle}'">
                             <img src="${item.main_image}" alt="${item.title}" loading="lazy">
                             
                             ${badges.length > 0 ? `
