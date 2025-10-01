@@ -44,9 +44,9 @@ button, input, select, textarea {
 
 /* Breadcrumbs */
 .breadcrumbs {
-    padding: 10px 20px 10px 20px; /* Увеличили padding-top до 10px */
-    /* background: white; УБРАЛИ */
-    /* border-bottom: 1px solid #e5e5e5; УБРАЛИ */
+    padding: 15px 40px; /* Как у навигации */
+    background: #f8f9fa; /* Легкий серый фон */
+    border-bottom: 1px solid #e5e5e5; /* Добавим обратно границу */
 }
 
 .breadcrumbs-container {
