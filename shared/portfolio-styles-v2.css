@@ -134,7 +134,7 @@
 .badge {
     background: white;
     padding: 6px 10px;
-    border-radius: 16px;
+    border-radius: 4px; /* Такой же как у типов внизу */
     font-size: 11px;
     font-weight: 600;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -145,9 +145,12 @@
     background: rgba(255, 255, 255, 0.95);
 }
 
-.badge-video { color: #ff0000; }
-.badge-instagram { color: #E4405F; }
-.badge-timelapse { color: #1DA1F2; }
+.badge-video { color: #ff6600; } /* Оранжевый */
+.badge-instagram { color: #ff6600; } /* Оранжевый */
+.badge-timelapse { color: #ff6600; } /* Оранжевый */
+
+/* Убираем Featured Badge - будем просто ставить первыми в сетке */
+/* .featured-badge { display: none; } */
 
 /* Featured Badge */
 .featured-badge {
