@@ -40,7 +40,7 @@ const portfolioMetaobjects = {
       theme_id: "theme-1",
       watch_product: {
         id: "watch-1",
-        title: "Tissot PRX Powermatic 80",
+        title: "PRX Powermatic 80", // Убрали Tissot из title
         vendor: "Tissot",
         price: 650,
         size: "40mm",
@@ -68,7 +68,7 @@ const portfolioMetaobjects = {
       theme_id: "theme-2",
       watch_product: {
         id: "watch-2",
-        title: "Oris Aquis Date",
+        title: "Aquis Date", // Убрали Oris
         vendor: "Oris",
         price: 2100,
         size: "43.5mm",
@@ -95,7 +95,7 @@ const portfolioMetaobjects = {
       theme_id: "theme-3",
       watch_product: {
         id: "watch-3",
-        title: "Citizen Tsuyosa",
+        title: "Tsuyosa", // Убрали Citizen
         vendor: "Citizen",
         price: 450,
         size: "40mm",
