@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Explorer - Bespoke Watch Design | IFL Watches</title>
+    
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="shared/styles.css">
+    <link rel="stylesheet" href="shared/navigation.css">
+    
+    <style>
+        /* Single Portfolio Page Styles */
+        
+        /* Hero Section */
+        .portfolio-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(0,0,0,0.3) 50%,
+                rgba(0,0,0,0.8) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 80px 40px;
+            color: white;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .hero-tags {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-tag {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+        
+        /* Breadcrumb Bar */
+        .breadcrumb-bar {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .breadcrumb-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .breadcrumbs a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--color-accent);
+        }
+        
+        .breadcrumbs .separator {
+            color: #ccc;
+        }
+        
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .share-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .share-btn:hover {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+        }
+        
+        /* Main Content */
+        .portfolio-content {
+            max-width: 1400px;
+            margin: 60px auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .main-gallery-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .main-gallery-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .fullscreen-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .fullscreen-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .gallery-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        .gallery-thumb {
+            aspect-ratio: 1;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .gallery-thumb.active {
+            border-color: var(--color-accent);
+        }
+        
+        .gallery-thumb:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Details Section */
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        .section-block {
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .section-block:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--color-dark);
+        }
+        
+        .project-description {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #666;
+        }
+        
+        /* Watch Specs */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .spec-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .spec-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #999;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        
+        .spec-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--color-dark);
+        }
+        
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .btn-large {
+            flex: 1;
+            padding: 18px 32px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #50ced1;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(64, 190, 193, 0.3);
+        }
+        
+        .btn-outline {
+            background: white;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+        }
+        
+        .btn-outline:hover {
+            background: var(--color-accent);
+            color: white;
+        }
+        
+        /* Process Section */
+        .process-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+            margin-top: 80px;
+        }
+        
+        .process-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .process-title {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--color-dark);
+        }
+        
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .process-step {
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--color-accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .step-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--color-dark);
+        }
+        
+        .step-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Related Works */
+        .related-section {
+            max-width: 1400px;
+            margin: 80px auto;
+            padding: 0 40px;
+        }
+        
+        .related-title {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: var(--color-dark);
+            text-align: center;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #40bec1 0%, #50ced1 100%);
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--color-accent);
+            padding: 16px 32px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .portfolio-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .gallery-section {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-hero {
+                height: 70vh;
+            }
+            
+            .hero-overlay {
+                padding: 40px 20px;
+            }
+            
+            .breadcrumb-bar {
+                padding: 15px 20px;
+            }
+            
+            .portfolio-content {
+                padding: 0 20px;
+                margin: 40px auto;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .gallery-thumbnails {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (reused from index.html) -->
+    <nav id="mainNav"></nav>
+    
+    <!-- Hero Section -->
+    <section class="portfolio-hero">
+        <img src="https://picsum.photos/1920/1080?random=1" alt="Ocean Explorer" class="hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1 class="hero-title">Ocean Explorer</h1>
+                <p class="hero-subtitle">A deep dive into marine artistry on the Oris Aquis Date</p>
+                <div class="hero-tags">
+                    <span class="hero-tag">Bespoke Design</span>
+                    <span class="hero-tag">Fine Art</span>
+                    <span class="hero-tag">Ocean & Marine</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+    </section>
+    
+    <!-- Breadcrumb Bar -->
+    <div class="breadcrumb-bar">
+        <div class="breadcrumb-container">
+            <div class="breadcrumbs">
+                <a href="/">Home</a>
+                <span class="separator">›</span>
+                <a href="/portfolio.html">Portfolio</a>
+                <span class="separator">›</span>
+                <a href="/portfolio.html?type=bespoke_concept">Bespoke Concepts</a>
+                <span class="separator">›</span>
+                <span>Ocean Explorer</span>
+            </div>
+            <div class="share-buttons">
+                <button class="share-btn" title="Share on Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+                    </svg>
+                </button>
+                <button class="share-btn" title="Share on Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </button>
+                <button class="share-btn" title="Copy Link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="portfolio-content">
+        <!-- Gallery Section -->
+        <div class="gallery-section">
+            <div class="main-gallery-image">
+                <img id="mainImage" src="https://picsum.photos/800/800?random=1" alt="Ocean Explorer">
+                <button class="fullscreen-btn" onclick="openFullscreen()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="gallery-thumbnails">
+                <div class="gallery-thumb active" onclick="changeImage(this, 'https://picsum.photos/800/800?random=1')">
+                    <img src="https://picsum.photos/200/200?random=1" alt="View 1">
+                </div>
+                <div class="gallery-thumb" onclick="changeImage(this, 'https://picsum.photos/800/800?random=2')">
+                    <img src="https://picsum.photos/200/200?random=2" alt="View 2">
+                </div>
+                <div class="gallery-thumb" onclick="changeImage(this, 'https://picsum.photos/800/800?random=3')">
+                    <img src="https://picsum.photos/200/200?random=3" alt="View 3">
+                </div>
+                <div class="gallery-thumb" onclick="changeImage(this, 'https://picsum.photos/800/800?random=4')">
+                    <img src="https://picsum.photos/200/200?random=4" alt="View 4">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Details Section -->
+        <div class="details-section">
+            <!-- Project Description -->
+            <div class="section-block">
+                <h2 class="section-title">The Story</h2>
+                <p class="project-description">
+                    The Ocean Explorer transforms the Oris Aquis Date into a canvas celebrating marine life. 
+                    Each brushstroke captures the fluid movement of ocean currents, while vibrant blues and 
+                    teals mirror the depths of the sea. This hand-painted masterpiece brings the underwater 
+                    world to your wrist, featuring intricate details of coral reefs and marine creatures 
+                    that seem to dance with every movement of your hand.
+                </p>
+            </div>
+            
+            <!-- Watch Specifications -->
+            <div class="section-block">
+                <h2 class="section-title">Watch Specifications</h2>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-label">Base Model</div>
+                        <div class="spec-value">Oris Aquis Date</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Size</div>
+                        <div class="spec-value">43.5mm</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Movement</div>
+                        <div class="spec-value">Swiss Automatic</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Water Resistance</div>
+                        <div class="spec-value">300m</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Art Style</div>
+                        <div class="spec-value">Fine Art</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Theme</div>
+                        <div class="spec-value">Ocean & Marine</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Section -->
+            <div class="section-block">
+                <h2 class="section-title">Watch the Creation</h2>
+                <div style="aspect-ratio: 16/9; background: #f8f9fa; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                    <p style="color: #999;">Video Player Placeholder</p>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="/products/ocean-explorer" class="btn-large btn-primary">Order This Design</a>
+                <a href="/pages/bespoke" class="btn-large btn-outline">Create Your Own</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="process-container">
+            <h2 class="process-title">The Creation Process</h2>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Concept & Design</h3>
+                    <p class="step-description">Initial sketches and color palette selection inspired by ocean depths</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Dial Preparation</h3>
+                    <p class="step-description">Careful disassembly and preparation of the watch dial</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Hand Painting</h3>
+                    <p class="step-description">Meticulous application of each layer using fine brushes</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Final Assembly</h3>
+                    <p class="step-description">Professional reassembly and quality testing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Related Works -->
+    <section class="related-section">
+        <h2 class="related-title">You May Also Like</h2>
+        <div class="related-grid" id="relatedGrid">
+            <!-- Related items will be dynamically inserted here -->
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="cta-title">Want Something Similar?</h2>
+        <p class="cta-subtitle">Let's create your unique timepiece together</p>
+        <div class="cta-buttons">
+            <a href="/pages/bespoke" class="btn-white">Start Your Custom Project</a>
+            <a href="/portfolio.html" class="btn-white">Browse More Designs</a>
+        </div>
+    </section>
+    
+    <!-- Scripts -->
+    <script src="shared/navigation.js"></script>
+    <script src="shared/portfolio-data-v2.js"></script>
+    
+    <script>
+        // Gallery functions
+        function changeImage(thumb, newSrc) {
+            document.getElementById('mainImage').src = newSrc;
+            document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+        }
+        
+        function openFullscreen() {
+            const img = document.getElementById('mainImage');
+            if (img.requestFullscreen) {
+                img.requestFullscreen();
+            } else if (img.webkitRequestFullscreen) {
+                img.webkitRequestFullscreen();
+            } else if (img.msRequestFullscreen) {
+                img.msRequestFullscreen();
+            }
+        }
+        
+        // Smooth scroll
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.breadcrumb-bar').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Load related works
+        function loadRelatedWorks() {
+            const currentItem = portfolioMetaobjects.items[0]; // В реальности получаем по ID из URL
+            const relatedItems = portfolioHelpers.getActiveItems()
+                .filter(item => item.id !== currentItem.id)
+                .filter(item => item.theme_id === currentItem.theme_id || item.style_id === currentItem.style_id)
+                .slice(0, 3);
+            
+            const relatedGrid = document.getElementById('relatedGrid');
+            relatedGrid.innerHTML = relatedItems.map(item => `
+                <div class="portfolio-card" onclick="window.location.href='/portfolio/${item.handle}'">
+                    <div class="portfolio-image-wrapper">
+                        <img src="${item.main_image}" alt="${item.title}" loading="lazy">
+                    </div>
+                    <div class="portfolio-info">
+                        <h4>${item.title}</h4>
+                        <p>${item.watch_product ? item.watch_product.title : 'Custom Design'}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadRelatedWorks();
+        });
+    </script>
+</body>
+</html>
