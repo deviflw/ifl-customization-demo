@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Portfolio - IFL Watches</title>
+    
+    <!-- Shared styles (DRY!) -->
+    <link rel="stylesheet" href="shared/base.css">
+    <link rel="stylesheet" href="shared/navigation.css">
+    <link rel="stylesheet" href="shared/portfolio.css">
+    <link rel="stylesheet" href="shared/portfolio-filters.css">
+    <link rel="stylesheet" href="shared/behance-filters.css">
+    <link rel="stylesheet" href="shared/modal.css">
+    
+    <!-- Navigation script -->
+    <script src="shared/navigation.js"></script>
+    
+    <!-- Portfolio data -->
+    <script src="shared/portfolio-data.js"></script>
+</head>
+<body>
+    <!-- Navigation будет вставлена автоматически через navigation.js -->
+
+    <!-- Portfolio Content -->
+    <main class="portfolio-container">
+        <!-- Header -->
+        <div class="portfolio-header">
+            <h1>PORTFOLIO</h1>
+            <p>Explore our collection of hand-painted masterpieces, each telling a unique story</p>
+        </div>
+
+        <!-- Behance-style Filter Trigger -->
+        <div class="portfolio-filter-trigger">
+            <button class="filter-toggle-btn" onclick="toggleFilterPanel()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+                </svg>
+                <span>Filters</span>
+            </button>
+        </div>
+
+        <!-- Behance-style Layout -->
+        <div class="portfolio-layout">
+            <!-- Sliding Filter Sidebar -->
+            <aside class="filter-sidebar" id="filterSidebar">
+                <div class="filter-sections">
+                    <!-- Theme Filters -->
+                    <div class="filter-group">
+                        <h3>Theme</h3>
+                        <div class="filter-options" id="themeFilters">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Style Filters -->
+                    <div class="filter-group">
+                        <h3>Style</h3>
+                        <div class="filter-options" id="styleFilters">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Watch Model Filters -->
+                    <div class="filter-group">
+                        <h3>Watch Model</h3>
+                        <div class="filter-options" id="watchFilters">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Clear All -->
+                    <div class="filter-actions">
+                        <button class="clear-all-btn" onclick="clearAllFilters()">Clear All</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Portfolio Grid Content -->
+            <div class="portfolio-content">
+                <!-- Portfolio Grid -->
+                <div class="portfolio-grid" id="portfolioGrid">
+                    <!-- Will be populated by JS -->
+                </div>
+            </div>
+
+        <!-- Loading State -->
+        <div class="portfolio-loading">Loading portfolio...</div>
+    </main>
+
+    <script>
+        // Behance Filter Panel Functions
+        let filterPanelOpen = false;
+        let activeFilters = {
+            theme: new Set(),
+            style: new Set(),
+            watch: new Set()
+        };
+
+        function toggleFilterPanel() {
+            const sidebar = document.getElementById('filterSidebar');
+            const button = document.querySelector('.filter-toggle-btn');
+
+            filterPanelOpen = !filterPanelOpen;
+
+            if (filterPanelOpen) {
+                sidebar.classList.add('active');
+                button.classList.add('active');
+            } else {
+                sidebar.classList.remove('active');
+                button.classList.remove('active');
+            }
+        }
+
+        function clearAllFilters() {
+            // Clear all active filters
+            activeFilters.theme.clear();
+            activeFilters.style.clear();
+            activeFilters.watch.clear();
+
+            // Remove active state from all filter buttons
+            document.querySelectorAll('.filter-option').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Re-render portfolio
+            portfolioGrid.render();
+        }
+
+        function initializeFilters() {
+            // Populate Theme filters
+            const themeContainer = document.getElementById('themeFilters');
+            portfolioMetaobjects.themes.forEach(theme => {
+                const button = document.createElement('button');
+                button.className = 'filter-option';
+                button.textContent = theme.name;
+                button.onclick = () => toggleFilter('theme', theme.handle, button);
+                themeContainer.appendChild(button);
+            });
+
+            // Populate Style filters
+            const styleContainer = document.getElementById('styleFilters');
+            portfolioMetaobjects.styles.forEach(style => {
+                const button = document.createElement('button');
+                button.className = 'filter-option';
+                button.textContent = style.name;
+                button.onclick = () => toggleFilter('style', style.handle, button);
+                styleContainer.appendChild(button);
+            });
+
+            // Populate Watch Model filters (extract unique watches from portfolio)
+            const watchContainer = document.getElementById('watchFilters');
+            const uniqueWatches = [...new Set(portfolioMetaobjects.items.map(item => item.watch_product.title))];
+            uniqueWatches.forEach(watch => {
+                const button = document.createElement('button');
+                button.className = 'filter-option';
+                button.textContent = watch;
+                button.onclick = () => toggleFilter('watch', watch, button);
+                watchContainer.appendChild(button);
+            });
+        }
+
+        function toggleFilter(type, value, button) {
+            const filterSet = activeFilters[type];
+
+            if (filterSet.has(value)) {
+                filterSet.delete(value);
+                button.classList.remove('active');
+            } else {
+                filterSet.add(value);
+                button.classList.add('active');
+            }
+
+            // Apply filters and re-render
+            portfolioGrid.render();
+        }
+
+        // Portfolio renderer - REUSING working code DRY!
+        class PortfolioGrid {
+            constructor() {
+                this.grid = document.getElementById('portfolioGrid');
+                this.filters = {
+                    style: '',
+                    theme: '',
+                    type: ''
+                };
+                this.typeLabels = {
+                    'bespoke_concept': 'Bespoke',
+                    'custom_order': 'Commission'
+                };
+                this.init();
+            }
+
+            init() {
+                // Initialize Behance filters instead of old dropdowns
+                initializeFilters();
+                this.render(); // Use working render method
+            }
+            
+            populateFilters() {
+                // Populate style filter
+                const styleSelect = document.getElementById('styleFilter');
+                portfolioMetaobjects.styles.forEach(style => {
+                    const option = document.createElement('option');
+                    option.value = style.id;
+                    option.textContent = style.name;
+                    styleSelect.appendChild(option);
+                });
+                
+                // Populate theme filter
+                const themeSelect = document.getElementById('themeFilter');
+                portfolioMetaobjects.themes.forEach(theme => {
+                    const option = document.createElement('option');
+                    option.value = theme.id;
+                    option.textContent = theme.name;
+                    themeSelect.appendChild(option);
+                });
+            }
+            
+            attachEventListeners() {
+                document.getElementById('styleFilter').addEventListener('change', (e) => {
+                    this.filters.style = e.target.value;
+                    this.render();
+                });
+                
+                document.getElementById('themeFilter').addEventListener('change', (e) => {
+                    this.filters.theme = e.target.value;
+                    this.render();
+                });
+                
+                document.getElementById('typeFilter').addEventListener('change', (e) => {
+                    this.filters.type = e.target.value;
+                    this.render();
+                });
+            }
+            
+            render() {
+                // For now, show all items (Behance filters will be connected later)
+                const items = portfolioMetaobjects.items;
+
+                // Hide loading state
+                document.querySelector('.portfolio-loading').style.display = 'none';
+
+                if (items.length === 0) {
+                    this.grid.innerHTML = `
+                        <div class="portfolio-empty">
+                            <p>No items found matching your filters.</p>
+                            <button class="btn-reset-filters" onclick="portfolioGrid.resetFilters()">
+                                Reset Filters
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                this.grid.innerHTML = items.map(item => this.createCard(item)).join('');
+
+                // Add click handlers for mobile
+                this.addMobileHandlers();
+            }
+            
+            createCard(item) {
+                const badges = [];
+                if (item.video_url) badges.push('<span class="badge badge-video">🎥 Video</span>');
+                if (item.instagram_url) badges.push('<span class="badge badge-instagram">📷 Instagram</span>');
+                if (item.timelapse_url) badges.push('<span class="badge badge-timelapse">⏱ Timelapse</span>');
+                
+                // Красивые названия для типов
+                const typeLabels = {
+                    'custom_order': 'Commission',
+                    'bespoke_concept': 'Bespoke',
+                    'product': 'Ready' // оставим для совместимости
+                };
+                
+                return `
+                    <div class="portfolio-card" data-id="${item.id}">
+                        <div class="portfolio-image-wrapper" onclick="window.location.href='/portfolio-single.html?id=${item.handle}'">
+                            <img src="${item.main_image}" alt="${item.title}" loading="lazy">
+                            
+                            ${badges.length > 0 ? `
+                                <div class="portfolio-badges">
+                                    ${badges.join('')}
+                                </div>
+                            ` : ''}
+                            
+                            <div class="portfolio-overlay">
+                                <button class="btn-quick-view" onclick="event.stopPropagation(); portfolioGrid.openQuickView('${item.id}')">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                    <span>Quick View</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-info">
+                            <h4>${item.title}</h4>
+                            <div class="portfolio-meta">
+                                <div class="portfolio-tags">
+                                    <span class="tag tag-style">${item.style.name}</span>
+                                    <span class="tag tag-theme">${item.theme.name}</span>
+                                </div>
+                                <span class="portfolio-type">${typeLabels[item.portfolio_type]}</span>
+                            </div>
+                            ${item.watch_product ? 
+                                `<p class="portfolio-watch">${item.watch_product.title}</p>` 
+                                : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            addMobileHandlers() {
+                // На мобильных делаем overlay видимым по клику
+                if (window.innerWidth <= 768) {
+                    document.querySelectorAll('.portfolio-card').forEach(card => {
+                        card.addEventListener('click', function(e) {
+                            if (!e.target.closest('.btn-view-details')) {
+                                // Toggle active class
+                                document.querySelectorAll('.portfolio-card').forEach(c => {
+                                    if (c !== this) c.classList.remove('active');
+                                });
+                                this.classList.toggle('active');
+                            }
+                        });
+                    });
+                }
+            }
+            
+            viewDetails(itemId) {
+                const item = portfolioHelpers.getActiveItems().find(p => p.id === itemId);
+                if (item) {
+                    // В реальном приложении это бы перенаправляло на страницу детали
+                    console.log('View details for:', item);
+                    alert(`Opening: ${item.title}\n\nThis would navigate to:\n/portfolio/${item.handle}`);
+                }
+            }
+            
+            openQuickView(itemId) {
+                const item = portfolioHelpers.getActiveItems().find(p => p.id === itemId);
+                if (!item) return;
+                
+                // Показываем модал
+                const modal = document.getElementById('quickViewModal');
+                const modalBody = modal.querySelector('.modal-body');
+                
+                // Генерируем контент для модала
+                modalBody.innerHTML = `
+                    <div class="quick-view-container">
+                        <div class="quick-view-gallery">
+                            <div class="main-image">
+                                <img src="${item.main_image}" alt="${item.title}">
+                            </div>
+                            ${item.images && item.images.length > 0 ? `
+                                <div class="thumbnail-list">
+                                    <div class="thumbnail active">
+                                        <img src="${item.main_image}" alt="${item.title}">
+                                    </div>
+                                    ${item.images.map(img => `
+                                        <div class="thumbnail">
+                                            <img src="${img}" alt="${item.title}">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="quick-view-details">
+                            <h2>${item.title}</h2>
+                            
+                            <div class="quick-view-tags">
+                                <span class="tag tag-style">${item.style.name}</span>
+                                <span class="tag tag-theme">${item.theme.name}</span>
+                                <span class="portfolio-type">${this.typeLabels[item.portfolio_type]}</span>
+                            </div>
+                            
+                            <p class="quick-view-description">${item.description || 'A unique custom timepiece design.'}</p>
+                            
+                            ${item.watch_product ? `
+                                <div class="watch-details">
+                                    <h3>Watch Details</h3>
+                                    <p><strong>Model:</strong> ${item.watch_product.title}</p>
+                                    <p><strong>Brand:</strong> ${item.watch_product.vendor}</p>
+                                    <p><strong>Size:</strong> ${item.watch_product.size}</p>
+                                    <p><strong>Price from:</strong> $${item.watch_product.price}</p>
+                                </div>
+                            ` : ''}
+                            
+                            <div class="quick-view-actions">
+                                ${item.portfolio_type === 'bespoke_concept' ? 
+                                    `<a href="${item.product_reference || '#'}" class="btn btn-primary">Order This Design</a>` :
+                                    `<button class="btn btn-primary" onclick="window.location.href='/pages/bespoke'">Order Similar</button>`
+                                }
+                                <a href="/portfolio/${item.handle}" class="btn btn-secondary">View Full Details</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Добавляем обработчики для галереи
+                const thumbnails = modalBody.querySelectorAll('.thumbnail');
+                const mainImage = modalBody.querySelector('.main-image img');
+                
+                thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', () => {
+                        thumbnails.forEach(t => t.classList.remove('active'));
+                        thumb.classList.add('active');
+                        mainImage.src = thumb.querySelector('img').src;
+                    });
+                });
+                
+                // Показываем модал
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            closeQuickView() {
+                const modal = document.getElementById('quickViewModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            resetFilters() {
+                this.filters = { style: '', theme: '', type: '' };
+                document.getElementById('styleFilter').value = '';
+                document.getElementById('themeFilter').value = '';
+                document.getElementById('typeFilter').value = '';
+                this.render();
+            }
+        }
+        
+        // Initialize portfolio grid
+        const portfolioGrid = new PortfolioGrid();
+    </script>
+
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" class="modal">
+        <div class="modal-overlay" onclick="portfolioGrid.closeQuickView()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="portfolioGrid.closeQuickView()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <div class="modal-body">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
