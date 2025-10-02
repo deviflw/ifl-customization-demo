@@ -140,28 +140,6 @@
     }
 }
 
-@media (min-width: 1400px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    /* Когда фильтры открыты - 3 колонки */
-    .filter-sidebar.active ~ .portfolio-grid-container .portfolio-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1800px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
-    
-    /* Когда фильтры открыты - 4 колонки */
-    .filter-sidebar.active ~ .portfolio-grid-container .portfolio-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
 /* Clear Filters Button */
 .clear-filters {
     width: 100%;
@@ -596,26 +574,7 @@
     color: #999;
 }
 
-/* Responsive breakpoints for grid */
-@media (min-width: 1200px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .filter-sidebar.active ~ .portfolio-grid-container .portfolio-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (min-width: 1600px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(5, 1fr);
-    }
-    
-    .filter-sidebar.active ~ .portfolio-grid-container .portfolio-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
+/* Keep 3 columns consistently on desktop */
 
 /* Mobile */
 @media (max-width: 768px) {
