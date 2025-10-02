@@ -1,0 +1,179 @@
+/* ==============================================
+   ICON LIBRARY
+   SVG icons as CSS backgrounds and inline examples
+   ============================================== */
+
+/* ==============================================
+   SOCIAL ICONS
+   ============================================== */
+
+/* Instagram Icon */
+.icon-instagram {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='20' height='20' rx='5' ry='5'/%3E%3Cpath d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/%3E%3Cline x1='17.5' y1='6.5' x2='17.51' y2='6.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Video/Play Icon */
+.icon-video {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cpolygon points='5 3 19 12 5 21 5 3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Filter Icon */
+.icon-filter {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cline x1='4' y1='6' x2='20' y2='6'/%3E%3Cline x1='7' y1='12' x2='20' y2='12'/%3E%3Cline x1='10' y1='18' x2='20' y2='18'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Timelapse Icon */
+.icon-timelapse {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpolyline points='12 6 12 12 16 14'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* ==============================================
+   UI ICONS
+   ============================================== */
+
+/* Close/X Icon */
+.icon-close {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Arrow Down */
+.icon-arrow-down {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Search Icon */
+.icon-search {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Check Icon */
+.icon-check {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Heart Icon */
+.icon-heart {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* Eye Icon (for Quick View) */
+.icon-eye {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+/* ==============================================
+   INLINE SVG EXAMPLES
+   Copy and paste these directly into HTML
+   ============================================== */
+
+/*
+Instagram Icon (inline):
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+</svg>
+
+Video Icon (inline):
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polygon points="5 3 19 12 5 21 5 3"/>
+</svg>
+
+Timelapse Icon (inline):
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="12" cy="12" r="10"/>
+    <polyline points="12 6 12 12 16 14"/>
+</svg>
+
+Filter Icon (inline):
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <line x1="4" y1="6" x2="20" y2="6"/>
+    <line x1="7" y1="12" x2="20" y2="12"/>
+    <line x1="10" y1="18" x2="20" y2="18"/>
+</svg>
+*/
+
+/* ==============================================
+   ICON MODIFIERS
+   ============================================== */
+
+/* White version */
+.icon-white {
+    filter: brightness(0) invert(1);
+}
+
+/* Colored versions */
+.icon-primary {
+    filter: invert(60%) sepia(52%) saturate(451%) hue-rotate(137deg) brightness(93%) contrast(87%);
+}
+
+/* Sizes */
+.icon-sm {
+    width: 16px;
+    height: 16px;
+}
+
+.icon-md {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-lg {
+    width: 32px;
+    height: 32px;
+}
+
+.icon-xl {
+    width: 48px;
+    height: 48px;
+}
