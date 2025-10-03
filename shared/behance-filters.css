@@ -37,19 +37,21 @@
 /* Portfolio Layout Container */
 .portfolio-layout {
     display: flex;
-    gap: 40px;
-    transition: all 0.4s ease;
+    gap: 0;
 }
 
-/* Filter Sidebar - ТОЛЬКО sliding механизм */
+.portfolio-layout.filters-open {
+    gap: 40px;
+}
+
+/* Filter Sidebar - no transitions, instant toggle */
 .filter-sidebar {
     width: 0;
     min-width: 0;
     overflow: hidden;
     background: white;
-    border: 1px solid #e0e0e0;
+    border: none;
     border-radius: 8px;
-    transition: all 0.4s ease;
     flex-shrink: 0;
 }
 
@@ -57,8 +59,9 @@
     width: 340px;
     min-width: 340px;
     padding: 24px;
-    overflow-y: auto;
+    overflow: hidden;
     max-height: calc(100vh - 100px);
+    border: 1px solid #e0e0e0;
 }
 
 /* Hide scrollbar but keep functionality */
@@ -76,17 +79,11 @@
 .portfolio-content {
     flex: 1;
     min-width: 0;
-    transition: all 0.4s ease;
 }
 
-/* Filter Sections animation */
+/* Filter Sections - simple display toggle via JS */
 .filter-sections {
-    opacity: 0;
-    transition: opacity 0.3s ease 0.2s;
-}
-
-.filter-sidebar.active .filter-sections {
-    opacity: 1;
+    width: 292px;
 }
 
 /* Smaller buttons in sidebar for better fit */

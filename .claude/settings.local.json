@@ -6,7 +6,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(dir \"C:\\Users\\mila\\Desktop\\ifl-customization-demo\\screenshots\" /b)"
+      "Bash(dir \"C:\\Users\\mila\\Desktop\\ifl-customization-demo\\screenshots\" /b)",
+      "WebFetch(domain:www.behance.net)"
     ],
     "deny": [],
     "ask": []

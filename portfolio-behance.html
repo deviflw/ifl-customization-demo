@@ -98,19 +98,27 @@
             watchModels: []
         };
 
-        // Toggle filter panel
+        // Toggle filter panel - with display none/block
         function toggleFilterPanel() {
             const sidebar = document.getElementById('filterSidebar');
             const button = document.querySelector('.filter-toggle-btn');
+            const layout = document.querySelector('.portfolio-layout');
+            const sections = sidebar.querySelector('.filter-sections');
 
             filterPanelOpen = !filterPanelOpen;
 
             if (filterPanelOpen) {
+                // Opening: show content immediately, then animate sidebar
+                sections.style.display = 'block';
                 sidebar.classList.add('active');
                 button.classList.add('active');
+                layout.classList.add('filters-open');
             } else {
+                // Closing: hide content immediately
+                sections.style.display = 'none';
                 sidebar.classList.remove('active');
                 button.classList.remove('active');
+                layout.classList.remove('filters-open');
             }
         }
 
