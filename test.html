@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Portfolio Filters</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-links {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-links h1 {
+            margin: 0 0 20px 0;
+            color: #333;
+        }
+        .test-links a {
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .test-links a:hover {
+            background: #555;
+        }
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            color: #155724;
+        }
+        .status h3 {
+            margin: 0 0 10px 0;
+        }
+        .status ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-links">
+        <h1>🧪 IFL Customization - Test Pages</h1>
+        
+        <a href="portfolio-behance.html">📸 Portfolio с фильтрами Behance (НОВАЯ ВЕРСИЯ)</a>
+        <a href="portfolio.html">📸 Portfolio (старая версия)</a>
+        <a href="bespoke-edition.html">🎨 Bespoke Edition Customizer</a>
+        <a href="full-customization.html">🎯 Full Customization</a>
+        <a href="portfolio-single.html">📄 Portfolio Single Page</a>
+        <a href="index.html">🏠 Главная страница</a>
+        
+        <div class="status">
+            <h3>✅ Статус: Фильтры исправлены!</h3>
+            <p><strong>Что работает в portfolio-behance.html:</strong></p>
+            <ul>
+                <li>Фильтры в стиле кастомайзера (filter-btn)</li>
+                <li>Активные фильтры внутри панели (как в Bespoke Edition)</li>
+                <li>Теги с крестиками для удаления</li>
+                <li>Счетчик активных фильтров</li>
+                <li>Clear All кнопка</li>
+                <li>Фильтрация по Theme, Style, Watch Model, Type</li>
+            </ul>
+            <p><strong>Использованы стили:</strong></p>
+            <ul>
+                <li>customizer-filters.css - для активных фильтров</li>
+                <li>behance-filters.css - для боковой панели</li>
+                <li>portfolio.css - для карточек</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
