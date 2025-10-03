@@ -1,4 +1,4 @@
-/* Behance-Style Filters - DRY reusing customizer styles */
+/* Behance-Style Filters - Using customizer design */
 
 /* Filter Trigger Button */
 .portfolio-filter-trigger {
@@ -13,7 +13,7 @@
     padding: 12px 20px;
     background: white;
     border: 2px solid #e0e0e0;
-    border-radius: 25px; /* Reusing customizer round style */
+    border-radius: 25px;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
@@ -29,7 +29,7 @@
 }
 
 .filter-toggle-btn.active {
-    background: #333; /* Reusing customizer active style */
+    background: #333;
     color: white;
     border-color: #333;
 }
@@ -47,16 +47,18 @@
     min-width: 0;
     overflow: hidden;
     background: white;
-    border: 1px solid #e0e0e0; /* Reusing customizer container style */
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     transition: all 0.4s ease;
     flex-shrink: 0;
 }
 
 .filter-sidebar.active {
-    width: 280px;
-    min-width: 280px;
+    width: 320px; /* Увеличил ширину для лучшего размещения кнопок */
+    min-width: 320px;
     padding: 24px;
+    overflow-y: auto; /* На случай если фильтров много */
+    max-height: calc(100vh - 100px);
 }
 
 /* Portfolio Content - Responsive width */
@@ -69,85 +71,20 @@
 /* Filter Sections */
 .filter-sections {
     opacity: 0;
-    transition: opacity 0.3s ease 0.2s; /* Delay for smooth appearance */
+    transition: opacity 0.3s ease 0.2s;
 }
 
 .filter-sidebar.active .filter-sections {
     opacity: 1;
 }
 
-/* Filter Groups - Reusing customizer spacing */
-.filter-group {
-    margin-bottom: 24px;
-}
-
-.filter-group h3 {
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Filter Options Grid */
-.filter-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-/* Filter Buttons - Reusing customizer .filter-btn style */
-.filter-option {
-    padding: 8px 16px;
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 25px; /* Reusing customizer round style */
-    cursor: pointer;
-    font-size: 12px;
-    color: #666;
-    transition: all 0.2s ease;
-    text-align: center;
-    min-width: fit-content;
-}
-
-.filter-option:hover {
-    border-color: #333;
-    color: #333;
-}
-
-.filter-option.active {
-    background: #333; /* Reusing customizer active style */
-    color: white;
-    border-color: #333;
-}
-
-/* Filter Actions - Reusing customizer clear button */
-.filter-actions {
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid #e0e0e0;
-}
-
-.clear-all-btn {
-    width: 100%;
-    padding: 10px 16px;
-    background: transparent;
-    border: 1px solid #999; /* Reusing customizer clear style */
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 12px;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-}
-
-.clear-all-btn:hover {
-    background: #333; /* Reusing customizer hover style */
-    color: white;
-    border-color: #333;
-}
+/* 
+  Все стили для filter-group, filter-label, filter-buttons, filter-btn 
+  берутся из customizer-filters.css - DRY!
+  
+  Также стили для active-filters, filter-tags, filter-tag, clear-all-btn
+  тоже берутся оттуда.
+*/
 
 /* Mobile Responsive - Slide down like customizer */
 @media (max-width: 768px) {
@@ -163,23 +100,20 @@
         border-left: none;
         border-right: none;
         border-radius: 0;
-        order: -1; /* Show above portfolio content */
+        order: -1;
     }
 
     .filter-sidebar.active {
         width: 100%;
         min-width: 100%;
         height: auto;
+        max-height: 70vh;
         padding: 20px;
         margin-bottom: 20px;
     }
 
     .portfolio-content {
         width: 100%;
-    }
-
-    .filter-options {
-        justify-content: center;
     }
 }
 
