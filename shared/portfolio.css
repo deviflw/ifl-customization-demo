@@ -39,6 +39,7 @@
     justify-content: center;
 }
 
+/* ОТКЛЮЧАЕМ - конфликтует с customizer-filters.css! Используем стили оттуда!
 .filter-group {
     display: flex;
     gap: 10px;
@@ -52,6 +53,7 @@
     color: var(--color-text-light);
     font-weight: 500;
 }
+*/
 
 .filter-group select {
     padding: 8px 15px;
