@@ -1,6 +1,6 @@
-/* Behance-Style Filters - Using customizer design */
+/* Behance-Style Sliding Panel ONLY - все остальное из customizer-filters.css */
 
-/* Filter Trigger Button */
+/* Filter Trigger Button - этого нет в кастомайзере, только для portfolio */
 .portfolio-filter-trigger {
     width: 100%;
     margin-bottom: 24px;
@@ -34,14 +34,14 @@
     border-color: #333;
 }
 
-/* Behance Layout Container */
+/* Portfolio Layout Container */
 .portfolio-layout {
     display: flex;
     gap: 40px;
     transition: all 0.4s ease;
 }
 
-/* Filter Sidebar - Hidden by default */
+/* Filter Sidebar - ТОЛЬКО sliding механизм */
 .filter-sidebar {
     width: 0;
     min-width: 0;
@@ -54,21 +54,21 @@
 }
 
 .filter-sidebar.active {
-    width: 320px; /* Увеличил ширину для лучшего размещения кнопок */
+    width: 320px;
     min-width: 320px;
     padding: 24px;
-    overflow-y: auto; /* На случай если фильтров много */
+    overflow-y: auto;
     max-height: calc(100vh - 100px);
 }
 
-/* Portfolio Content - Responsive width */
+/* Portfolio Content */
 .portfolio-content {
     flex: 1;
     min-width: 0;
     transition: all 0.4s ease;
 }
 
-/* Filter Sections */
+/* Filter Sections animation */
 .filter-sections {
     opacity: 0;
     transition: opacity 0.3s ease 0.2s;
@@ -78,15 +78,7 @@
     opacity: 1;
 }
 
-/* 
-  Все стили для filter-group, filter-label, filter-buttons, filter-btn 
-  берутся из customizer-filters.css - DRY!
-  
-  Также стили для active-filters, filter-tags, filter-tag, clear-all-btn
-  тоже берутся оттуда.
-*/
-
-/* Mobile Responsive - Slide down like customizer */
+/* Mobile Responsive */
 @media (max-width: 768px) {
     .portfolio-layout {
         flex-direction: column;
@@ -117,12 +109,17 @@
     }
 }
 
-/* Loading state when filters are applied */
-.portfolio-content.filtering {
-    opacity: 0.6;
-    pointer-events: none;
-}
-
-.portfolio-content.filtering .portfolio-grid {
-    transition: opacity 0.3s ease;
-}
+/* ВСЕ ОСТАЛЬНОЕ БЕРЕТСЯ ИЗ customizer-filters.css:
+   - .filter-group
+   - .filter-label  
+   - .filter-buttons
+   - .filter-btn
+   - .active-filters
+   - .filters-label
+   - .filter-tags
+   - .filter-tag
+   - .remove-tag
+   - .clear-all-btn
+   
+   НЕ ДУБЛИРУЕМ! DRY!
+*/
