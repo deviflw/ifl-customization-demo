@@ -1,4 +1,4 @@
-/* Behance-Style Sliding Panel ONLY - все остальное из customizer-filters.css */
+/* Behance-Style Sliding Panel ONLY - все остальное из filters.css */
 
 /* Filter Trigger Button - этого нет в кастомайзере, только для portfolio */
 .portfolio-filter-trigger {
@@ -54,11 +54,22 @@
 }
 
 .filter-sidebar.active {
-    width: 320px;
-    min-width: 320px;
+    width: 340px;
+    min-width: 340px;
     padding: 24px;
     overflow-y: auto;
     max-height: calc(100vh - 100px);
+}
+
+/* Hide scrollbar but keep functionality */
+.filter-sidebar.active::-webkit-scrollbar {
+    width: 0;
+    display: none;
+}
+
+.filter-sidebar.active {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* Portfolio Content */
@@ -76,6 +87,16 @@
 
 .filter-sidebar.active .filter-sections {
     opacity: 1;
+}
+
+/* Smaller buttons in sidebar for better fit */
+.filter-sections .filter-btn {
+    font-size: 13px;
+    padding: 7px 14px;
+}
+
+.filter-sections .filter-label {
+    font-size: 13px;
 }
 
 /* Mobile Responsive */
@@ -109,7 +130,7 @@
     }
 }
 
-/* ВСЕ ОСТАЛЬНОЕ БЕРЕТСЯ ИЗ customizer-filters.css:
+/* ВСЕ ОСТАЛЬНОЕ БЕРЕТСЯ ИЗ filters.css:
    - .filter-group
    - .filter-label  
    - .filter-buttons

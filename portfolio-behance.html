@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="shared/navigation.css">
     <link rel="stylesheet" href="shared/portfolio.css">
     <link rel="stylesheet" href="shared/behance-filters.css">  <!-- Sliding панель -->
-    <link rel="stylesheet" href="shared/customizer-filters.css">  <!-- Стили фильтров ПОСЛЕ, чтобы не перебивались -->
+    <link rel="stylesheet" href="shared/filters.css">  <!-- Универсальные стили фильтров -->
     <link rel="stylesheet" href="shared/modal.css">
     
     <!-- Navigation script -->
@@ -48,7 +48,7 @@
             <aside class="filter-sidebar" id="filterSidebar">
                 <div class="filter-sections">
                     <!-- Active filters display INSIDE sidebar -->
-                    <div class="active-filters" id="activeFilters" style="display: none;">
+                    <div class="active-filters active-filters-vertical" id="activeFilters" style="display: none;">
                         <span class="filters-label">Active filters:</span>
                         <div class="filter-tags" id="activeFilterTags"></div>
                         <button class="clear-all-btn" onclick="clearAllFilters()">Clear All</button>
@@ -77,14 +77,6 @@
                             <!-- Will be populated by JS -->
                         </div>
                     </div>
-
-                    <!-- Type Filters -->
-                    <div class="filter-group">
-                        <label class="filter-label">Type</label>
-                        <div class="filter-buttons" id="typeFilters">
-                            <!-- Will be populated by JS -->
-                        </div>
-                    </div>
                 </div>
             </aside>
 
@@ -103,8 +95,7 @@
         let activeFilters = {
             themes: [],
             styles: [],
-            watchModels: [],
-            types: []
+            watchModels: []
         };
 
         // Toggle filter panel
@@ -129,11 +120,10 @@
             activeFilters.themes = Array.from(document.querySelectorAll('#themeFilters .filter-btn.active')).map(btn => btn.getAttribute('data-filter-value'));
             activeFilters.styles = Array.from(document.querySelectorAll('#styleFilters .filter-btn.active')).map(btn => btn.getAttribute('data-filter-value'));
             activeFilters.watchModels = Array.from(document.querySelectorAll('#watchFilters .filter-btn.active')).map(btn => btn.getAttribute('data-filter-value'));
-            activeFilters.types = Array.from(document.querySelectorAll('#typeFilters .filter-btn.active')).map(btn => btn.getAttribute('data-filter-value'));
 
             // Update filter count badge
-            const totalFilters = activeFilters.themes.length + activeFilters.styles.length + 
-                                activeFilters.watchModels.length + activeFilters.types.length;
+            const totalFilters = activeFilters.themes.length + activeFilters.styles.length +
+                                activeFilters.watchModels.length;
             const filterCount = document.getElementById('filterCount');
             if (totalFilters > 0) {
                 filterCount.style.display = 'inline-block';
@@ -147,7 +137,7 @@
             const activeFilterTags = document.getElementById('activeFilterTags');
             
             if (totalFilters > 0) {
-                activeFiltersDiv.style.display = 'block';
+                activeFiltersDiv.style.display = 'flex';
                 activeFilterTags.innerHTML = '';
                 
                 // Add theme tags
@@ -169,11 +159,6 @@
                 // Add watch model tags
                 activeFilters.watchModels.forEach(model => {
                     activeFilterTags.innerHTML += createFilterTag(model, 'watchModel', model);
-                });
-                
-                // Add type tags
-                activeFilters.types.forEach(type => {
-                    activeFilterTags.innerHTML += createFilterTag(getTypeLabel(type), 'type', type);
                 });
             } else {
                 activeFiltersDiv.style.display = 'none';
@@ -206,8 +191,7 @@
             activeFilters = {
                 themes: [],
                 styles: [],
-                watchModels: [],
-                types: []
+                watchModels: []
             };
             updateFilters();
         }
@@ -241,11 +225,6 @@
                 
                 // Check watch model filter
                 if (activeFilters.watchModels.length > 0 && item.watch_product && !activeFilters.watchModels.includes(item.watch_product.vendor)) {
-                    return false;
-                }
-                
-                // Check type filter
-                if (activeFilters.types.length > 0 && !activeFilters.types.includes(item.portfolio_type)) {
                     return false;
                 }
                 
@@ -372,27 +351,6 @@
                         updateFilters();
                     };
                     watchContainer.appendChild(button);
-                });
-            }
-
-            // Type filters
-            const typeContainer = document.getElementById('typeFilters');
-            if (typeContainer && portfolioMetaobjects) {
-                const types = [...new Set(portfolioMetaobjects.items
-                    .map(item => item.portfolio_type)
-                    .filter(Boolean))];
-                
-                types.forEach(type => {
-                    const button = document.createElement('button');
-                    button.className = 'filter-btn';
-                    button.setAttribute('data-filter-type', 'type');
-                    button.setAttribute('data-filter-value', type);
-                    button.textContent = getTypeLabel(type);
-                    button.onclick = function() {
-                        this.classList.toggle('active');
-                        updateFilters();
-                    };
-                    typeContainer.appendChild(button);
                 });
             }
 
