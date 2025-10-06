@@ -7,7 +7,9 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(dir \"C:\\Users\\mila\\Desktop\\ifl-customization-demo\\screenshots\" /b)",
-      "WebFetch(domain:www.behance.net)"
+      "WebFetch(domain:www.behance.net)",
+      "Bash(dir:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [],
     "ask": []

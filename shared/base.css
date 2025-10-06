@@ -893,3 +893,92 @@ button, input, select, textarea {
         margin: 0 auto;
     }
 }
+
+/* ============================================
+   GLOBAL BUTTON STYLES
+   ============================================ */
+
+/* Base button */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-family: var(--font-primary);
+}
+
+/* Primary button - solid tiffany */
+.btn-primary {
+    background: var(--color-accent);
+    color: white;
+    border: 2px solid var(--color-accent);
+}
+
+.btn-primary:hover {
+    background: #50ced1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(64, 190, 193, 0.3);
+}
+
+/* Outline button - tiffany border */
+.btn-outline {
+    background: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+}
+
+.btn-outline:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+/* Secondary button (alias for outline) */
+.btn-secondary {
+    background: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+}
+
+.btn-secondary:hover {
+    background: var(--color-accent);
+    color: white;
+}
+
+/* White button - for dark backgrounds */
+.btn-white {
+    background: white;
+    color: var(--color-dark);
+    border: 2px solid white;
+}
+
+.btn-white:hover {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+/* Large button variant */
+.btn-large {
+    padding: 18px 36px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Mobile button adjustments */
+@media (max-width: 768px) {
+    .btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+
+    .btn-large {
+        padding: 14px 28px;
+        font-size: 16px;
+    }
+}
