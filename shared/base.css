@@ -910,6 +910,7 @@ button, input, select, textarea {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: var(--font-family);
+    background: transparent;
     border: 2px solid transparent;
 }
 
