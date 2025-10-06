@@ -898,13 +898,8 @@ button, input, select, textarea {
    GLOBAL BUTTON STYLES
    ============================================ */
 
-/* Base button styles - applied to all button variants */
-.btn,
-.btn-primary,
-.btn-outline,
-.btn-secondary,
-.btn-white,
-.btn-large {
+/* Base button - use with .btn-primary, .btn-outline, etc */
+.btn {
     display: inline-block;
     padding: 14px 28px;
     border-radius: 4px;
@@ -915,17 +910,19 @@ button, input, select, textarea {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: var(--font-primary);
+    border: 2px solid transparent;
 }
 
 /* Primary button - solid tiffany */
 .btn-primary {
     background: var(--color-accent);
     color: white;
-    border: 2px solid var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 .btn-primary:hover {
     background: #50ced1;
+    border-color: #50ced1;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(64, 190, 193, 0.3);
 }
@@ -934,7 +931,7 @@ button, input, select, textarea {
 .btn-outline {
     background: transparent;
     color: var(--color-accent);
-    border: 2px solid var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 .btn-outline:hover {
@@ -946,7 +943,7 @@ button, input, select, textarea {
 .btn-secondary {
     background: transparent;
     color: var(--color-accent);
-    border: 2px solid var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 .btn-secondary:hover {
@@ -958,35 +955,30 @@ button, input, select, textarea {
 .btn-white {
     background: white;
     color: var(--color-dark);
-    border: 2px solid white;
+    border-color: white;
 }
 
 .btn-white:hover {
     background: transparent;
     color: white;
-    border: 2px solid white;
 }
 
-/* Large button variant - overrides base padding */
+/* Large button variant */
 .btn-large {
-    padding: 18px 36px !important;
-    font-size: 18px !important;
+    padding: 18px 36px;
+    font-size: 18px;
     font-weight: 600;
 }
 
 /* Mobile button adjustments */
 @media (max-width: 768px) {
-    .btn,
-    .btn-primary,
-    .btn-outline,
-    .btn-secondary,
-    .btn-white {
+    .btn {
         padding: 12px 24px;
         font-size: 14px;
     }
 
     .btn-large {
-        padding: 14px 28px !important;
-        font-size: 16px !important;
+        padding: 14px 28px;
+        font-size: 16px;
     }
 }
