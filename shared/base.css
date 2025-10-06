@@ -909,20 +909,20 @@ button, input, select, textarea {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: var(--font-primary);
+    font-family: var(--font-family);
     border: 2px solid transparent;
 }
 
 /* Primary button - solid tiffany */
 .btn-primary {
-    background: var(--color-accent);
+    background: var(--secondary-color);
     color: white;
-    border-color: var(--color-accent);
+    border-color: var(--secondary-color);
 }
 
 .btn-primary:hover {
-    background: #50ced1;
-    border-color: #50ced1;
+    background: var(--secondary-hover);
+    border-color: var(--secondary-hover);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(64, 190, 193, 0.3);
 }
@@ -930,31 +930,31 @@ button, input, select, textarea {
 /* Outline button - tiffany border */
 .btn-outline {
     background: transparent;
-    color: var(--color-accent);
-    border-color: var(--color-accent);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
 .btn-outline:hover {
-    background: var(--color-accent);
+    background: var(--secondary-color);
     color: white;
 }
 
 /* Secondary button (alias for outline) */
 .btn-secondary {
     background: transparent;
-    color: var(--color-accent);
-    border-color: var(--color-accent);
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
 .btn-secondary:hover {
-    background: var(--color-accent);
+    background: var(--secondary-color);
     color: white;
 }
 
 /* White button - for dark backgrounds */
 .btn-white {
     background: white;
-    color: var(--color-dark);
+    color: var(--primary-color);
     border-color: white;
 }
 

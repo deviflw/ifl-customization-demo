@@ -15,11 +15,11 @@
 }
 
 .portfolio-header h1 {
-    font-family: var(--font-primary);
+    font-family: var(--font-family);
     font-size: 36px;
     font-weight: 300;
     letter-spacing: 2px;
-    color: var(--color-dark);
+    color: var(--primary-color);
     margin-bottom: 16px;
 }
 
@@ -43,7 +43,7 @@
     padding: 8px 15px;
     border: 1px solid var(--color-border);
     border-radius: 4px;
-    font-family: var(--font-primary);
+    font-family: var(--font-family);
     font-size: 13px;
     background: white;
     cursor: pointer;
@@ -52,12 +52,12 @@
 }
 
 .filter-group select:hover {
-    border-color: var(--color-accent);
+    border-color: var(--secondary-color);
 }
 
 .filter-group select:focus {
     outline: none;
-    border-color: var(--color-accent);
+    border-color: var(--secondary-color);
     box-shadow: 0 0 0 3px rgba(64, 190, 193, 0.1);
 }
 
@@ -143,7 +143,7 @@
     position: absolute;
     top: 12px;
     left: 12px;
-    background: linear-gradient(135deg, var(--color-accent), #35a5a8);
+    background: linear-gradient(135deg, var(--secondary-color), #35a5a8);
     color: white;
     padding: 4px 10px;
     border-radius: 4px;
@@ -182,7 +182,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: var(--color-accent);
+    background: var(--secondary-color);
     color: white;
     padding: 14px 28px;
     border: none;
@@ -246,7 +246,7 @@
 
 .btn-view-details {
     margin-top: 12px;
-    background: var(--color-accent);
+    background: var(--secondary-color);
     color: white;
     padding: 8px 16px;
     border-radius: 4px;
@@ -272,7 +272,7 @@
 
 .portfolio-info h4 {
     font-size: 16px;
-    color: var(--color-dark);
+    color: var(--primary-color);
     margin-bottom: 12px;
     font-weight: 500;
 }
@@ -301,7 +301,7 @@
 
 .tag-style {
     background: #f0f8f8;
-    color: var(--color-accent);
+    color: var(--secondary-color);
 }
 
 .tag-theme {
@@ -355,7 +355,7 @@
 }
 
 .btn-reset-filters {
-    background: var(--color-accent);
+    background: var(--secondary-color);
     color: white;
     padding: 10px 24px;
     border: none;
@@ -364,7 +364,7 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: var(--font-primary);
+    font-family: var(--font-family);
 }
 
 .btn-reset-filters:hover {
